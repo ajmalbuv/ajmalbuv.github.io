@@ -1,0 +1,33 @@
+<section class="flex flex-col justify-center" id="about">
+    <h1 class="text-2xl font-semibold m-3">Experience</h1>
+    <div *ngFor="let experience of experiences" class="mx-4 mb-6">
+        <div>
+            <h2 class="text-lg font-semibold py-2">{{experience.designation}}</h2>
+            <h3 class="text-base font-semibold">{{experience.company}}</h3>
+            <h4 class="text-sm font-semibold">{{experience.duration}}</h4>
+        </div>
+        <p class="py-3">{{experience.description}}</p>
+    </div>
+    <h1 class="text-2xl font-semibold m-3">Education</h1>
+    <div class="edu flex flex-col justify-center">
+        <div *ngFor="let education of educations; let i = index" class="mx-4 mb-6 border-4 flex-1">
+            <div class="p-3">
+                <h2 class="text-lg font-semibold">{{education.school.toUpperCase()}}</h2>
+                <h3 class="text-sm font-medium">{{education.place}}</h3>
+                <h4 class="text-sm font-normal">{{education.duration}}</h4>
+                <p class="py-3 font-bold" [ngClass]="i === 0 ? 'text-2xl lg:text-3xl' : 'text-5xl'">{{education.degree}}</p>
+            </div>
+        </div>
+    </div>
+    <h1 class="text-2xl font-semibold m-3">Certification</h1>
+    <div class="cert grid grid-flow-row">
+        <div *ngFor="let certification of certifications; let i = index" class="mx-4 mb-6 flex-1">
+            <div class="p-3" [ngClass]="i != 0 ? 'border-4' : null ">
+                <h2 class="text-lg font-semibold">{{certification.course}}</h2>
+                <h3 class="text-sm font-medium">{{certification.centre}}</h3>
+                <p class="text-sm font-normal">{{certification.place}}</p>
+                <p class="py-3 font-bold">{{certification.duration}}</p>
+            </div>
+        </div>  
+    </div>
+</section>
