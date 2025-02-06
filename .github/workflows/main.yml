@@ -20,7 +20,6 @@ jobs:
           node-version: 22
 
       - name: Build Angular app to prod
-        # working-directory: github-option-three-app
         run: npm install && npm run build:prod
 
       - name: Deploy to GitHub Pages
