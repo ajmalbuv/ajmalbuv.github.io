@@ -4,7 +4,7 @@ export const PersonalDetails = {
   resume: '',
   designation: [
     'Java Full Stack Developer',
-    'Java Developer',
+    'Flutter Developer',
     'Angular Developer',
   ],
   description:
@@ -28,7 +28,7 @@ export const PersonalDetails = {
       img: 'assets/images/personal/linkedin.svg',
     },
     instagram: {
-      url: 'https://www.instagram.com/_maji._/?igsh=anF3Y21vZWxldHNj',
+      url: 'https://www.instagram.com/_.aju',
       img: 'assets/images/personal/instagram.svg',
     },
   },
