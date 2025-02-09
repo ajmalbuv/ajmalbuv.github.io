@@ -1,6 +1,6 @@
 export const PersonalDetails = {
   name: 'Ajmal Basheer',
-  img: 'assets/images/personal/profilepic.webp',
+  img: 'assets/images/personal/photo.webp',
   resume: '',
   designation: [
     'Java Full Stack Developer',
