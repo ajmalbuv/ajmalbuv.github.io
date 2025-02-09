@@ -20,7 +20,7 @@ export const PersonalDetails = {
     },
     address: 'Bengaluru, Karnataka',
     github: {
-      url: 'https://github.com/',
+      url: 'https://github.com/ajmalbuv',
       img: 'assets/images/personal/github.svg',
     },
     linkedin: {
