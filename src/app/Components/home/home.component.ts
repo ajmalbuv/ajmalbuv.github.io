@@ -16,7 +16,7 @@ import { DataService } from '../../Services/data.service';
 })
 export class HomeComponent implements OnInit {
   user_details : any;
-  currentDesignationIndex: number = 0;
+  currentDesignationIndex = 0;
 
   constructor(private data:DataService) {}
 
