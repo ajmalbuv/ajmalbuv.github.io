@@ -55,7 +55,7 @@ export const Skill = [
       {
         name: 'Tailwind CSS',
         image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg',
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
       },
       {
         name: 'React',
@@ -139,8 +139,7 @@ export const Skill = [
       },
       {
         name: 'JWT',
-        image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jwt/jwt-original.svg',
+        image: '/assets/images/skills/web/jwt.svg',
       },
       {
         name: 'Redis',
@@ -149,8 +148,7 @@ export const Skill = [
       },
       {
         name: 'RESTful APIs',
-        image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/api/api-original.svg',
+        image: '/assets/images/skills/web/rest.svg',
       },
     ],
   },
@@ -170,7 +168,7 @@ export const Skill = [
       {
         name: 'AWS',
         image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg',
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
       },
       {
         name: 'Vercel',
