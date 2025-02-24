@@ -1,14 +1,13 @@
 export const Education = [
   {
-    school: 'Jain University',
+    school: 'Krupanidhi Degree College',
     place: 'Bengaluru, Karnataka',
-    degree:
-      'Bachelor’s of Technology - Computer Science with specialization in AI.',
-    duration: 'Aug 2019 - Sept 2023',
+    degree: "Bachelor's in Computer Application",
+    duration: 'Oct 2021 - Sept 2024',
   },
   {
-    school: 'MES Raja Residential School',
-    place: 'Kozhikode, Kerala',
+    school: 'MIC Higher Secondary School',
+    place: 'Malappuram, Kerala',
     degree: 'Senior Secondary School',
     duration: '2017 - 2019',
   },

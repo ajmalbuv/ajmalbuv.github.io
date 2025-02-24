@@ -1,10 +1,16 @@
 export const Experience = [
-    {
-      company: 'Doctosmart Enterprises Pvt Ltd, Kozhikode',
-      designation: 'Java Full Stack Developer Intern',
-      duration: 'April 2024 - Oct 2024 ',
-      description:
-        'Developed and integrated full-stack web applications by combining a Spring Boot backend with an Angular frontend, ensuring seamless user interactions and efficient functionality. Implemented JWT-based authentication and role-based access control (RBAC), securing the Angular application and ensuring authorized access based on user roles. Integrated and managed RESTful APIs from the Spring Boot backend, using HTTPClient to handle data and incorporate error handling and data validation, significantly improving application stability. Containerized applications with Docker, optimizing deployment workflows, and deployed them on AWS utilizing EC2 for compute, RDS for database management, and S3 for scalable storage.'
-    }
-  ];
-  
+  {
+    company: 'ETAYA INNOVATIONS Pvt Ltd, Bengaluru',
+    designation: 'Flutter Developer Intern',
+    duration: 'Nov 2023 - Present',
+    description:
+      'Developing and maintaining cross-platform mobile applications for Android and iOS using Flutter and Dart. Implementing clean architecture with provider-based state management to enhance performance and maintainability. Integrated Firebase for real-time data synchronization, authentication, and push notifications, improving app responsiveness. Optimized app efficiency by reducing widget rebuilds, implementing lazy loading, and minimizing API call overhead, resulting in smoother UI interactions. Conducting automated and manual testing using Flutter’s testing framework and Firebase Crashlytics to ensure app stability and reduce crash rates.',
+  },
+  {
+    company: 'WIMD Technologies Pvt Ltd, Bengaluru',
+    designation: 'Software Engineer Intern',
+    duration: 'May 2024 - June 2024',
+    description:
+      'Designed and implemented secure RESTful APIs using Node.js with JWT authentication and role-based access control. Assisted in database optimization by indexing MongoDB collections, improving query performance. Automated API testing with Postman, identifying and resolving integration issues across CRUD operations. Participated in collaborative development, engaging in code reviews and debugging to enhance system stability and API/database integration.',
+  },
+];
