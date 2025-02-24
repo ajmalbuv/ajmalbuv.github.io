@@ -1,14 +1,8 @@
 export const Certification = [
   {
-    course: 'Java Full Stack Development',
-    centre: 'EduBridge Learning Pvt Ltd.',
+    course: 'ML with Python',
+    centre: 'KEONICS',
     place: 'Bengaluru, Karnataka',
-    duration: 'Oct 2023 - March 2024',
-  },
-  {
-    course: 'Data Structure and Algorithm - Java',
-    centre: 'Udemy',
-    place: null,
-    duration: 'Nov 2024',
+    duration: 'Oct 2021 - March 2024',
   },
 ];
