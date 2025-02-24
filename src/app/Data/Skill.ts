@@ -13,11 +13,6 @@ export const Skill = [
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
       },
       {
-        name: 'Java',
-        image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
-      },
-      {
         name: 'TypeScript',
         image:
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
@@ -28,6 +23,11 @@ export const Skill = [
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg',
       },
       {
+        name: 'Java',
+        image:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+      },
+      {
         name: 'C',
         image:
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',
@@ -36,11 +36,6 @@ export const Skill = [
         name: 'PHP',
         image:
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg',
-      },
-      {
-        name: 'R',
-        image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg',
       },
     ],
   },
@@ -56,6 +51,11 @@ export const Skill = [
         name: 'CSS3',
         image:
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+      },
+      {
+        name: 'Tailwind CSS',
+        image:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg',
       },
       {
         name: 'React',
@@ -78,11 +78,6 @@ export const Skill = [
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg',
       },
       {
-        name: 'Flask',
-        image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg',
-      },
-      {
         name: 'Flutter',
         image:
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg',
@@ -91,21 +86,6 @@ export const Skill = [
         name: 'Bootstrap',
         image:
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg',
-      },
-      {
-        name: 'Tailwind CSS',
-        image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg',
-      },
-      {
-        name: 'REST APIs',
-        image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/api/api-original.svg',
-      },
-      {
-        name: 'JWT',
-        image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jwt/jwt-original.svg',
       },
     ],
   },
@@ -133,14 +113,49 @@ export const Skill = [
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg',
       },
       {
-        name: 'Oracle',
+        name: 'Firebase',
         image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg',
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
       },
     ],
   },
   {
-    type: 'DevOps and Cloud Platforms',
+    type: 'Frameworks and Libraries',
+    skills: [
+      {
+        name: 'FastAPI',
+        image:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',
+      },
+      {
+        name: 'Express.js',
+        image:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+      },
+      {
+        name: 'Redux',
+        image:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg',
+      },
+      {
+        name: 'JWT',
+        image:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jwt/jwt-original.svg',
+      },
+      {
+        name: 'Redis',
+        image:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg',
+      },
+      {
+        name: 'RESTful APIs',
+        image:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/api/api-original.svg',
+      },
+    ],
+  },
+  {
+    type: 'DevOps & Cloud Platforms',
     skills: [
       {
         name: 'Docker',
@@ -156,11 +171,6 @@ export const Skill = [
         name: 'AWS',
         image:
           'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg',
-      },
-      {
-        name: 'Azure',
-        image:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg',
       },
       {
         name: 'Vercel',
@@ -185,7 +195,7 @@ export const Skill = [
     ],
   },
   {
-    type: 'Tools and IDEs',
+    type: 'IDE’s & Other Tools',
     skills: [
       {
         name: 'VS Code',
