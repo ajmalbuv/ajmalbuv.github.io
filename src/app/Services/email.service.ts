@@ -22,7 +22,7 @@ export class EmailService {
       .send(
         environment.emailjsServiceId,
         environment.emailjsTemplateId,
-        templateParams
+        templateParams,
       )
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text);

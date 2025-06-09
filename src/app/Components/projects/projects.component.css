@@ -1,79 +1,78 @@
 @media (min-width: 768px) {
   .container {
-    max-width: 100%;  
+    max-width: 100%;
   }
 }
 
-@media (min-width: 1025px ){
-    section{
-        padding: 10px;
-        width: 90%;
-        margin: auto;
-        margin-top: 10px;
-    }
+@media (min-width: 1025px) {
+  section {
+    padding: 10px;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+  }
 
-    .container{
-        grid-template-columns: 1fr 1fr;
-        column-gap: 10px;
-    }
+  .container {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+  }
 }
 
-.container{
+.container {
   box-sizing: border-box;
 }
 
-.container > div{
+.container>div {
   overflow: hidden;
   box-sizing: border-box;
 }
 
 .project-container .techstack {
-    display: block;
-  }
-  
+  display: block;
+}
+
 .project-container .description {
-display: none;
+  display: none;
 }
 
 .project-container:hover .description {
-display: block;
+  display: block;
 }
 
-.project-container:hover{
-    background-color: white;
-    color: black;
-    transition: 300ms ease-in;
+.project-container:hover {
+  background-color: white;
+  color: black;
+  transition: 300ms ease-in;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .container > div:nth-child(odd) {
-      opacity: 0;
-      transform: translateX(-100px);
-      animation: fade-in-left 1s ease-in forwards;
-      animation-timeline: view(); 
-      animation-range: entry; 
-    }
-  
-    .container > div:nth-child(even) {
-      opacity: 0;
-      transform: translateX(20px);
-      animation: fade-in-right 1s ease-in forwards;
-      animation-timeline: view();
-      animation-range: entry;
-    }
-  
-    @keyframes fade-in-left {
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-  
-    @keyframes fade-in-right {
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
+  .container>div:nth-child(odd) {
+    opacity: 0;
+    transform: translateX(-100px);
+    animation: fade-in-left 1s ease-in forwards;
+    animation-timeline: view();
+    animation-range: entry;
+  }
+
+  .container>div:nth-child(even) {
+    opacity: 0;
+    transform: translateX(20px);
+    animation: fade-in-right 1s ease-in forwards;
+    animation-timeline: view();
+    animation-range: entry;
+  }
+
+  @keyframes fade-in-left {
+    to {
+      transform: translateX(0);
+      opacity: 1;
     }
   }
-  
+
+  @keyframes fade-in-right {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}

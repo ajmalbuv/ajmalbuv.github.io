@@ -8,9 +8,9 @@ import { DataService } from '../../Services/data.service';
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [ CommonModule],
+  imports: [CommonModule],
   templateUrl: './about.component.html',
-  styleUrl: './about.component.css'
+  styleUrl: './about.component.css',
 })
 export class AboutComponent implements OnInit {
   experiences: any[] = [];

@@ -1,50 +1,53 @@
 .screenshot-container {
-    border: 2px solid #ccc;
+  border: 2px solid #ccc;
 }
 
 @media (min-width: 640px) {
-    .img-container {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .img-container {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
 @media (min-width: 1024px) {
-    section{
-      width: 90%;
-      margin: auto;
-      margin-top: 50px;
-    }
-
-    .img-container {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  section {
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
   }
 
-  @media (prefers-reduced-motion: no-preference){
-    #s1{
-        opacity: 1;
-        animation: fade-out linear forwards;
-        animation-timeline: view(50px);
-        animation-range: exit;
-    }
+  .img-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
-    #s2 > div > div{
-      scale: .6;
-      opacity: 0;
-      animation: fade-in linear forwards;
-      animation-timeline: view();
-      animation-range: entry;
+@media (prefers-reduced-motion: no-preference) {
+  #s1 {
+    opacity: 1;
+    animation: fade-out linear forwards;
+    animation-timeline: view(50px);
+    animation-range: exit;
+  }
+
+  #s2>div>div {
+    scale: .6;
+    opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
   }
 
   @keyframes fade-in {
-      to {
-          scale: 1; 
-          opacity: 1; 
-      }
+    to {
+      scale: 1;
+      opacity: 1;
+    }
   }
 
-    @keyframes fade-out {
-        to { opacity: 0; scale: 0.6 }
-    } 
- 
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+      scale: 0.6
+    }
+  }
+
 }
