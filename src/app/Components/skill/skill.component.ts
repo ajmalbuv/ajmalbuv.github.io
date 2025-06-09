@@ -5,10 +5,10 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-skill',
   standalone: true,
-  imports: [CommonModule],
+  imports: [ CommonModule ],
   templateUrl: './skill.component.html',
-  styleUrl: './skill.component.css',
+  styleUrl: './skill.component.css'
 })
 export class SkillComponent {
-  skills = Skill;
+  skills=Skill;
 }

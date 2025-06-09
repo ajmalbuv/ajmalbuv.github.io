@@ -1,7 +1,7 @@
 .text-2xl {
     font-size: clamp(1.15rem, 2vw, 2rem);
 }
-
+  
 .text-5xl {
     font-size: clamp(2rem, 5vw, 5rem);
 }
@@ -12,8 +12,7 @@ label {
     color: #ffffff;
 }
 
-input[type="text"],
-input[type="number"] {
+input[type="text"], input[type="number"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 8px;
@@ -24,7 +23,7 @@ input[type="number"] {
     color: rgb(0, 0, 0);
 }
 
-textarea {
+textarea{
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
@@ -46,7 +45,7 @@ input[type="submit"] {
     font-size: 16px;
 }
 
-.form-group-name {
+.form-group-name{
     display: flex;
     flex-direction: column;
 }
@@ -58,53 +57,53 @@ input[type="submit"] {
         margin-bottom: 50px;
     }
 
-    section>div:nth-child(1) {
+    section > div:nth-child(1) {
         width: 50%;
         height: 60vh;
     }
 
-    section>div:nth-child(2) {
+    section > div:nth-child(2) {
         width: 40%;
     }
 
-    .side2>div:nth-child(2) {
+    .side2 > div:nth-child(2){
         position: absolute;
         bottom: 20px;
         left: 100px;
         width: 40%;
     }
 
-    .form-group-name {
+    .form-group-name{
         flex-direction: row;
         justify-content: space-between;
     }
 
-    .form-group-name div {
+    .form-group-name div{
         width: 48%;
     }
 
-    @media (prefers-reduced-motion: no-preference) {
-        #contact {
+    @media (prefers-reduced-motion: no-preference){
+        #contact{
             scale: .6;
             opacity: 0;
             animation: fade linear forwards;
             animation-timeline: view();
             animation-range: entry;
         }
-
+    
         @keyframes fade {
             to {
                 opacity: 1;
-                scale: 1;
+                scale: 1;    
             }
-        }
+        } 
     }
-
+    
 }
 
 
 
-.side2 input[type="submit"] {
+.side2 input[type="submit"]{
     transition: transform 1000ms;
 }
 
@@ -115,8 +114,8 @@ input[type="submit"] {
     color: white;
 }
 
-@media (max-width: 1024px) {
-    .side1 {
+@media (max-width: 1024px){
+    .side1{
         scale: .6;
         opacity: 0;
         animation: fade linear forwards;
@@ -124,7 +123,7 @@ input[type="submit"] {
         animation-range: entry;
     }
 
-    .side2 {
+    .side2{
         scale: .8;
         opacity: 0;
         animation: fade linear forwards;
@@ -135,7 +134,7 @@ input[type="submit"] {
     @keyframes fade {
         to {
             opacity: 1;
-            scale: 1;
+            scale: 1;    
         }
-    }
+    } 
 }

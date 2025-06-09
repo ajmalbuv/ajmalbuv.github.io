@@ -5,9 +5,11 @@ import { Component, HostListener, OnInit } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+  styleUrl: './header.component.css'
 })
+
 export class HeaderComponent implements OnInit {
+  
   isClosed = false;
 
   ngOnInit() {
@@ -27,4 +29,5 @@ export class HeaderComponent implements OnInit {
     const screenWidth = window.innerWidth;
     this.isClosed = screenWidth < 640;
   }
+
 }

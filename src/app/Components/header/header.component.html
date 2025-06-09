@@ -1,29 +1,19 @@
 <header class="top-0 sticky z-50" [class.expanded]="!isClosed">
-  <div class="flex justify-between items-center text-white lg:px-20">
-    <div class="p-3">
-      <h1 class="text-4xl lg:text-5xl font-semibold">Portfolio.</h1>
+    <div class="flex justify-between items-center text-white lg:px-20">
+        <div class="p-3">
+            <h1 class="text-4xl lg:text-5xl font-semibold">Portfolio.</h1>
+        </div>
+        <nav class=" fixed w-full top-16 bg-black opacity-50 sm:bg-transparent sm:relative sm:top-0 sm:w-[50%]" id="sidebar" [class.close]="isClosed">
+            <ul class="flex justify-between items-center p-3">
+                <li><a href="">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skill">Skills</a></li>
+                <li><a href="#project">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="sm:hidden">
+            <button (click)="toggleSidebar()" id="toggle-btn" aria-label="Toggle button"><img src="assets/icons/menu.svg" alt="" class="lg:h-16 h-10"></button>
+        </div>
     </div>
-    <nav
-      class="fixed w-full top-16 bg-black opacity-50 sm:bg-transparent sm:relative sm:top-0 sm:w-[50%]"
-      id="sidebar"
-      [class.close]="isClosed"
-    >
-      <ul class="flex justify-between items-center p-3">
-        <li><a href="">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skill">Skills</a></li>
-        <li><a href="#project">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="sm:hidden">
-      <button
-        (click)="toggleSidebar()"
-        id="toggle-btn"
-        aria-label="Toggle button"
-      >
-        <img src="assets/icons/menu.svg" alt="" class="lg:h-16 h-10" />
-      </button>
-    </div>
-  </div>
 </header>

@@ -6,9 +6,9 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-project-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [ CommonModule],
   templateUrl: './project-details.component.html',
-  styleUrl: './project-details.component.css',
+  styleUrl: './project-details.component.css'
 })
 export class ProjectDetailsComponent implements OnInit {
   project: any;
@@ -26,4 +26,5 @@ export class ProjectDetailsComponent implements OnInit {
       this.screenshotsArray = Object.values(this.project.screenshots);
     }
   }
+
 }

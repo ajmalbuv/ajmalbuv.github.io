@@ -1,23 +1,23 @@
-@media (min-width: 1025px) {
-    section {
+@media (min-width: 1025px ){
+    section{
         padding: 10px;
         width: 90%;
         margin: auto;
         margin-top: 10px;
     }
 
-    .edu {
+    .edu{
         flex-direction: row;
     }
 
-    .cert {
-        grid-template-columns: repeat(3, 1fr);
+    .cert{
+        grid-template-columns: repeat(3,1fr);
     }
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference){
 
-    .edu>div {
+    .edu > div{
         scale: .6;
         opacity: 0;
         animation: fade-in linear forwards;
@@ -27,8 +27,10 @@
 
     @keyframes fade-in {
         to {
-            scale: 1;
-            opacity: 1;
+            scale: 1; 
+            opacity: 1; 
         }
     }
 }
+
+ 

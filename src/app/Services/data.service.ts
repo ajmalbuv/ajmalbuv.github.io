@@ -7,9 +7,10 @@ import { Skill } from '../Data/Skill';
 import { Projects } from '../Data/Projects';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class DataService {
+
   constructor() {}
 
   getExperiences() {
@@ -36,7 +37,8 @@ export class DataService {
     return Projects;
   }
 
-  getContacts() {
+  getContacts(){
     return PersonalDetails.contact;
   }
+
 }
