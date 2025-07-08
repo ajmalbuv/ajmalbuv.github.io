@@ -1,22 +1,21 @@
-header{
-    background: 
-    linear-gradient(135deg, #43639C 0%, #412653 70%);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+header {
+  background: linear-gradient(135deg, #43639c 0%, #412653 70%);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 header.expanded {
-    height: 110px;
+  height: 110px;
 }
 
 #sidebar.close {
-    width: 0;
-    overflow: hidden;
-  }
+  width: 0;
+  overflow: hidden;
+}
 
-@media (min-width: 640px ){
-    header.expanded {
-        height: 70px;
-    }
+@media (min-width: 640px) {
+  header.expanded {
+    height: 70px;
+  }
 }

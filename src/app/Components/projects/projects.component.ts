@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Projects } from '../../Data/Projects';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-projects',
-    imports: [CommonModule],
-    templateUrl: './projects.component.html',
-    styleUrl: './projects.component.css'
+  selector: 'app-projects',
+  imports: [CommonModule],
+  templateUrl: './projects.component.html',
+  styleUrl: './projects.component.css',
 })
 export class ProjectsComponent {
-  projects = Projects;
+  private router = inject(Router);
 
-  constructor(private router: Router) {}
+  projects = Projects;
 
   navigateToProject(index: number) {
     this.router.navigate(['/project', index]).then(() => {

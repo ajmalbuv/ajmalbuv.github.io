@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import emailjs from '@emailjs/browser';
 import { environment } from '../../environments/environment';
+import { ContactFormData } from '../types/contact-form';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class EmailService {
     emailjs.init(environment.emailjsPublicKey);
   }
 
-  sendMail(contact: any) {
+  sendMail(contact: ContactFormData) {
     const templateParams = {
       name: `${contact.firstname} ${contact.lastname}`,
       email: contact.email,
@@ -22,7 +23,7 @@ export class EmailService {
       .send(
         environment.emailjsServiceId,
         environment.emailjsTemplateId,
-        templateParams
+        templateParams,
       )
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text);

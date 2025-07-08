@@ -1,140 +1,138 @@
 .text-2xl {
-    font-size: clamp(1.15rem, 2vw, 2rem);
+  font-size: clamp(1.15rem, 2vw, 2rem);
 }
-  
+
 .text-5xl {
-    font-size: clamp(2rem, 5vw, 5rem);
+  font-size: clamp(2rem, 5vw, 5rem);
 }
 
 label {
-    display: block;
-    margin-bottom: 5px;
-    color: #ffffff;
+  display: block;
+  margin-bottom: 5px;
+  color: #ffffff;
 }
 
-input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: white;
-    color: rgb(0, 0, 0);
+input[type='text'],
+input[type='number'] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: white;
+  color: rgb(0, 0, 0);
 }
 
-textarea{
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: white;
-    height: 150px;
-    color: rgb(0, 0, 0);
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: white;
+  height: 150px;
+  color: rgb(0, 0, 0);
 }
 
-input[type="submit"] {
-    background-color: #ffffff;
-    color: #4C1D95;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+input[type='submit'] {
+  background-color: #ffffff;
+  color: #4c1d95;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.form-group-name{
-    display: flex;
-    flex-direction: column;
+.form-group-name {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 1025px) {
-    section {
-        flex-direction: row;
-        width: 100%;
-        margin-bottom: 50px;
-    }
+  section {
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 50px;
+  }
 
-    section > div:nth-child(1) {
-        width: 50%;
-        height: 60vh;
-    }
+  section > div:nth-child(1) {
+    width: 50%;
+    height: 60vh;
+  }
 
-    section > div:nth-child(2) {
-        width: 40%;
-    }
+  section > div:nth-child(2) {
+    width: 40%;
+  }
 
-    .side2 > div:nth-child(2){
-        position: absolute;
-        bottom: 20px;
-        left: 100px;
-        width: 40%;
-    }
+  .side2 > div:nth-child(2) {
+    position: absolute;
+    bottom: 20px;
+    left: 100px;
+    width: 40%;
+  }
 
-    .form-group-name{
-        flex-direction: row;
-        justify-content: space-between;
-    }
+  .form-group-name {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-    .form-group-name div{
-        width: 48%;
-    }
+  .form-group-name div {
+    width: 48%;
+  }
 
-    @media (prefers-reduced-motion: no-preference){
-        #contact{
-            scale: .6;
-            opacity: 0;
-            animation: fade linear forwards;
-            animation-timeline: view();
-            animation-range: entry;
-        }
-    
-        @keyframes fade {
-            to {
-                opacity: 1;
-                scale: 1;    
-            }
-        } 
-    }
-    
-}
-
-
-
-.side2 input[type="submit"]{
-    transition: transform 1000ms;
-}
-
-.side2 input[type="submit"]:hover,
-.side2 input[type="submit"]:focus-visible {
-    transform: translateX(1rem);
-    background-color: #8b5cf6;
-    color: white;
-}
-
-@media (max-width: 1024px){
-    .side1{
-        scale: .6;
-        opacity: 0;
-        animation: fade linear forwards;
-        animation-timeline: view();
-        animation-range: entry;
-    }
-
-    .side2{
-        scale: .8;
-        opacity: 0;
-        animation: fade linear forwards;
-        animation-timeline: view();
-        animation-range: entry;
+  @media (prefers-reduced-motion: no-preference) {
+    #contact {
+      scale: 0.6;
+      opacity: 0;
+      animation: fade linear forwards;
+      animation-timeline: view();
+      animation-range: entry;
     }
 
     @keyframes fade {
-        to {
-            opacity: 1;
-            scale: 1;    
-        }
-    } 
+      to {
+        opacity: 1;
+        scale: 1;
+      }
+    }
+  }
+}
+
+.side2 input[type='submit'] {
+  transition: transform 1000ms;
+}
+
+.side2 input[type='submit']:hover,
+.side2 input[type='submit']:focus-visible {
+  transform: translateX(1rem);
+  background-color: #8b5cf6;
+  color: white;
+}
+
+@media (max-width: 1024px) {
+  .side1 {
+    scale: 0.6;
+    opacity: 0;
+    animation: fade linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+  }
+
+  .side2 {
+    scale: 0.8;
+    opacity: 0;
+    animation: fade linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+  }
+
+  @keyframes fade {
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
 }

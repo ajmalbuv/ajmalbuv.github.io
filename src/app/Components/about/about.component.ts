@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Experience } from '../../Data/Experience';
-import { Education } from '../../Data/Education';
-import { Certification } from '../../Data/Certification';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../Services/data.service';
+import { Experience } from '../../types/experience';
+import { Education } from '../../types/education';
+import { Certification } from '../../types/certification';
 
 @Component({
-    selector: 'app-about',
-    imports: [CommonModule],
-    templateUrl: './about.component.html',
-    styleUrl: './about.component.css'
+  selector: 'app-about',
+  imports: [CommonModule],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
 })
 export class AboutComponent implements OnInit {
-  experiences: any[] = [];
-  educations: any[] = [];
-  certifications: any[] = [];
+  private dataService = inject(DataService);
 
-  constructor(private dataService: DataService) {}
+  experiences: Experience[] = [];
+  educations: Education[] = [];
+  certifications: Certification[] = [];
 
   ngOnInit() {
     this.experiences = this.dataService.getExperiences();

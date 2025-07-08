@@ -1,28 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AboutComponent } from '../about/about.component';
 import { SkillComponent } from '../skill/skill.component';
 import { ProjectsComponent } from '../projects/projects.component';
 import { ContactComponent } from '../contact/contact.component';
 import { DataService } from '../../Services/data.service';
+import { PersonalDetails } from '../../types/personalDetails.';
 
 @Component({
-    selector: 'app-home',
-    imports: [
-        CommonModule,
-        AboutComponent,
-        SkillComponent,
-        ProjectsComponent,
-        ContactComponent,
-    ],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.css'
+  selector: 'app-home',
+  imports: [
+    CommonModule,
+    AboutComponent,
+    SkillComponent,
+    ProjectsComponent,
+    ContactComponent,
+  ],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  user_details: any;
-  currentDesignationIndex = 0;
+  private data = inject(DataService);
 
-  constructor(private data: DataService) {}
+  user_details!: PersonalDetails;
+  currentDesignationIndex = 0;
 
   downloadCV() {
     const fileUrl =

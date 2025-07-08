@@ -6,39 +6,40 @@ import { PersonalDetails } from '../Data/PersonalDetails.';
 import { Skill } from '../Data/Skill';
 import { Projects } from '../Data/Projects';
 
+import { Experience as ExperienceType } from '../types/experience';
+import { Education as EducationType } from '../types/education';
+import { Certification as CertificationType } from '../types/certification';
+import {
+  PersonalDetails as PersonalDetailsType,
+  Contact,
+} from '../types/personalDetails.';
+import { Skill as SkillType } from '../types/skill';
+import { Project as ProjectType } from '../types/projects';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
-
   constructor() {}
-
-  getExperiences() {
+  getExperiences(): ExperienceType[] {
     return Experience;
   }
-
-  getEducations() {
+  getEducations(): EducationType[] {
     return Education;
   }
-
-  getCertifications() {
+  getCertifications(): CertificationType[] {
     return Certification;
   }
-
-  getPersonalDetails() {
+  getPersonalDetails(): PersonalDetailsType {
     return PersonalDetails;
   }
-
-  getSkills() {
+  getSkills(): SkillType[] {
     return Skill;
   }
-
-  getProjects() {
+  getProjects(): ProjectType[] {
     return Projects;
   }
-
-  getContacts(){
+  getContacts(): Contact {
     return PersonalDetails.contact;
   }
-
 }

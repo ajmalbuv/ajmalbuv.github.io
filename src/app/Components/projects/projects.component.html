@@ -2,20 +2,20 @@
   <h1 class="text-2xl font-semibold">Projects</h1>
   <div class="container grid">
     @for (project of projects; track project; let i = $index) {
-    <div
-      class="project-container border-4 rounded-3xl my-3 cursor-pointer"
-      title="Click to View Details"
-      (click)="navigateToProject(i)"
-    >
-      <div class="flex items-center p-3">
-        <img [src]="project.img" alt="" class="h-[70px]" loading="lazy" />
-        <h2 class="text-xl font-semibold px-3">{{ project.title }}</h2>
+      <div
+        class="project-container border-4 rounded-3xl my-3 cursor-pointer"
+        title="Click to View Details"
+        (click)="navigateToProject(i)"
+      >
+        <div class="flex items-center p-3">
+          <img [src]="project.img" alt="" class="h-[70px]" loading="lazy" />
+          <h2 class="text-xl font-semibold px-3">{{ project.title }}</h2>
+        </div>
+        <div>
+          <p class="description px-3 pb-3 text-sm">{{ project.description }}</p>
+          <p class="techstack px-3 pb-3 text-sm">{{ project.techstack }}</p>
+        </div>
       </div>
-      <div>
-        <p class="description px-3 pb-3 text-sm">{{ project.description }}</p>
-        <p class="techstack px-3 pb-3 text-sm">{{ project.techstack }}</p>
-      </div>
-    </div>
     }
   </div>
 </section>

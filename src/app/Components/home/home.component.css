@@ -1,61 +1,66 @@
-@media (min-width: 1025px ){
-    #home{
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        height: 85vh;
-    }
+@media (min-width: 1025px) {
+  #home {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+  }
 
-    #profile{
-        height: 400px;
-        background-color: white;
-        margin-left: 2.5rem;
-        margin-right: 2.5rem;
-    }
+  #profile {
+    height: 400px;
+    background-color: white;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+  }
 
-    #designation{
-        width: 300px;
-        text-align: right;
-    }
+  #designation {
+    width: 300px;
+    text-align: right;
+  }
 
-    #designation h1{
-        line-height: 60px;
-    }
+  #designation h1 {
+    line-height: 60px;
+  }
 
-    #description{
-        width: 400px;
-    }
+  #description {
+    width: 400px;
+  }
 }
 
-@media (prefers-reduced-motion: no-preference){
-    #home{
-        opacity: 1;
-        animation: fade-out linear forwards;
-        animation-timeline: view();
-        animation-range: exit 50px;
+@media (prefers-reduced-motion: no-preference) {
+  #home {
+    opacity: 1;
+    animation: fade-out linear forwards;
+    animation-timeline: view();
+    animation-range: exit 50px;
+  }
+
+  .profile {
+    opacity: 1;
+    animation: profile linear forwards;
+    animation-timeline: view(100px);
+    animation-range: exit;
+  }
+
+  .cv button {
+    transition: transform 1000ms;
+  }
+
+  .cv button:hover,
+  .cv button:focus-visible {
+    transform: translateX(1rem);
+  }
+
+  @keyframes fade-out {
+    to {
+      opacity: 0;
     }
+  }
 
-    .profile{
-        opacity: 1;
-        animation: profile linear forwards;
-        animation-timeline: view(100px);
-        animation-range: exit;
+  @keyframes profile {
+    to {
+      scale: 0.6;
+      opacity: 0;
     }
-
-    .cv button{
-        transition: transform 1000ms;
-    }
-
-    .cv button:hover,
-    .cv button:focus-visible {
-        transform: translateX(1rem);
-    }
-
-    @keyframes fade-out {
-        to { opacity: 0 }
-    } 
-
-    @keyframes profile {
-        to { scale: .6; opacity: 0 }
-    } 
+  }
 }

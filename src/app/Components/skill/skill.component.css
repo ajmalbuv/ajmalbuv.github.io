@@ -1,24 +1,24 @@
 @media (min-width: 768px) {
   .container {
-    max-width: 100%;  
+    max-width: 100%;
   }
 }
 
-@media (min-width: 1025px ){
-    section{
-        padding: 10px;
-        width: 90%;
-        margin: auto;
-        margin-top: 10px;
-    }
+@media (min-width: 1025px) {
+  section {
+    padding: 10px;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+  }
 
-    .container{
-        grid-template-columns: repeat(7, auto);
-        grid-template-areas: 
-          'one one one one two two two'
-          'three three three four four four four'
-          'five five five four four four four'
-          'five five five four four four four';
+  .container {
+    grid-template-columns: repeat(7, auto);
+    grid-template-areas:
+      'one one one one two two two'
+      'three three three four four four four'
+      'five five five four four four four'
+      'five five five four four four four';
   }
 
   .container > div:nth-child(1) {
@@ -37,26 +37,24 @@
     grid-area: four;
   }
 
-  .container > div:nth-child(4) > div{
+  .container > div:nth-child(4) > div {
     padding-left: 0;
     padding-right: 0;
   }
 
-  .container > div:nth-child(4) > div > div{
+  .container > div:nth-child(4) > div > div {
     margin-top: 7px;
   }
 
-  .container > div:nth-child(4) > div > div > img{
+  .container > div:nth-child(4) > div > div > img {
     height: 60px;
-    
   }
 
   .container > div:nth-child(5) {
     grid-area: five;
   }
-
 }
-  
+
 @media (prefers-reduced-motion: no-preference) {
   .container > div:nth-child(1),
   .container > div:nth-child(3),
@@ -64,8 +62,8 @@
     opacity: 0;
     transform: translateX(-100px);
     animation: fade-in-left 1s ease-in forwards;
-    animation-timeline: view(); 
-    animation-range: entry; 
+    animation-timeline: view();
+    animation-range: entry;
   }
 
   .container > div:nth-child(2),
@@ -91,5 +89,3 @@
     }
   }
 }
-  
-  

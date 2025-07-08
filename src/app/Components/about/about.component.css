@@ -1,36 +1,33 @@
-@media (min-width: 1025px ){
-    section{
-        padding: 10px;
-        width: 90%;
-        margin: auto;
-        margin-top: 10px;
-    }
+@media (min-width: 1025px) {
+  section {
+    padding: 10px;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+  }
 
-    .edu{
-        flex-direction: row;
-    }
+  .edu {
+    flex-direction: row;
+  }
 
-    .cert{
-        grid-template-columns: repeat(3,1fr);
-    }
+  .cert {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-@media (prefers-reduced-motion: no-preference){
+@media (prefers-reduced-motion: no-preference) {
+  .edu > div {
+    scale: 0.6;
+    opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+  }
 
-    .edu > div{
-        scale: .6;
-        opacity: 0;
-        animation: fade-in linear forwards;
-        animation-timeline: view();
-        animation-range: entry;
+  @keyframes fade-in {
+    to {
+      scale: 1;
+      opacity: 1;
     }
-
-    @keyframes fade-in {
-        to {
-            scale: 1; 
-            opacity: 1; 
-        }
-    }
+  }
 }
-
- 

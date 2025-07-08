@@ -45,51 +45,54 @@
       </form>
     </div>
     @if (contacts) {
-    <div class="images flex justify-evenly border-2 p-2 rounded-full mt-5">
-      <a [href]="'mailto:' + contacts.email.id" title="{{ contacts.email.id }}">
-        <img
-          [src]="contacts.email.img"
-          alt="Email"
-          class="h-[30px]"
-          loading="lazy"
-        />
-      </a>
-      <a
-        [href]="'tel:' + contacts.phone.number"
-        title="{{ contacts.phone.number }}"
-      >
-        <img
-          [src]="contacts.phone.img"
-          alt="Phone"
-          class="h-[30px]"
-          loading="lazy"
-        />
-      </a>
-      <a [href]="contacts.instagram.url">
-        <img
-          [src]="contacts.instagram.img"
-          alt="Instagram"
-          class="h-[30px]"
-          loading="lazy"
-        />
-      </a>
-      <a [href]="contacts.github.url">
-        <img
-          [src]="contacts.github.img"
-          alt="Github"
-          class="h-[30px]"
-          loading="lazy"
-        />
-      </a>
-      <a [href]="contacts.linkedin.url">
-        <img
-          [src]="contacts.linkedin.img"
-          alt="LinkedIn"
-          class="h-[30px]"
-          loading="lazy"
-        />
-      </a>
-    </div>
+      <div class="images flex justify-evenly border-2 p-2 rounded-full mt-5">
+        <a
+          [href]="'mailto:' + contacts.email.id"
+          title="{{ contacts.email.id }}"
+        >
+          <img
+            [src]="contacts.email.img"
+            alt="Email"
+            class="h-[30px]"
+            loading="lazy"
+          />
+        </a>
+        <a
+          [href]="'tel:' + contacts.phone.number"
+          title="{{ contacts.phone.number }}"
+        >
+          <img
+            [src]="contacts.phone.img"
+            alt="Phone"
+            class="h-[30px]"
+            loading="lazy"
+          />
+        </a>
+        <a [href]="contacts.instagram.url">
+          <img
+            [src]="contacts.instagram.img"
+            alt="Instagram"
+            class="h-[30px]"
+            loading="lazy"
+          />
+        </a>
+        <a [href]="contacts.github.url">
+          <img
+            [src]="contacts.github.img"
+            alt="Github"
+            class="h-[30px]"
+            loading="lazy"
+          />
+        </a>
+        <a [href]="contacts.linkedin.url">
+          <img
+            [src]="contacts.linkedin.img"
+            alt="LinkedIn"
+            class="h-[30px]"
+            loading="lazy"
+          />
+        </a>
+      </div>
     }
   </div>
 </section>

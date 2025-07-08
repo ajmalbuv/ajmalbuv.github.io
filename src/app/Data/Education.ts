@@ -2,7 +2,7 @@ export const Education = [
   {
     school: 'Krupanidhi Degree College',
     place: 'Bengaluru, Karnataka',
-    degree: "Bachelor's in Computer Application",
+    degree: 'Bachelor\'s in Computer Application',
     duration: 'Oct 2021 - Sept 2024',
   },
   {

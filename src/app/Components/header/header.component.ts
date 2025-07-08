@@ -1,14 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-header',
-    imports: [],
-    templateUrl: './header.component.html',
-    styleUrl: './header.component.css'
+  selector: 'app-header',
+  imports: [],
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css',
 })
-
 export class HeaderComponent implements OnInit {
-  
   isClosed = false;
 
   ngOnInit() {
@@ -16,7 +14,7 @@ export class HeaderComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize() {
     this.checkScreenSize();
   }
 
@@ -28,5 +26,4 @@ export class HeaderComponent implements OnInit {
     const screenWidth = window.innerWidth;
     this.isClosed = screenWidth < 640;
   }
-
 }
