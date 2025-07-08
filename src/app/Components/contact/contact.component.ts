@@ -5,11 +5,10 @@ import { PersonalDetails } from '../../Data/PersonalDetails.';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-contact',
-  standalone: true,
-  imports: [ FormsModule, CommonModule],
-  templateUrl: './contact.component.html',
-  styleUrl: './contact.component.css'
+    selector: 'app-contact',
+    imports: [FormsModule, CommonModule],
+    templateUrl: './contact.component.html',
+    styleUrl: './contact.component.css'
 })
 export class ContactComponent {
 

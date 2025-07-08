@@ -4,11 +4,10 @@ import { Projects } from '../../Data/Projects';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-projects',
-  standalone: true,
-  imports: [ CommonModule],
-  templateUrl: './projects.component.html',
-  styleUrl: './projects.component.css'
+    selector: 'app-projects',
+    imports: [CommonModule],
+    templateUrl: './projects.component.html',
+    styleUrl: './projects.component.css'
 })
 export class ProjectsComponent {
   projects = Projects;

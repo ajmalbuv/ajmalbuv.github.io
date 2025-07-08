@@ -7,17 +7,16 @@ import { ContactComponent } from '../contact/contact.component';
 import { DataService } from '../../Services/data.service';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    CommonModule,
-    AboutComponent,
-    SkillComponent,
-    ProjectsComponent,
-    ContactComponent,
-  ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+    selector: 'app-home',
+    imports: [
+        CommonModule,
+        AboutComponent,
+        SkillComponent,
+        ProjectsComponent,
+        ContactComponent,
+    ],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
   user_details: any;
