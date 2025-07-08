@@ -4,11 +4,10 @@ import { Projects } from '../../Data/Projects';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-project-details',
-  standalone: true,
-  imports: [ CommonModule],
-  templateUrl: './project-details.component.html',
-  styleUrl: './project-details.component.css'
+    selector: 'app-project-details',
+    imports: [CommonModule],
+    templateUrl: './project-details.component.html',
+    styleUrl: './project-details.component.css'
 })
 export class ProjectDetailsComponent implements OnInit {
   project: any;
