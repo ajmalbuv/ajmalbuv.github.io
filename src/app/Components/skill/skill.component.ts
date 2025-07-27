@@ -1,6 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Skill } from '../../Data/Skill';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-skill',

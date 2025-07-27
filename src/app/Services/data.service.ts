@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Experience } from '../Data/Experience';
-import { Education } from '../Data/Education';
 import { Certification } from '../Data/Certification';
+import { Education } from '../Data/Education';
+import { Experience } from '../Data/Experience';
 import { PersonalDetails } from '../Data/PersonalDetails.';
-import { Skill } from '../Data/Skill';
 import { Projects } from '../Data/Projects';
-
-import { Experience as ExperienceType } from '../types/experience';
-import { Education as EducationType } from '../types/education';
+import { Skill } from '../Data/Skill';
 import { Certification as CertificationType } from '../types/certification';
+import { Education as EducationType } from '../types/education';
+import { Experience as ExperienceType } from '../types/experience';
 import {
-  PersonalDetails as PersonalDetailsType,
   Contact,
+  PersonalDetails as PersonalDetailsType,
 } from '../types/personalDetails.';
-import { Skill as SkillType } from '../types/skill';
 import { Project as ProjectType } from '../types/projects';
+import { Skill as SkillType } from '../types/skill';
 
 @Injectable({
   providedIn: 'root',

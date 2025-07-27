@@ -1,9 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { DataService } from '../../Services/data.service';
-import { Experience } from '../../types/experience';
-import { Education } from '../../types/education';
 import { Certification } from '../../types/certification';
+import { Education } from '../../types/education';
+import { Experience } from '../../types/experience';
 
 @Component({
   selector: 'app-about',

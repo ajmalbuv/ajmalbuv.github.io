@@ -1,11 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AboutComponent } from '../about/about.component';
-import { SkillComponent } from '../skill/skill.component';
-import { ProjectsComponent } from '../projects/projects.component';
-import { ContactComponent } from '../contact/contact.component';
+import { Component, inject, OnInit } from '@angular/core';
 import { DataService } from '../../Services/data.service';
 import { PersonalDetails } from '../../types/personalDetails.';
+import { AboutComponent } from '../about/about.component';
+import { ContactComponent } from '../contact/contact.component';
+import { ProjectsComponent } from '../projects/projects.component';
+import { SkillComponent } from '../skill/skill.component';
 
 @Component({
   selector: 'app-home',

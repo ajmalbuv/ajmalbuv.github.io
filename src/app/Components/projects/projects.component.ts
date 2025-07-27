@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Projects } from '../../Data/Projects';
 import { Router } from '@angular/router';
+import { Projects } from '../../Data/Projects';
 
 @Component({
   selector: 'app-projects',

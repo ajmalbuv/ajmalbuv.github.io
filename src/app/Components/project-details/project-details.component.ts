@@ -1,7 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Projects } from '../../Data/Projects';
-import { CommonModule } from '@angular/common';
 import { Project } from '../../types/projects';
 
 @Component({

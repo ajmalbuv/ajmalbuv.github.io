@@ -1,9 +1,9 @@
-import { Component, ViewChild, inject } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
-import { EmailService } from '../../Services/email.service';
-import { PersonalDetails } from '../../Data/PersonalDetails.';
 import { CommonModule } from '@angular/common';
-import { Contact } from '../../types/personalDetails.';
+import { Component, inject, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { PersonalDetails } from '../../Data/PersonalDetails.';
+import { EmailService } from '../../Services/email.service';
+import { ContactFormData } from '../../types/contact-form';
 
 @Component({
   selector: 'app-contact',
@@ -17,7 +17,7 @@ export class ContactComponent {
   @ViewChild('myform') myform!: NgForm;
   contacts = PersonalDetails.contact;
 
-  sendMail(contact: Contact) {
+  sendMail(contact: ContactFormData) {
     this.emailService
       .sendMail(contact)
       .then(() => {

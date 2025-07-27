@@ -1,7 +1,10 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
   "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-  "files": { "ignoreUnknown": false },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["!**/node_modules", "!**/.angular", "!**/dist", "!**/coverage"]
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -14,18 +17,12 @@
     "bracketSpacing": true,
     "expand": "auto",
     "useEditorconfig": true,
-    "includes": [
-      "**",
-      "!**/node_modules",
-      "!**/dist",
-      "!**/coverage",
-      "!src/environments/*.ts"
-    ]
+    "includes": ["**"]
   },
   "linter": {
     "enabled": true,
     "rules": { "recommended": false },
-    "includes": ["**", "projects/**/*"]
+    "includes": ["**"]
   },
   "javascript": {
     "formatter": {
