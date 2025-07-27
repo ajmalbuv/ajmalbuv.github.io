@@ -12,8 +12,8 @@ label {
   color: #ffffff;
 }
 
-input[type='text'],
-input[type='number'] {
+input[type="text"],
+input[type="number"] {
   width: 100%;
   padding: 8px;
   margin-bottom: 8px;
@@ -36,7 +36,7 @@ textarea {
   color: rgb(0, 0, 0);
 }
 
-input[type='submit'] {
+input[type="submit"] {
   background-color: #ffffff;
   color: #4c1d95;
   padding: 10px 20px;
@@ -101,12 +101,12 @@ input[type='submit'] {
   }
 }
 
-.side2 input[type='submit'] {
+.side2 input[type="submit"] {
   transition: transform 1000ms;
 }
 
-.side2 input[type='submit']:hover,
-.side2 input[type='submit']:focus-visible {
+.side2 input[type="submit"]:hover,
+.side2 input[type="submit"]:focus-visible {
   transform: translateX(1rem);
   background-color: #8b5cf6;
   color: white;
