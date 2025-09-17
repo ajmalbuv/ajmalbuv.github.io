@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   downloadCV() {
     const fileUrl =
-      'https://raw.githubusercontent.com/ajmalbuv/resume/master/resume.pdf';
+      'https://raw.githubusercontent.com/ajmalbuv/resume/master/resume-no-image.pdf';
 
     fetch(fileUrl)
       .then((response) => response.blob())
