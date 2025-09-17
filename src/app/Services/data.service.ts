@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Certification } from '../Data/Certification';
 import { Education } from '../Data/Education';
 import { Experience } from '../Data/Experience';
-import { PersonalDetails } from '../Data/PersonalDetails.';
+import { PersonalDetails } from '../Data/PersonalDetails';
 import { Projects } from '../Data/Projects';
 import { Skill } from '../Data/Skill';
 import { Certification as CertificationType } from '../types/certification';

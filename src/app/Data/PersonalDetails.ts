@@ -2,11 +2,7 @@ export const PersonalDetails = {
   name: 'Ajmal Basheer',
   img: 'assets/images/personal/photo.webp',
   resume: '',
-  designation: [
-    'Full Stack Developer',
-    'Flutter Mobile Developer',
-    'Angular & Web Developer',
-  ],
+  designation: ['Flutter Mobile Developer', 'Full Stack Developer'],
   description:
     'A results-driven software developer with expertise in both backend and frontend technologies. I build scalable, high-performance applications using modern frameworks and cloud services. Passionate about crafting seamless user experiences and robust, secure systems, I deliver end-to-end solutions for complex technical challenges.',
   contact: {
