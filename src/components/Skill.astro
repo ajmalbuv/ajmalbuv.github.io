@@ -1,0 +1,138 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import { Skill as skillsData } from "../data/Skill";
+---
+
+<section class="flex flex-col justify-center m-3" id="skill">
+  <h1 class="text-2xl font-semibold m-3">Skills</h1>
+  <div class="container grid gap-5 w-full">
+    {
+      skillsData.map((skill) => (
+        <div>
+          <h1 class="mb-1 ml-3">{skill.type}</h1>
+          <div
+            class:list={[
+              "grid p-4 border-4 border-white rounded-3xl gap-y-4",
+              skill.skills.length === 4 ? "grid-cols-4" : "grid-cols-3",
+            ]}
+          >
+            {skill.skills.map((s) => (
+              <div class="flex flex-col items-center justify-center">
+                {typeof s.icon === "string" ? (
+                  <Icon name={s.icon} class="text-[50px] h-[50px] w-[50px]" />
+                ) : (
+                  <Image
+                    src={s.icon as ImageMetadata}
+                    alt={s.name}
+                    widths={[50, 100, (s.icon as ImageMetadata).width]}
+                    sizes="50px"
+                    class="h-[50px] w-auto object-contain"
+                    loading="lazy"
+                  />
+                )}
+                <p class="text-xs text-center mt-1">{s.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  @media (min-width: 768px) {
+    .container {
+      max-width: 100%;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    section {
+      padding: 10px;
+      width: 90%;
+      margin: auto;
+      margin-top: 10px;
+    }
+
+    .container {
+      grid-template-columns: repeat(7, auto);
+      grid-template-areas:
+        "one one one one two two two"
+        "three three three four four four four"
+        "five five five four four four four"
+        "five five five four four four four";
+    }
+
+    .container > div:nth-child(1) {
+      grid-area: one;
+    }
+
+    .container > div:nth-child(2) {
+      grid-area: two;
+    }
+
+    .container > div:nth-child(3) {
+      grid-area: three;
+    }
+
+    .container > div:nth-child(4) {
+      grid-area: four;
+    }
+
+    .container > div:nth-child(4) > div {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .container > div:nth-child(4) > div > div {
+      margin-top: 7px;
+    }
+
+    .container > div:nth-child(4) > div > div > img,
+    .container > div:nth-child(4) > div > div > svg {
+      height: 60px;
+      width: auto;
+    }
+
+    .container > div:nth-child(5) {
+      grid-area: five;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .container > div:nth-child(1),
+    .container > div:nth-child(3),
+    .container > div:nth-child(5) {
+      opacity: 0;
+      transform: translateX(-100px);
+      animation: fade-in-left 1s ease-in forwards;
+      animation-timeline: view();
+      animation-range: entry;
+    }
+
+    .container > div:nth-child(2),
+    .container > div:nth-child(4) {
+      opacity: 0;
+      transform: translateX(50px);
+      animation: fade-in-right 1s ease-in forwards;
+      animation-timeline: view();
+      animation-range: entry;
+    }
+
+    @keyframes fade-in-left {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade-in-right {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  }
+</style>

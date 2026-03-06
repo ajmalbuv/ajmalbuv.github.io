@@ -1,0 +1,148 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import { Projects } from "../../data/Projects";
+
+export function getStaticPaths() {
+  return Projects.map((project, index) => ({
+    params: { id: index.toString() },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+
+// Dynamically import all screenshots to get optimization benefits
+const allScreenshots = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/projects/screenshots/**/*.{webp,png,jpg,jpeg}",
+);
+
+const screenshotsArray = await Promise.all(
+  Object.values(project.screenshots || {}).map(async (path) => {
+    if (typeof path === 'string' && allScreenshots[path]) {
+      const mod = await (allScreenshots[path] as () => Promise<{ default: ImageMetadata }>)();
+      return mod.default;
+    }
+    return path;
+  })
+);
+---
+
+<Layout title={`${project.title} - Details`}>
+  <Header />
+  <main class="flex flex-col m-3">
+    <section class="flex flex-col">
+      <div class="flex items-center">
+        <Image
+          src={project.img as ImageMetadata}
+          alt={project.title}
+          class="h-[70px] w-auto object-contain"
+          widths={[70, 140, (project.img as ImageMetadata).width]}
+          sizes="70px"
+          loading="eager"
+        />
+        <h2 class="px-3 text-3xl font-semibold">{project.title}</h2>
+      </div>
+
+      <div class="py-3" id="s1">
+        <p class="text-lg">{project.largeDescription}</p>
+      </div>
+
+      <div id="features-section">
+        <h1 class="text-2xl font-semibold my-3">Features</h1>
+        <div class="border-4 rounded-3xl">
+          {
+            project.features.map((feature) => (
+              <div class="m-3">
+                <p class="text-sm">
+                  <span class="text-base font-semibold">
+                    {feature.heading}:
+                  </span>
+                  {feature.description}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="py-3" id="s2">
+        <h1 class="text-2xl font-semibold my-3">Screenshots</h1>
+        <div class="img-container grid grid-cols-1 gap-4">
+          {
+            screenshotsArray.map((screenshot) => (
+              <div class="screenshot-container">
+                {screenshot && (
+                  <Image
+                    src={screenshot as ImageMetadata}
+                    alt="Screenshot"
+                    class="h-[100%] object-fill w-full"
+                    widths={[320, 640, (screenshot as ImageMetadata).width]}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
+                  />
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .screenshot-container {
+    border: 2px solid #ccc;
+  }
+
+  @media (min-width: 640px) {
+    .img-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    section {
+      width: 90%;
+      margin: auto;
+      margin-top: 50px;
+    }
+
+    .img-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #s1 {
+      opacity: 1;
+      animation: fade-out-anim linear forwards;
+      animation-timeline: view(50px);
+      animation-range: exit;
+    }
+
+    .screenshot-container {
+      scale: 0.6;
+      opacity: 0;
+      animation: fade-in-anim linear forwards;
+      animation-timeline: view();
+      animation-range: entry;
+    }
+
+    @keyframes fade-in-anim {
+      to {
+        scale: 1;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade-out-anim {
+      to {
+        opacity: 0;
+        scale: 0.6;
+      }
+    }
+  }
+</style>

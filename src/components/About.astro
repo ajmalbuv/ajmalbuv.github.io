@@ -1,0 +1,98 @@
+---
+import { Experience } from "../data/Experience";
+import { Education } from "../data/Education";
+import { Certification } from "../data/Certification";
+---
+
+<section class="flex flex-col justify-center" id="about">
+  <h1 class="text-2xl font-semibold m-3">Experience</h1>
+  {
+    Experience.map((experience) => (
+      <div class="mx-4 mb-6">
+        <div>
+          <h2 class="text-lg font-semibold py-2">{experience.designation}</h2>
+          <h3 class="text-base font-semibold">{experience.company}</h3>
+          <h4 class="text-sm font-semibold">{experience.duration}</h4>
+        </div>
+        <p class="py-3">{experience.description}</p>
+      </div>
+    ))
+  }
+
+  <h1 class="text-2xl font-semibold m-3">Education</h1>
+  <div class="edu flex flex-col justify-center">
+    {
+      Education.map((education, i) => (
+        <div class="mx-4 mb-6 border-4 flex-1">
+          <div class="p-3">
+            <h2 class="text-lg font-semibold">
+              {education.school.toUpperCase()}
+            </h2>
+            <h3 class="text-sm font-medium">{education.place}</h3>
+            <h4 class="text-sm font-normal">{education.duration}</h4>
+            <p
+              class:list={[
+                "py-3 font-bold",
+                i === 0 ? "text-2xl lg:text-3xl" : "text-5xl",
+              ]}
+            >
+              {education.degree}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <h1 class="text-2xl font-semibold m-3">Certification</h1>
+  <div class="cert grid grid-flow-row">
+    {
+      Certification.map((certification, i) => (
+        <div class="mx-4 mb-6 flex-1">
+          <div class:list={["p-3", i !== 0 ? "border-4" : ""]}>
+            <h2 class="text-lg font-semibold">{certification.course}</h2>
+            <h3 class="text-sm font-medium">{certification.centre}</h3>
+            <p class="text-sm font-normal">{certification.place}</p>
+            <p class="py-3 font-bold">{certification.duration}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  @media (min-width: 1025px) {
+    #about {
+      padding: 10px;
+      width: 90%;
+      margin: auto;
+      margin-top: 10px;
+    }
+
+    .edu {
+      flex-direction: row;
+    }
+
+    .cert {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .edu > div {
+      scale: 0.6;
+      opacity: 0;
+      animation: fade-in linear forwards;
+      animation-timeline: view();
+      animation-range: entry;
+    }
+
+    @keyframes fade-in {
+      to {
+        scale: 1;
+        opacity: 1;
+      }
+    }
+  }
+</style>

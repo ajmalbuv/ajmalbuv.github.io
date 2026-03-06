@@ -1,0 +1,146 @@
+---
+import { Image } from "astro:assets";
+import { PersonalDetails } from "../data/PersonalDetails";
+const contacts = PersonalDetails.contact;
+---
+
+<section class="flex flex-col" id="home">
+  <div class="" id="designation">
+    <h1 id="designation-text" class="text-4xl font-semibold p-3 sm:text-5xl">
+      {PersonalDetails.designation[0]}
+    </h1>
+  </div>
+  
+  <div class="profile flex justify-center items-end m-3" id="profile">
+    <Image
+      src={PersonalDetails.img as ImageMetadata}
+      alt={PersonalDetails.name}
+      class="bg-white h-64 w-auto object-contain"
+      widths={[240, 400, (PersonalDetails.img as ImageMetadata).width]}
+      sizes={`(max-width: 1024px) 240px, 400px`}
+      loading="eager"
+    />
+  </div>
+
+  <div class="flex flex-col justify-center" id="description">
+    <p class="text-4xl font-semibold p-3 sm:text-5xl">
+      I am <br />{PersonalDetails.name}
+    </p>
+    <p class="text-base font-light p-3 sm:text-lg">
+      {PersonalDetails.description}
+    </p>
+    <div class="cv m-3">
+      <button
+        id="download-cv"
+        class="p-3 bg-white text-violet-900 text-lg rounded-md cursor-pointer hover:bg-violet-50 active:scale-95 transition-all duration-300"
+      >
+        Download Resume
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 1025px) {
+    #home {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 85vh;
+    }
+
+    #profile {
+      height: 400px;
+      background-color: white;
+      margin-left: 2.5rem;
+      margin-right: 2.5rem;
+    }
+
+    #designation {
+      width: 300px;
+      text-align: right;
+    }
+
+    #designation h1 {
+      line-height: 60px;
+    }
+
+    #description {
+      width: 400px;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #home {
+      opacity: 1;
+      animation: fade-out linear forwards;
+      animation-timeline: view();
+      animation-range: exit 50px;
+    }
+
+    .profile {
+      opacity: 1;
+      animation: profile-anim linear forwards;
+      animation-timeline: view(100px);
+      animation-range: exit;
+    }
+
+    .cv button:hover,
+    .cv button:focus-visible {
+      transform: translateX(1rem);
+    }
+
+    @keyframes fade-out {
+      to {
+        opacity: 0;
+      }
+    }
+
+    @keyframes profile-anim {
+      to {
+        scale: 0.6;
+        opacity: 0;
+      }
+    }
+  }
+</style>
+
+<script define:vars={{ designations: PersonalDetails.designation }}>
+  function initHome() {
+    const textElement = document.getElementById("designation-text");
+    let currentIndex = 0;
+
+    if (textElement && designations.length > 1) {
+      if (window.homeInterval) clearInterval(window.homeInterval);
+
+      window.homeInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % designations.length;
+        textElement.textContent = designations[currentIndex];
+      }, 2000);
+    }
+    const downloadBtn = document.getElementById("download-cv");
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", () => {
+        const fileUrl =
+          "https://raw.githubusercontent.com/ajmalbuv/resume/master/resume-no-image.pdf";
+
+        fetch(fileUrl)
+          .then((response) => response.blob())
+          .then((blob) => {
+            const blobUrl = window.URL.createObjectURL(blob);
+            const anchor = document.createElement("a");
+            anchor.href = blobUrl;
+            anchor.download = "AjmalBasheer-Resume.pdf";
+
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+            window.URL.revokeObjectURL(blobUrl);
+          })
+          .catch((error) => console.error("Download failed:", error));
+      });
+    }
+  }
+  initHome();
+  document.addEventListener("astro:after-swap", initHome);
+</script>

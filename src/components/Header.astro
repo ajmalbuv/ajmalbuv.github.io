@@ -1,0 +1,80 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<header class="top-0 sticky z-50 transition-all duration-300" id="main-header">
+  <div class="flex justify-between items-center text-white lg:px-20">
+    <div class="p-3">
+      <h1 class="text-4xl lg:text-5xl font-semibold">Portfolio.</h1>
+    </div>
+    <nav
+      class="fixed w-full top-16 bg-black opacity-90 sm:bg-transparent sm:relative sm:top-0 sm:w-[50%] transition-all duration-300 overflow-hidden sm:overflow-visible"
+      id="sidebar"
+    >
+      <ul
+        class="flex flex-col sm:flex-row justify-between items-center p-3 gap-4 sm:gap-0"
+      >
+        <li><a href="/">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skill">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="sm:hidden p-3">
+      <button
+        id="toggle-btn"
+        aria-label="Toggle button"
+        class="focus:outline-none"
+      >
+        <Icon name="mdi:menu" class="h-10 w-10" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  header {
+    background: linear-gradient(135deg, #43639c 0%, #412653 70%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  /* Initial mobile state */
+  @media (max-width: 639px) {
+    #sidebar.close {
+      height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      opacity: 0;
+    }
+    #sidebar:not(.close) {
+      height: auto;
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById("toggle-btn");
+  const sidebar = document.getElementById("sidebar");
+  const header = document.getElementById("main-header");
+
+  function checkScreenSize() {
+    if (window.innerWidth < 640) {
+      sidebar?.classList.add("close");
+    } else {
+      sidebar?.classList.remove("close");
+    }
+  }
+
+  // Initial check
+  checkScreenSize();
+
+  toggleBtn?.addEventListener("click", () => {
+    sidebar?.classList.toggle("close");
+  });
+
+  window.addEventListener("resize", checkScreenSize);
+</script>

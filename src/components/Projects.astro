@@ -1,0 +1,117 @@
+---
+import { Image } from "astro:assets";
+import { Projects as projectsData } from "../data/Projects";
+---
+
+<section class="flex flex-col justify-center mt-10 mx-3" id="projects">
+  <h1 class="text-2xl font-semibold m-3">Projects</h1>
+  <div class="container grid">
+    {
+      projectsData.map((project, i) => (
+        <a
+          href={`/project/${i}`}
+          class="project-container border-4 rounded-3xl my-3 cursor-pointer block text-white no-underline transition-colors"
+          title="Click to View Details"
+        >
+          <div class="flex items-center p-3">
+            <Image
+              src={project.img as ImageMetadata}
+              alt={project.title}
+              class="h-[70px] w-auto object-contain"
+              widths={[70, 140, (project.img as ImageMetadata).width]}
+              sizes="70px"
+              loading="lazy"
+            />
+            <h2 class="text-xl font-semibold px-3">{project.title}</h2>
+          </div>
+          <div>
+            <p class="description px-3 pb-3 text-sm">{project.description}</p>
+            <p class="techstack px-3 pb-3 text-sm">{project.techstack}</p>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  @media (min-width: 768px) {
+    .container {
+      max-width: 100%;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    section {
+      padding: 10px;
+      width: 90%;
+      margin: auto;
+      margin-top: 10px;
+    }
+
+    .container {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 10px;
+    }
+  }
+
+  .container {
+    box-sizing: border-box;
+  }
+
+  .container > a {
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .project-container .techstack {
+    display: block;
+  }
+
+  .project-container .description {
+    display: none;
+  }
+
+  .project-container:hover .description {
+    display: block;
+  }
+
+  .project-container:hover {
+    background-color: white;
+    color: black;
+    border-color: white;
+    transition: 300ms ease-in;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .container > a:nth-child(odd) {
+      opacity: 0;
+      transform: translateX(-100px);
+      animation: fade-in-left 1s ease-in forwards;
+      animation-timeline: view();
+      animation-range: entry;
+    }
+
+    .container > a:nth-child(even) {
+      opacity: 0;
+      transform: translateX(20px);
+      animation: fade-in-right 1s ease-in forwards;
+      animation-timeline: view();
+      animation-range: entry;
+    }
+
+    @keyframes fade-in-left {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade-in-right {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  }
+</style>
