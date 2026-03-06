@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import { PersonalDetails } from "../data/PersonalDetails";
-import { getImage } from "astro:assets";
 
 interface Props {
   title?: string;
@@ -18,13 +17,8 @@ const {
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
 } = Astro.props;
 
-const optimizedImage = await getImage({
-  src: image,
-  format: "webp",
-});
-
 const siteUrl = Astro.site?.toString();
-const avatarUrl = new URL(optimizedImage.src, siteUrl).toString();
+const avatarUrl = new URL(image.src, siteUrl).toString();
 
 // JSON-LD Structured Data
 const schema = {
@@ -49,7 +43,8 @@ const schema = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="canonical" href={canonicalURL} />
@@ -66,7 +61,6 @@ const schema = {
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={avatarUrl} />
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-    <link rel="preload" href={optimizedImage.src} as="image" />
     <ClientRouter />
 
     <!-- Cloudflare Web Analytics -->
