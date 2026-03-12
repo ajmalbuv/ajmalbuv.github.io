@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@fontsource/poppins": "^5.2.7",
     "@iconify-json/devicon": "^1.2.59",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/simple-icons": "^1.2.72",
     "@tailwindcss/vite": "^4.2.1",
-    "astro": "^5.17.1",
+    "astro": "^6.0.3",
     "astro-icon": "^1.1.5",
     "tailwindcss": "^4.2.1"
   }

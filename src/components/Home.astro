@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import { PersonalDetails } from "../data/PersonalDetails";
-const contacts = PersonalDetails.contact;
 ---
 
 <section class="flex flex-col" id="home">
@@ -10,15 +9,19 @@ const contacts = PersonalDetails.contact;
       {PersonalDetails.designation[0]}
     </h1>
   </div>
-  
+
   <div class="profile flex justify-center items-end m-3" id="profile">
     <Image
       src={PersonalDetails.img as ImageMetadata}
       alt={PersonalDetails.name}
       class="bg-white h-64 w-auto object-contain"
-      widths={[240, 400, (PersonalDetails.img as ImageMetadata).width]}
-      sizes={`(max-width: 1024px) 240px, 400px`}
+      width={400}
+      height={574}
+      widths={[240, 480, 800]}
+      sizes="(max-width: 640px) 178px, (max-width: 1024px) 279px, 400px"
       loading="eager"
+      fetchpriority="high"
+      decoding="async"
     />
   </div>
 
