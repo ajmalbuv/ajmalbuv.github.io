@@ -108,7 +108,12 @@ import { PersonalDetails } from "../data/PersonalDetails";
   }
 </style>
 
-<script define:vars={{ designations: PersonalDetails.designation }}>
+<script
+  define:vars={{
+    designations: PersonalDetails.designation,
+    resumeUrl: PersonalDetails.resume,
+  }}
+>
   function initHome() {
     const textElement = document.getElementById("designation-text");
     let currentIndex = 0;
@@ -124,8 +129,7 @@ import { PersonalDetails } from "../data/PersonalDetails";
     const downloadBtn = document.getElementById("download-cv");
     if (downloadBtn) {
       downloadBtn.addEventListener("click", () => {
-        const fileUrl =
-          "https://raw.githubusercontent.com/ajmalbuv/resume/master/resume-no-image.pdf";
+        const fileUrl = resumeUrl;
 
         fetch(fileUrl)
           .then((response) => response.blob())

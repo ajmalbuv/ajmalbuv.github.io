@@ -1,19 +1,19 @@
 import type { ImageMetadata } from 'astro';
 
-export interface ContactDetail {
+export interface IconDetail {
   id?: string;
   number?: string;
   url?: string;
-  img: string | ImageMetadata;
+  icon: string;
 }
 
 export interface Contact {
-  email: ContactDetail;
-  phone: ContactDetail;
+  email: IconDetail;
+  phone: IconDetail;
   address: string;
-  github: ContactDetail;
-  linkedin: ContactDetail;
-  instagram: ContactDetail;
+  github: IconDetail;
+  linkedin: IconDetail;
+  instagram: IconDetail;
 }
 
 export interface PersonalDetails {

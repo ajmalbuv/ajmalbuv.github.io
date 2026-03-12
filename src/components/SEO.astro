@@ -1,0 +1,65 @@
+---
+import { PersonalDetails } from "../data/PersonalDetails";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: URL;
+}
+
+const {
+  title = "Ajmal Basheer | Software Engineer & Systems Builder",
+  description = "Ajmal Basheer is a software engineer focused on high-performance Flutter applications, scalable systems, and modern cross-platform solutions.",
+  image = typeof PersonalDetails.img === "string"
+    ? PersonalDetails.img
+    : PersonalDetails.img.src,
+  canonicalURL = new URL(Astro.url.pathname, Astro.site),
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString();
+const avatarUrl = new URL(image, siteUrl).toString();
+
+// JSON-LD Structured Data
+const schema = {
+  "@context": "http://schema.org",
+  "@type": "Person",
+  name: ["Ajmal Basheer", "ajmalbuv", "Ajmal Aju", "_.aju"],
+  image: avatarUrl,
+  jobTitle: ["Software Engineer", "Systems Builder", "Flutter Developer"],
+  description: description,
+  url: siteUrl,
+  sameAs: [
+    PersonalDetails.contact.github.url,
+    PersonalDetails.contact.instagram.url,
+    PersonalDetails.contact.linkedin.url,
+    "https://twitch.tv/ajmalbuv",
+  ],
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
+<meta name="generator" content={Astro.generator} />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="canonical" href={canonicalURL} />
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={avatarUrl} />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={avatarUrl} />
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
