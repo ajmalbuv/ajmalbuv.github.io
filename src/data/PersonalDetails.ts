@@ -1,4 +1,4 @@
-import type { PersonalDetails as PersonalDetailsType } from "../types/personalDetails..ts";
+import type { PersonalDetails as PersonalDetailsType } from "../types/personalDetails.ts";
 import photo from "../assets/images/personal/photo.webp";
 
 export const PersonalDetails: PersonalDetailsType = {

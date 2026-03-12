@@ -10,6 +10,7 @@ interface Props {
   description?: string;
   image?: ImageMetadata;
   canonicalURL?: URL;
+  lang?: string;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   description = "Ajmal Basheer is a software engineer focused on high-performance Flutter applications, scalable systems, and modern cross-platform solutions.",
   image = PersonalDetails.img as ImageMetadata,
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
+  lang = "en",
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString();
@@ -41,7 +43,7 @@ const schema = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
