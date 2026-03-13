@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { PersonalDetails } from "../data/PersonalDetails";
+import SafeLink from "./SafeLink.astro";
 const contacts = PersonalDetails.contact;
 ---
 
@@ -98,7 +99,7 @@ const contacts = PersonalDetails.contact;
     {
       contacts && (
         <div class="social-bar flex justify-evenly items-center border-2 p-2 rounded-full mt-5 min-h-[50px] lg:absolute lg:bottom-5 lg:left-[100px] lg:w-[40%]">
-          <a
+          <SafeLink
             href={`mailto:${contacts.email.id}`}
             title={contacts.email.id}
             class="flex items-center justify-center cursor-pointer"
@@ -108,8 +109,8 @@ const contacts = PersonalDetails.contact;
               name={contacts.email.icon}
               class="h-[30px] w-[30px] object-contain"
             />
-          </a>
-          <a
+          </SafeLink>
+          <SafeLink
             href={`tel:${contacts.phone.number}`}
             title={contacts.phone.number}
             class="flex items-center justify-center cursor-pointer"
@@ -119,8 +120,8 @@ const contacts = PersonalDetails.contact;
               name={contacts.phone.icon}
               class="h-[30px] w-[30px] object-contain"
             />
-          </a>
-          <a
+          </SafeLink>
+          <SafeLink
             href={contacts.instagram.url}
             target="_blank"
             rel="noopener noreferrer"
@@ -131,8 +132,8 @@ const contacts = PersonalDetails.contact;
               name={contacts.instagram.icon}
               class="h-[30px] w-[30px] object-contain"
             />
-          </a>
-          <a
+          </SafeLink>
+          <SafeLink
             href={contacts.github.url}
             target="_blank"
             rel="noopener noreferrer"
@@ -143,8 +144,8 @@ const contacts = PersonalDetails.contact;
               name={contacts.github.icon}
               class="h-[30px] w-[30px] object-contain"
             />
-          </a>
-          <a
+          </SafeLink>
+          <SafeLink
             href={contacts.linkedin.url}
             target="_blank"
             rel="noopener noreferrer"
@@ -155,7 +156,7 @@ const contacts = PersonalDetails.contact;
               name={contacts.linkedin.icon}
               class="h-[30px] w-[30px] object-contain"
             />
-          </a>
+          </SafeLink>
         </div>
       )
     }

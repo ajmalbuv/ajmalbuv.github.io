@@ -1,0 +1,52 @@
+---
+interface Props {
+  href?: string;
+  title?: string;
+  class?: string;
+  ["aria-label"]?: string;
+  [key: string]: any;
+}
+
+const {
+  href,
+  title,
+  class: className,
+  "aria-label": ariaLabel,
+  ...rest
+} = Astro.props;
+
+if (!href) return null;
+
+// Helper to encode string to HTML entities
+// This converts every character to its &#code; equivalent
+const encode = (str: string) =>
+  str
+    .split("")
+    .map((char) => `&#${char.charCodeAt(0)};`)
+    .join("");
+
+// Attributes we want to protect/encode
+const protectedAttrs: Record<string, string | undefined> = {
+  href: encode(href),
+  title: title ? encode(title) : undefined,
+  "aria-label": ariaLabel ? encode(ariaLabel) : undefined,
+};
+
+// Merge with other standard attributes (class, target, etc.)
+const allAttrs = {
+  ...rest,
+  class: className,
+  ...protectedAttrs,
+};
+
+// Build the attribute string manually to prevent double-escaping by Astro
+const attrString = Object.entries(allAttrs)
+  .filter(([_, value]) => value !== undefined && value !== null)
+  .map(([key, value]) => `${key}="${String(value)}"`)
+  .join(" ");
+
+const slotContent = await Astro.slots.render("default");
+const finalHtml = `<a ${attrString}>${slotContent}</a>`;
+---
+
+<Fragment set:html={finalHtml} />
