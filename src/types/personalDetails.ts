@@ -1,6 +1,6 @@
 import type { ImageMetadata } from 'astro';
 
-export interface IconDetail {
+interface IconDetail {
   id?: string;
   number?: string;
   url?: string;

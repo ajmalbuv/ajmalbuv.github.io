@@ -1,4 +1,6 @@
-export const Experience = [
+import type { Experience as ExperienceType } from "../types/experience";
+
+export const Experience: ExperienceType[] = [
   {
     company: "ETAYA INNOVATIONS Pvt Ltd, Bengaluru",
     designation: "Flutter Developer Intern",

@@ -1,4 +1,6 @@
-export const Certification = [
+import type { Certification as CertificationType } from "../types/certification";
+
+export const Certification: CertificationType[] = [
   {
     course: "ML with Python",
     centre: "KEONICS",

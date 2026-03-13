@@ -1,4 +1,6 @@
-export const Education = [
+import type { Education as EducationType } from "../types/education";
+
+export const Education: EducationType[] = [
   {
     school: "Krupanidhi Degree College",
     place: "Bengaluru, Karnataka",

@@ -1,0 +1,7 @@
+{
+  "ignoreDependencies": [
+    "@iconify-json/devicon",
+    "@iconify-json/mdi",
+    "@iconify-json/simple-icons"
+  ]
+}
