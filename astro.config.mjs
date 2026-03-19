@@ -1,13 +1,16 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
-import icon from 'astro-icon';
+import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "astro/config";
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ajmalbuv.github.io',
+  site: "https://ajmalbuv.github.io",
   integrations: [icon()],
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
+  build: {
+    assets: "assets",
+  },
 });
