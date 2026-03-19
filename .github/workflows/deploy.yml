@@ -16,6 +16,9 @@ permissions:
 jobs:
   github-pages:
     name: Deploy to GitHub Pages
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -23,6 +26,9 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
+
+      - name: Setup Pages 🛠️
+        uses: actions/configure-pages@v5
 
       - name: Setup Node.js 🟢
         uses: actions/setup-node@v4
@@ -59,10 +65,18 @@ jobs:
 
   vps-deploy:
     name: Deploy to VPS Branch
+    concurrency:
+      group: "vps"
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
+
+      - name: Setup Node.js 🟢
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
 
       - name: Setup Bun 🚀
         uses: oven-sh/setup-bun@v2
