@@ -5,7 +5,7 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ajmalbuv.github.io",
+  site: "https://ajmalbuv.pages.dev",
   integrations: [icon()],
   vite: {
     plugins: [tailwindcss()],
