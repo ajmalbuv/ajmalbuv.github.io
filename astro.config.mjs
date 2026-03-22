@@ -9,6 +9,9 @@ export default defineConfig({
   integrations: [icon()],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      assetsInlineLimit: 0,
+    },
   },
   build: {
     assets: "assets",

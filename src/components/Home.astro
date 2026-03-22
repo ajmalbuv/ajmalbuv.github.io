@@ -3,7 +3,12 @@ import { Image } from "astro:assets";
 import { PersonalDetails } from "../data/PersonalDetails";
 ---
 
-<section class="flex flex-col" id="home">
+<section
+  class="flex flex-col"
+  id="home"
+  data-designations={JSON.stringify(PersonalDetails.designation)}
+  data-resume-url={PersonalDetails.resume}
+>
   <div class="" id="designation">
     <h1 id="designation-text" class="text-4xl font-semibold p-3 sm:text-5xl">
       {PersonalDetails.designation[0]}
@@ -108,30 +113,33 @@ import { PersonalDetails } from "../data/PersonalDetails";
   }
 </style>
 
-<script
-  define:vars={{
-    designations: PersonalDetails.designation,
-    resumeUrl: PersonalDetails.resume,
-  }}
->
+<script>
   function initHome() {
+    const homeSection = document.getElementById("home");
+    if (!homeSection) return;
+
+    const designationsStr = homeSection.dataset.designations;
+    const resumeUrl = homeSection.dataset.resumeUrl;
+    if (!designationsStr) return;
+
+    const designations = JSON.parse(designationsStr);
     const textElement = document.getElementById("designation-text");
     let currentIndex = 0;
 
     if (textElement && designations.length > 1) {
-      if (window.homeInterval) clearInterval(window.homeInterval);
+      if ((window as any).homeInterval)
+        clearInterval((window as any).homeInterval);
 
-      window.homeInterval = setInterval(() => {
+      (window as any).homeInterval = setInterval(() => {
         currentIndex = (currentIndex + 1) % designations.length;
         textElement.textContent = designations[currentIndex];
       }, 2000);
     }
-    const downloadBtn = document.getElementById("download-cv");
-    if (downloadBtn) {
-      downloadBtn.addEventListener("click", () => {
-        const fileUrl = resumeUrl;
 
-        fetch(fileUrl)
+    const downloadBtn = document.getElementById("download-cv");
+    if (downloadBtn && resumeUrl) {
+      downloadBtn.addEventListener("click", () => {
+        fetch(resumeUrl)
           .then((response) => response.blob())
           .then((blob) => {
             const blobUrl = window.URL.createObjectURL(blob);
