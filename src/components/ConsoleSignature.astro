@@ -1,4 +1,7 @@
 <script>
+  // Access the hash injected at build-time
+  const gitHash = (import.meta.env as any).PUBLIC_GIT_HASH || "dev";
+
   const signature = `
    ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄        ▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄        
   ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░▌      ▐░░▌▐░░░░░░░░░░░▌▐░░▌       
@@ -33,7 +36,7 @@
   Love this portfolio? Check out the source code on GitHub:
   https://github.com/ajmalbuv/ajmalbuv.github.io
 
-  [ System: Ajmal v2.0 | Status: Online | Mode: Building ]
+  [ System: Ajmal v2.0 | Hash: ${gitHash} | Status: Online ]
   `;
 
   const styles = [
@@ -43,8 +46,6 @@
     "font-weight: bold",
     "line-height: 1.4",
     "padding: 10px",
-    "background: #000000",
-    "text-shadow: 0 0 2px #00ff41",
   ].join(";");
 
   console.log("%c" + signature, styles);
