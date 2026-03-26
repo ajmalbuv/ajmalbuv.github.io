@@ -1,0 +1,1 @@
+const s=document.getElementById("toggle-btn"),e=document.getElementById("sidebar");function t(){window.innerWidth<640?e?.classList.add("close"):e?.classList.remove("close")}t();s?.addEventListener("click",()=>{e?.classList.toggle("close")});window.addEventListener("resize",t);
