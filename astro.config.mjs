@@ -2,6 +2,8 @@
 import { execSync } from "node:child_process";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
+import robotsTxt from "astro-robots-txt";
 import icon from "astro-icon";
 
 // Future-proof Git Hash detection for Cloudflare, GitHub, and Local
@@ -24,7 +26,7 @@ const gitHash = getGitHash();
 // https://astro.build/config
 export default defineConfig({
   site: "https://ajmalbuv.pages.dev",
-  integrations: [icon()],
+  integrations: [icon(), sitemap(), robotsTxt()],
   vite: {
     plugins: [tailwindcss()],
     build: {
