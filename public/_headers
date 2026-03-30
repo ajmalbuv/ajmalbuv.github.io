@@ -4,7 +4,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: accelerometer=(),camera=(),geolocation=(),gyroscope=(),magnetometer=(),microphone=(),payment=(),usb=(),browsing-topics=(),run-ad-auction=(),join-ad-interest-group=(),private-aggregation=(),attribution-reporting=(),compute-pressure=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://media.githubusercontent.com https://ajmalbuv.pages.dev; font-src 'self' data:; connect-src 'self' https://api.emailjs.com https://cloudflareinsights.com https://media.githubusercontent.com; manifest-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;
+  Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' data: https://media.githubusercontent.com https://ajmalbuv.pages.dev; font-src 'self' data:; connect-src 'self' https://api.emailjs.com https://cloudflareinsights.com https://media.githubusercontent.com; manifest-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;
   Access-Control-Allow-Origin: https://ajmalbuv.pages.dev
   Access-Control-Allow-Headers: Content-Type, X-CSRF-Token
   Cross-Origin-Opener-Policy: same-origin

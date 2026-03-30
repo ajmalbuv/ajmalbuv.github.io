@@ -30,7 +30,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     build: {
-      assetsInlineLimit: 0,
+      cssCodeSplit: false,
+      assetsInlineLimit: 4096,
     },
     define: {
       "import.meta.env.PUBLIC_GIT_HASH": JSON.stringify(gitHash),
