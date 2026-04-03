@@ -1,5 +1,5 @@
 ---
-import { PersonalDetails } from "../data/PersonalDetails";
+import { PersonalDetails } from '../data/PersonalDetails';
 
 interface Props {
   title?: string;
@@ -9,9 +9,9 @@ interface Props {
 }
 
 const {
-  title = "Ajmal Basheer | Software Engineer & Systems Builder",
-  description = "Ajmal Basheer is a software engineer focused on high-performance Flutter applications, scalable systems, and modern cross-platform solutions.",
-  image = typeof PersonalDetails.img === "string"
+  title = 'Ajmal Basheer | Software Engineer & Systems Builder',
+  description = 'Ajmal Basheer is a software engineer focused on high-performance Flutter applications, scalable systems, and modern cross-platform solutions.',
+  image = typeof PersonalDetails.img === 'string'
     ? PersonalDetails.img
     : PersonalDetails.img.src,
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
@@ -22,18 +22,18 @@ const avatarUrl = new URL(image, siteUrl).toString();
 
 // JSON-LD Structured Data
 const schema = {
-  "@context": "http://schema.org",
-  "@type": "Person",
-  name: ["Ajmal Basheer", "ajmalbuv", "Ajmal Aju", "_.aju"],
+  '@context': 'http://schema.org',
+  '@type': 'Person',
+  name: ['Ajmal Basheer', 'ajmalbuv', 'Ajmal Aju', '_.aju'],
   image: avatarUrl,
-  jobTitle: ["Software Engineer", "Systems Builder", "Flutter Developer"],
+  jobTitle: ['Software Engineer', 'Systems Builder', 'Flutter Developer'],
   description: description,
   url: siteUrl,
   sameAs: [
     PersonalDetails.contact.github.url,
     PersonalDetails.contact.instagram.url,
     PersonalDetails.contact.linkedin.url,
-    "https://twitch.tv/ajmalbuv",
+    'https://twitch.tv/ajmalbuv',
   ],
 };
 ---

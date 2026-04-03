@@ -5,7 +5,10 @@
     "clientKind": "git",
     "useIgnoreFile": true
   },
-  "files": { "ignoreUnknown": false },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["src/**/*.astro", "src/**/*.ts", "src/**/*.js"]
+  },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
@@ -22,5 +25,21 @@
     "rules": {
       "recommended": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off",
+            "noUnusedImports": "off"
+          },
+          "style": {
+            "useConst": "off"
+          }
+        }
+      }
+    }
+  ]
 }

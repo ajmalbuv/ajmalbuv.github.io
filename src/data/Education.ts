@@ -1,22 +1,22 @@
-import type { Education as EducationType } from "../types/education";
+import type { Education as EducationType } from '../types/education';
 
 export const Education: EducationType[] = [
   {
-    school: "Krupanidhi Degree College",
-    place: "Bengaluru, Karnataka",
+    school: 'Krupanidhi Degree College',
+    place: 'Bengaluru, Karnataka',
     degree: "Bachelor's in Computer Application",
-    duration: "Oct 2021 - Sept 2024",
+    duration: 'Oct 2021 - Sept 2024',
   },
   {
-    school: "MIC Higher Secondary School",
-    place: "Malappuram, Kerala",
-    degree: "Senior Secondary School",
-    duration: "2017 - 2019",
+    school: 'MIC Higher Secondary School',
+    place: 'Malappuram, Kerala',
+    degree: 'Senior Secondary School',
+    duration: '2017 - 2019',
   },
   {
-    school: "International Indian School Dammam",
-    place: "Dammam, KSA",
-    degree: "Secondary School",
-    duration: "2017",
+    school: 'International Indian School Dammam',
+    place: 'Dammam, KSA',
+    degree: 'Secondary School',
+    duration: '2017',
   },
 ];

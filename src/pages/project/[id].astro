@@ -1,8 +1,8 @@
 ---
-import { Image } from "astro:assets";
-import Layout from "../../layouts/Layout.astro";
-import Header from "../../components/Header.astro";
-import { Projects } from "../../data/Projects";
+import { Image } from 'astro:assets';
+import Header from '../../components/Header.astro';
+import { Projects } from '../../data/Projects';
+import Layout from '../../layouts/Layout.astro';
 
 export function getStaticPaths() {
   return Projects.map((project, index) => ({
@@ -15,17 +15,19 @@ const { project } = Astro.props;
 
 // Dynamically import all screenshots to get optimization benefits
 const allScreenshots = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/images/projects/screenshots/**/*.{webp,png,jpg,jpeg}",
+  '/src/assets/images/projects/screenshots/**/*.{webp,png,jpg,jpeg}',
 );
 
 const screenshotsArray = await Promise.all(
   Object.values(project.screenshots || {}).map(async (path) => {
     if (typeof path === 'string' && allScreenshots[path]) {
-      const mod = await (allScreenshots[path] as () => Promise<{ default: ImageMetadata }>)();
+      const mod = await (
+        allScreenshots[path] as () => Promise<{ default: ImageMetadata }>
+      )();
       return mod.default;
     }
     return path;
-  })
+  }),
 );
 ---
 

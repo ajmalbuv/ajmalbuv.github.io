@@ -1,4 +1,4 @@
-import type { ImageMetadata } from "astro";
+import type { ImageMetadata } from 'astro';
 
 export interface SkillItem {
   name: string;

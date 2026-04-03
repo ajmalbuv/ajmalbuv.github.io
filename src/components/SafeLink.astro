@@ -3,15 +3,15 @@ interface Props {
   href?: string;
   title?: string;
   class?: string;
-  ["aria-label"]?: string;
-  [key: string]: any;
+  'aria-label'?: string;
+  [key: string]: unknown;
 }
 
 const {
   href,
   title,
   class: className,
-  "aria-label": ariaLabel,
+  'aria-label': ariaLabel,
   ...rest
 } = Astro.props;
 
@@ -21,15 +21,15 @@ if (!href) return null;
 // This converts every character to its &#code; equivalent
 const encode = (str: string) =>
   str
-    .split("")
+    .split('')
     .map((char) => `&#${char.charCodeAt(0)};`)
-    .join("");
+    .join('');
 
 // Attributes we want to protect/encode
 const protectedAttrs: Record<string, string | undefined> = {
   href: encode(href),
   title: title ? encode(title) : undefined,
-  "aria-label": ariaLabel ? encode(ariaLabel) : undefined,
+  'aria-label': ariaLabel ? encode(ariaLabel) : undefined,
 };
 
 // Merge with other standard attributes (class, target, etc.)
@@ -43,9 +43,9 @@ const allAttrs = {
 const attrString = Object.entries(allAttrs)
   .filter(([_, value]) => value !== undefined && value !== null)
   .map(([key, value]) => `${key}="${String(value)}"`)
-  .join(" ");
+  .join(' ');
 
-const slotContent = await Astro.slots.render("default");
+const slotContent = await Astro.slots.render('default');
 const finalHtml = `<a ${attrString}>${slotContent}</a>`;
 ---
 

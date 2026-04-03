@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.8",
     "@astrojs/sitemap": "^3.7.2",
     "@emailjs/browser": "^4.4.1",
     "@fontsource/poppins": "^5.2.7",
@@ -19,6 +20,7 @@
     "astro": "6.1.1",
     "astro-icon": "^1.1.5",
     "astro-robots-txt": "^1.0.0",
-    "tailwindcss": "^4.2.1"
+    "tailwindcss": "^4.2.1",
+    "typescript": "^6.0.2"
   }
 }
