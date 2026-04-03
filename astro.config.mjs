@@ -16,7 +16,7 @@ const getGitHash = () => {
       execSync("git rev-parse HEAD").toString().trim();
 
     return hash.slice(0, 7);
-  } catch (e) {
+  } catch {
     return "dev";
   }
 };
@@ -28,7 +28,7 @@ export default defineConfig({
   site: "https://ajmalbuv.pages.dev",
   integrations: [icon(), sitemap(), robotsTxt()],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [/** @type {any} */ (tailwindcss())],
     build: {
       cssCodeSplit: false,
       assetsInlineLimit: 4096,

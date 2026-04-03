@@ -29,7 +29,7 @@ const screenshotsArray = await Promise.all(
 );
 ---
 
-<Layout title={`${project.title} - Details`} image={project.img as ImageMetadata}>
+<Layout title={`${project.title} - Details`} image={(project.img as ImageMetadata).src}>
   <Header />
   <main class="flex flex-col m-3">
     <section class="flex flex-col">
