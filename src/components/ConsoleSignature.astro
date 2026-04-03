@@ -1,7 +1,9 @@
 <script>
-  // Access the hash injected at build-time with a safe fallback
   const gitHash = (import.meta.env as any).PUBLIC_GIT_HASH || "dev";
-  const timestamp = new Date().toLocaleString();
+  const buildTime =
+    (import.meta.env as any).PUBLIC_BUILD_TIME || new Date().toISOString();
+  const formattedBuildTime = new Date(buildTime).toLocaleString();
+  const browserLocale = Intl.DateTimeFormat().resolvedOptions().locale;
 
   const mauve = "color: #cba6f7";
   const blue = "color: #89b4fa";
@@ -36,32 +38,26 @@
       `%c 🔗 GitHub:    %chttps://github.com/ajmalbuv\n` +
       `%c 🔗 LinkedIn:  %chttps://linkedin.com/in/ajmalbuv\n` +
       `%c ───────────────────────────────────────────────────────────\n` +
-      `%c [ Build: %c${gitHash} %c| Status: %cOnline %c| Session: %c${timestamp} %c]`,
-    // Styles for ASCII
+      `%c [ Build: %c${gitHash} %c| Locale: %c${browserLocale} %c| Compiled: %c${formattedBuildTime} %c]`,
     `${mauve}; ${bold}; ${fontFamily}`,
     reset,
-    // Header
     `${mauve}; font-size: 14px; ${bold}; ${fontFamily}`,
     "color: #585b70",
     "color: #9399b2; font-style: italic",
-    // Separator
     "color: #313244",
-    // Details
     peach,
     reset,
     blue,
     reset,
     blue,
     reset,
-    // Separator
     "color: #313244",
-    // System info footer
     overlay,
     mauve,
     overlay,
     green,
     overlay,
-    blue,
+    peach,
     overlay,
   );
 </script>

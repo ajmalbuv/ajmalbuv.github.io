@@ -22,6 +22,7 @@ const getGitHash = () => {
 };
 
 const gitHash = getGitHash();
+const buildTime = new Date().toISOString();
 
 // https://astro.build/config
 export default defineConfig({
@@ -35,6 +36,7 @@ export default defineConfig({
     },
     define: {
       "import.meta.env.PUBLIC_GIT_HASH": JSON.stringify(gitHash),
+      "import.meta.env.PUBLIC_BUILD_TIME": JSON.stringify(buildTime),
     },
   },
   build: {
