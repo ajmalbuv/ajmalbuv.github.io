@@ -21,6 +21,6 @@
     "astro-icon": "^1.1.5",
     "astro-robots-txt": "^1.0.0",
     "tailwindcss": "^4.2.1",
-    "typescript": "^6.0.2"
+    "typescript": "^5.7.3"
   }
 }
