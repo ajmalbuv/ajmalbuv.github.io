@@ -3,10 +3,16 @@
   const gitHash = (import.meta.env as any).PUBLIC_GIT_HASH || "dev";
   const timestamp = new Date().toLocaleString();
 
-  const primary = "color: #8b5cf6"; // Violet 500
-  const secondary = "color: #06b6d4"; // Cyan 500
+  const mauve = "color: #cba6f7";
+  const blue = "color: #89b4fa";
+  const peach = "color: #fab387";
+  const overlay = "color: #6c7086";
+  const green = "color: #a6e3a1";
   const reset = "color: inherit";
   const bold = "font-weight: bold";
+
+  const fontFamily =
+    'font-family: "FiraCode Nerd Font", "Fira Code", monospace';
 
   const ascii = `
    ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄        ▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄        
@@ -25,37 +31,37 @@
   console.log(
     `%c${ascii}%c\n` +
       `%c 🚀 AJMAL BASHEER %c| %cSoftware Engineer & Systems Builder\n` +
-      `%c -----------------------------------------------------------\n` +
+      `%c ───────────────────────────────────────────────────────────\n` +
       `%c 📍 Based:     %cKerala, India\n` +
       `%c 🔗 GitHub:    %chttps://github.com/ajmalbuv\n` +
       `%c 🔗 LinkedIn:  %chttps://linkedin.com/in/ajmalbuv\n` +
-      `%c -----------------------------------------------------------\n` +
+      `%c ───────────────────────────────────────────────────────────\n` +
       `%c [ Build: %c${gitHash} %c| Status: %cOnline %c| Session: %c${timestamp} %c]`,
     // Styles for ASCII
-    `${primary}; ${bold}`,
+    `${mauve}; ${bold}; ${fontFamily}`,
     reset,
     // Header
-    `${primary}; font-size: 14px; ${bold}`,
-    "color: #666",
-    "color: #aaa; font-style: italic",
+    `${mauve}; font-size: 14px; ${bold}; ${fontFamily}`,
+    "color: #585b70",
+    "color: #9399b2; font-style: italic",
     // Separator
-    "color: #444",
+    "color: #313244",
     // Details
-    secondary,
+    peach,
     reset,
-    secondary,
+    blue,
     reset,
-    secondary,
+    blue,
     reset,
     // Separator
-    "color: #444",
+    "color: #313244",
     // System info footer
-    "color: #666",
-    primary,
-    "color: #666",
-    "color: #22c55e",
-    "color: #666",
-    secondary,
-    "color: #666",
+    overlay,
+    mauve,
+    overlay,
+    green,
+    overlay,
+    blue,
+    overlay,
   );
 </script>
