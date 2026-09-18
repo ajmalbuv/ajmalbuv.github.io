@@ -39,7 +39,7 @@ const screenshotsArray = await Promise.all(
         <Image
           src={project.img as ImageMetadata}
           alt={project.title}
-          class="h-[70px] w-auto object-contain"
+          class="h-17.5 w-auto object-contain"
           widths={[70, 140, (project.img as ImageMetadata).width]}
           sizes="70px"
           loading="eager"
@@ -79,7 +79,7 @@ const screenshotsArray = await Promise.all(
                   <Image
                     src={screenshot as ImageMetadata}
                     alt="Screenshot"
-                    class="h-[100%] object-fill w-full"
+                    class="h-full object-fill w-full"
                     widths={[320, 640, (screenshot as ImageMetadata).width]}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     loading="lazy"
