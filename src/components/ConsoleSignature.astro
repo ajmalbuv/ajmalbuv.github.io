@@ -1,7 +1,8 @@
 <script>
-  const gitHash = import.meta.env.PUBLIC_GIT_HASH || "dev";
-  const buildTime =
-    import.meta.env.PUBLIC_BUILD_TIME || new Date().toISOString();
+  import { PUBLIC_GIT_HASH, PUBLIC_BUILD_TIME } from "astro:env/client";
+
+  const gitHash = PUBLIC_GIT_HASH || "dev";
+  const buildTime = PUBLIC_BUILD_TIME || new Date().toISOString();
   const formattedBuildTime = new Date(buildTime).toLocaleString();
   const browserLocale = Intl.DateTimeFormat().resolvedOptions().locale;
 

@@ -212,14 +212,15 @@ const contacts = PersonalDetails.contact;
 
 <script>
   import emailjs from "@emailjs/browser";
+  import {
+    PUBLIC_EMAILJS_PUBLIC_KEY,
+    PUBLIC_EMAILJS_SERVICE_ID,
+    PUBLIC_EMAILJS_TEMPLATE_ID,
+  } from "astro:env/client";
 
   function initContact() {
-    const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
-    const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
-    const TEMPLATE_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
-
-    if (PUBLIC_KEY) {
-      emailjs.init(PUBLIC_KEY);
+    if (PUBLIC_EMAILJS_PUBLIC_KEY) {
+      emailjs.init(PUBLIC_EMAILJS_PUBLIC_KEY);
     }
 
     const contactForm = document.getElementById(
@@ -231,7 +232,11 @@ const contacts = PersonalDetails.contact;
       contactForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
+        if (
+          !PUBLIC_EMAILJS_PUBLIC_KEY ||
+          !PUBLIC_EMAILJS_SERVICE_ID ||
+          !PUBLIC_EMAILJS_TEMPLATE_ID
+        ) {
           alert(
             "EmailJS keys are not configured. Please check your environment variables.",
           );
@@ -247,7 +252,11 @@ const contacts = PersonalDetails.contact;
         };
 
         emailjs
-          .send(SERVICE_ID, TEMPLATE_ID, templateParams)
+          .send(
+            PUBLIC_EMAILJS_SERVICE_ID,
+            PUBLIC_EMAILJS_TEMPLATE_ID,
+            templateParams,
+          )
           .then(() => {
             alert("Mail sent successfully!");
             contactForm.reset();
@@ -260,6 +269,5 @@ const contacts = PersonalDetails.contact;
     }
   }
 
-  initContact();
-  document.addEventListener("astro:after-swap", initContact);
+  document.addEventListener("astro:page-load", initContact);
 </script>

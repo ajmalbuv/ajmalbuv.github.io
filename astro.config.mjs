@@ -2,7 +2,7 @@
 import { execSync } from 'node:child_process';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import icon from 'astro-icon';
 import llms from 'astro-llms-md';
 import robotsTxt from 'astro-robots-txt';
@@ -24,20 +24,47 @@ const getGitHash = () => {
 
 const gitHash = getGitHash();
 const buildTime = new Date().toISOString();
+process.env.PUBLIC_GIT_HASH = gitHash;
+process.env.PUBLIC_BUILD_TIME = buildTime;
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ajmalbuv.pages.dev',
+  site: process.env.SITE || 'https://ajmalbuv.pages.dev',
+  env: {
+    schema: {
+      PUBLIC_GIT_HASH: envField.string({
+        context: 'client',
+        access: 'public',
+        default: gitHash,
+      }),
+      PUBLIC_BUILD_TIME: envField.string({
+        context: 'client',
+        access: 'public',
+        default: buildTime,
+      }),
+      PUBLIC_EMAILJS_PUBLIC_KEY: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_EMAILJS_SERVICE_ID: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      PUBLIC_EMAILJS_TEMPLATE_ID: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+    },
+  },
   integrations: [icon(), sitemap(), robotsTxt()],
   vite: {
-    plugins: [/** @type {any} */ (tailwindcss()), llms()],
+    plugins: [tailwindcss(), llms()],
     build: {
       cssCodeSplit: false,
       assetsInlineLimit: 4096,
-    },
-    define: {
-      'import.meta.env.PUBLIC_GIT_HASH': JSON.stringify(gitHash),
-      'import.meta.env.PUBLIC_BUILD_TIME': JSON.stringify(buildTime),
     },
   },
   build: {

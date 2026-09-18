@@ -15,10 +15,10 @@ import { Icon } from 'astro-icon/components';
         class="flex flex-col sm:flex-row justify-between items-center p-3 gap-4 sm:gap-0"
       >
         <li><a href="/">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skill">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#skill">Skills</a></li>
+        <li><a href="/#projects">Projects</a></li>
+        <li><a href="/#contact">Contact</a></li>
       </ul>
     </nav>
     <div class="sm:hidden p-3">
@@ -57,23 +57,37 @@ import { Icon } from 'astro-icon/components';
 </style>
 
 <script>
-  const toggleBtn = document.getElementById("toggle-btn");
-  const sidebar = document.getElementById("sidebar");
+  function initHeader() {
+    const toggleBtn = document.getElementById("toggle-btn");
+    const sidebar = document.getElementById("sidebar");
 
-  function checkScreenSize() {
     if (window.innerWidth < 640) {
       sidebar?.classList.add("close");
     } else {
       sidebar?.classList.remove("close");
     }
+
+    toggleBtn?.addEventListener("click", () => {
+      sidebar?.classList.toggle("close");
+    });
+
+    sidebar?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 640) {
+          sidebar?.classList.add("close");
+        }
+      });
+    });
   }
 
-  // Initial check
-  checkScreenSize();
+  document.addEventListener("astro:page-load", initHeader);
 
-  toggleBtn?.addEventListener("click", () => {
-    sidebar?.classList.toggle("close");
+  window.addEventListener("resize", () => {
+    const sidebar = document.getElementById("sidebar");
+    if (window.innerWidth < 640) {
+      sidebar?.classList.add("close");
+    } else {
+      sidebar?.classList.remove("close");
+    }
   });
-
-  window.addEventListener("resize", checkScreenSize);
 </script>
