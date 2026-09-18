@@ -1,9 +1,11 @@
 ---
 interface Props {
-  href?: string;
-  title?: string;
-  class?: string;
-  'aria-label'?: string;
+  href?: string | undefined;
+  title?: string | undefined;
+  class?: string | undefined;
+  'aria-label'?: string | undefined;
+  target?: string | undefined;
+  rel?: string | undefined;
   [key: string]: unknown;
 }
 

@@ -5,11 +5,11 @@ import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
-  canonicalURL?: URL;
-  lang?: string;
+  title?: string | undefined;
+  description?: string | undefined;
+  image?: string | undefined;
+  canonicalURL?: URL | undefined;
+  lang?: string | undefined;
 }
 
 const { title, description, image, canonicalURL, lang = 'en' } = Astro.props;

@@ -226,8 +226,8 @@ const contacts = PersonalDetails.contact;
       "contact-form",
     ) as HTMLFormElement;
 
-    if (contactForm && !contactForm.dataset.initialized) {
-      contactForm.dataset.initialized = "true";
+    if (contactForm && !contactForm.dataset['initialized']) {
+      contactForm.dataset['initialized'] = "true";
       contactForm.addEventListener("submit", (e) => {
         e.preventDefault();
 

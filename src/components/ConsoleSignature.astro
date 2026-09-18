@@ -1,7 +1,7 @@
 <script>
-  const gitHash = (import.meta.env as any).PUBLIC_GIT_HASH || "dev";
+  const gitHash = import.meta.env.PUBLIC_GIT_HASH || "dev";
   const buildTime =
-    (import.meta.env as any).PUBLIC_BUILD_TIME || new Date().toISOString();
+    import.meta.env.PUBLIC_BUILD_TIME || new Date().toISOString();
   const formattedBuildTime = new Date(buildTime).toLocaleString();
   const browserLocale = Intl.DateTimeFormat().resolvedOptions().locale;
 

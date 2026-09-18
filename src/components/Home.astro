@@ -115,12 +115,14 @@ import { PersonalDetails } from '../data/PersonalDetails';
 </style>
 
 <script>
+  let homeInterval: ReturnType<typeof setInterval> | undefined;
+
   function initHome() {
     const homeSection = document.getElementById("home");
     if (!homeSection) return;
 
-    const designationsStr = homeSection.dataset.designations;
-    const resumeUrl = homeSection.dataset.resumeUrl;
+    const designationsStr = homeSection.dataset['designations'];
+    const resumeUrl = homeSection.dataset['resumeUrl'];
     if (!designationsStr) return;
 
     const designations = JSON.parse(designationsStr);
@@ -128,12 +130,15 @@ import { PersonalDetails } from '../data/PersonalDetails';
     let currentIndex = 0;
 
     if (textElement && designations.length > 1) {
-      if ((window as any).homeInterval)
-        clearInterval((window as any).homeInterval);
+      if (homeInterval)
+        clearInterval(homeInterval);
 
-      (window as any).homeInterval = setInterval(() => {
+      homeInterval = setInterval(() => {
         currentIndex = (currentIndex + 1) % designations.length;
-        textElement.textContent = designations[currentIndex];
+        const nextText = designations[currentIndex];
+        if (nextText) {
+          textElement.textContent = nextText;
+        }
       }, 2000);
     }
 
@@ -157,6 +162,7 @@ import { PersonalDetails } from '../data/PersonalDetails';
       });
     }
   }
+
   initHome();
   document.addEventListener("astro:after-swap", initHome);
 </script>
