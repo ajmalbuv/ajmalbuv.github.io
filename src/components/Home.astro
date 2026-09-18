@@ -144,7 +144,7 @@ import { PersonalDetails } from '../data/PersonalDetails';
 
     const downloadBtn = document.getElementById("download-cv");
     if (downloadBtn && resumeUrl) {
-      downloadBtn.addEventListener("click", () => {
+      downloadBtn.onclick = () => {
         fetch(resumeUrl)
           .then((response) => response.blob())
           .then((blob) => {
@@ -159,9 +159,15 @@ import { PersonalDetails } from '../data/PersonalDetails';
             window.URL.revokeObjectURL(blobUrl);
           })
           .catch((error) => console.error("Download failed:", error));
-      });
+      };
     }
   }
 
+  initHome();
   document.addEventListener("astro:page-load", initHome);
+  document.addEventListener("astro:before-swap", () => {
+    if (homeInterval) {
+      clearInterval(homeInterval);
+    }
+  });
 </script>

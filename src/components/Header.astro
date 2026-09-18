@@ -8,7 +8,7 @@ import { Icon } from 'astro-icon/components';
       <h1 class="text-4xl lg:text-5xl font-semibold">Portfolio.</h1>
     </div>
     <nav
-      class="fixed w-full top-16 bg-black opacity-90 sm:bg-transparent sm:relative sm:top-0 sm:w-[50%] transition-all duration-300 overflow-hidden sm:overflow-visible"
+      class="fixed w-full top-16 bg-black/95 sm:bg-transparent sm:relative sm:top-0 sm:w-[50%] overflow-hidden sm:overflow-visible"
       id="sidebar"
     >
       <ul
@@ -24,10 +24,13 @@ import { Icon } from 'astro-icon/components';
     <div class="sm:hidden p-3">
       <button
         id="toggle-btn"
-        aria-label="Toggle button"
-        class="focus:outline-none"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="sidebar"
+        class="group focus:outline-none cursor-pointer"
       >
-        <Icon name="mdi:menu" class="h-10 w-10" />
+        <Icon name="mdi:menu" class="h-10 w-10 block group-aria-expanded:hidden" />
+        <Icon name="mdi:close" class="h-10 w-10 hidden group-aria-expanded:block" />
       </button>
     </div>
   </div>
@@ -41,53 +44,43 @@ import { Icon } from 'astro-icon/components';
     background-attachment: fixed;
   }
 
-  /* Initial mobile state */
+  /* Mobile drawer transition (handled entirely in CSS) */
   @media (max-width: 639px) {
-    #sidebar.close {
-      height: 0;
-      padding-top: 0;
-      padding-bottom: 0;
+    #sidebar {
+      max-height: 0;
       opacity: 0;
+      pointer-events: none;
+      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
     }
-    #sidebar:not(.close) {
-      height: auto;
+    #sidebar[data-open="true"] {
+      max-height: 24rem;
       opacity: 1;
+      pointer-events: auto;
     }
   }
 </style>
 
 <script>
-  function initHeader() {
-    const toggleBtn = document.getElementById("toggle-btn");
-    const sidebar = document.getElementById("sidebar");
+  document.addEventListener("click", (e) => {
+    const target = e.target;
+    if (!(target instanceof Element)) return;
 
-    if (window.innerWidth < 640) {
-      sidebar?.classList.add("close");
-    } else {
-      sidebar?.classList.remove("close");
+    const toggleBtn = target.closest("#toggle-btn");
+    if (toggleBtn) {
+      const sidebar = document.getElementById("sidebar");
+      const isOpen = sidebar?.getAttribute("data-open") === "true";
+      const nextState = !isOpen;
+
+      sidebar?.setAttribute("data-open", String(nextState));
+      toggleBtn.setAttribute("aria-expanded", String(nextState));
+      return;
     }
 
-    toggleBtn?.addEventListener("click", () => {
-      sidebar?.classList.toggle("close");
-    });
-
-    sidebar?.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        if (window.innerWidth < 640) {
-          sidebar?.classList.add("close");
-        }
-      });
-    });
-  }
-
-  document.addEventListener("astro:page-load", initHeader);
-
-  window.addEventListener("resize", () => {
-    const sidebar = document.getElementById("sidebar");
-    if (window.innerWidth < 640) {
-      sidebar?.classList.add("close");
-    } else {
-      sidebar?.classList.remove("close");
+    if (target.closest("#sidebar a")) {
+      const sidebar = document.getElementById("sidebar");
+      const toggle = document.getElementById("toggle-btn");
+      sidebar?.removeAttribute("data-open");
+      toggle?.setAttribute("aria-expanded", "false");
     }
   });
 </script>
