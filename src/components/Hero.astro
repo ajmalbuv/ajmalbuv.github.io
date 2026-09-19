@@ -10,16 +10,13 @@ const { personal } = siteData;
   id="home"
   class="relative w-full min-h-[92vh] bg-white text-black flex items-center justify-center overflow-hidden py-16 px-4 sm:px-6 lg:px-8"
 >
-  <!-- Particle Canvas Layer (Exact 0day structure) -->
   <div
     id="particles-js"
     class="absolute inset-0 w-full h-full z-0 pointer-events-auto overflow-hidden"
     aria-hidden="true"
   ></div>
 
-  <!-- Hero Content Layer (100% functional without JS) -->
   <div class="relative z-10 w-full max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-14">
-    <!-- Circular Avatar (No border, clean shadow) -->
     <div class="shrink-0">
       <Image
         src={personal.avatar}
@@ -32,7 +29,6 @@ const { personal } = siteData;
       />
     </div>
 
-    <!-- Text & Links Column (0day alignment & structure) -->
     <div class="flex flex-col items-center md:items-start text-center md:text-left">
       <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-black font-sans leading-none mb-2">
         {personal.handle}
@@ -44,45 +40,64 @@ const { personal } = siteData;
         {personal.title}
       </p>
 
-      <!-- Actions & Social Links Row -->
       <div class="flex flex-wrap items-center justify-center md:justify-start gap-4">
-        <!-- 0day Social Icons -->
         <div class="flex items-center gap-2">
           {
             personal.contact.socials.map((social) => (
-              <a
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.ariaLabel}
-                data-tooltip={social.name}
-                class="p-2.5 rounded-lg text-black hover:text-[#fc7a00] hover:bg-neutral-100 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
-              >
-                <Icon name={social.icon} class="w-6 h-6" />
-              </a>
+              <div class="group relative inline-flex items-center justify-center">
+                <a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.ariaLabel}
+                  class="p-2.5 rounded-lg text-black hover:text-[#fc7a00] hover:bg-neutral-100 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+                >
+                  <Icon name={social.icon} class="w-6 h-6" />
+                </a>
+                <span
+                  aria-hidden="true"
+                  class="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-neutral-900 px-2 py-1 font-mono text-xs text-neutral-200 opacity-0 shadow-lg border border-neutral-800 transition-opacity duration-200 group-hover:opacity-100 group-has-focus-visible:opacity-100 z-50"
+                >
+                  {social.name}
+                </span>
+              </div>
             ))
           }
         </div>
 
         <span class="hidden sm:inline-block w-px h-6 bg-neutral-300 mx-1" aria-hidden="true"></span>
 
-        <!-- Dynamic Resume Download Button -->
         <button
           id="download-resume-btn"
           data-resume-url={personal.resumeUrl}
           type="button"
-          class="inline-flex items-center gap-2 px-5 py-2.5 bg-black text-white font-mono text-xs sm:text-sm font-semibold rounded-full hover:bg-[#fc7a00] hover:text-black transition-colors duration-200 cursor-pointer shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+          class="inline-flex items-center gap-2 px-5 py-2.5 bg-black text-white font-mono text-xs sm:text-sm font-semibold rounded-full hover:bg-[#fc7a00] hover:text-black transition-colors duration-200 cursor-pointer shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] aria-busy:pointer-events-none aria-busy:cursor-wait aria-busy:opacity-70"
         >
           <Icon name="mdi:file-document-outline" class="w-4 h-4" />
-          <span>Resume</span>
+          <span>Download Resume</span>
         </button>
+
+        <a
+          href={personal.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-4 py-2 border border-neutral-300 text-neutral-800 font-mono text-xs font-medium rounded-full hover:border-black hover:text-black transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+        >
+          <Icon name="mdi:open-in-new" class="w-3.5 h-3.5" />
+          <span>View Online</span>
+          <span class="sr-only">(opens in new tab)</span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
 <script>
-  import { type ISourceOptions, tsParticles } from '@tsparticles/engine';
+  import {
+    type Container,
+    type ISourceOptions,
+    tsParticles,
+  } from '@tsparticles/engine';
   import { loadSlim } from '@tsparticles/slim';
 
   const particlesConfig: ISourceOptions = {
@@ -165,16 +180,34 @@ const { personal } = siteData;
     detectRetina: true,
   };
 
-  function initParticles() {
-    const container = document.getElementById('particles-js');
-    if (!container) return;
+  let pluginsPromise: Promise<void> | null = null;
+  let particleContainer: Container | undefined;
 
-    loadSlim(tsParticles).then(() => {
-      tsParticles.load({
+  async function initParticles() {
+    const container = document.getElementById('particles-js');
+    if (!container || container.dataset['initialized']) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    container.dataset['initialized'] = 'true';
+
+    try {
+      if (!pluginsPromise) {
+        pluginsPromise = loadSlim(tsParticles);
+      }
+      await pluginsPromise;
+      const c = await tsParticles.load({
         id: 'particles-js',
         options: particlesConfig,
       });
-    });
+      if (!container.isConnected) {
+        c?.destroy();
+        return;
+      }
+      particleContainer = c;
+    } catch (err) {
+      pluginsPromise = null; 
+      delete container.dataset['initialized'];
+      console.warn('tsParticles initialization error:', err);
+    }
   }
 
   function initResume() {
@@ -184,11 +217,11 @@ const { personal } = siteData;
 
     resumeBtn.addEventListener('click', async () => {
       const resumeUrl = resumeBtn.dataset['resumeUrl'];
-      if (!resumeUrl) return;
+      if (!resumeUrl || resumeBtn.getAttribute('aria-busy') === 'true') return;
 
-      const originalText = resumeBtn.innerHTML;
-      resumeBtn.setAttribute('disabled', 'true');
-      resumeBtn.classList.add('opacity-70');
+      const originalHtml = resumeBtn.innerHTML;
+      resumeBtn.setAttribute('aria-busy', 'true');
+      resumeBtn.innerHTML = '<span>Downloading...</span>';
 
       try {
         const res = await fetch(resumeUrl);
@@ -201,23 +234,25 @@ const { personal } = siteData;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        window.URL.revokeObjectURL(blobUrl);
-      } catch (e) {
-        console.warn('Fallback to direct window open:', e);
-        window.open(resumeUrl, '_blank', 'noopener,noreferrer');
+        setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+      } catch (err) {
+        console.warn('Direct fallback on fetch error:', err);
+        window.location.href = resumeUrl;
       } finally {
-        resumeBtn.removeAttribute('disabled');
-        resumeBtn.classList.remove('opacity-70');
-        resumeBtn.innerHTML = originalText;
+        resumeBtn.removeAttribute('aria-busy');
+        resumeBtn.innerHTML = originalHtml;
       }
     });
   }
 
-  // Initialize immediately and on view transitions
-  initParticles();
-  initResume();
-  document.addEventListener('astro:page-load', () => {
+  const boot = () => {
     initParticles();
     initResume();
+  };
+  boot();
+  document.addEventListener('astro:page-load', boot);
+  document.addEventListener('astro:before-swap', () => {
+    particleContainer?.destroy();
+    particleContainer = undefined;
   });
 </script>

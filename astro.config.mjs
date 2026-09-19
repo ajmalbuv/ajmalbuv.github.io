@@ -65,29 +65,29 @@ function inlineCsp() {
         for (const file of htmlFiles) {
           const content = fs.readFileSync(file, 'utf8');
 
-          // Hash all inline styles
           const styleMatches = content.matchAll(
-            /<style[^>]*>([\s\S]*?)<\/style>/gi,
+            /<style(?:\s+[^>]*)?>([\s\S]*?)<\/style>/gi,
           );
           for (const match of styleMatches) {
-            const hash = crypto
-              .createHash('sha256')
-              .update(match[1])
-              .digest('base64');
-            styleHashes.add(`'sha256-${hash}'`);
-          }
-
-          // Hash all inline scripts (e.g. application/ld+json)
-          const scriptMatches = content.matchAll(
-            /<script[^>]*>([\s\S]*?)<\/script>/gi,
-          );
-          for (const match of scriptMatches) {
-            // Only hash non-empty inline script blocks
-            const scriptContent = match[1]?.trim();
-            if (scriptContent) {
+            const css = match[1]?.trim();
+            if (css) {
               const hash = crypto
                 .createHash('sha256')
-                .update(match[1])
+                .update(css)
+                .digest('base64');
+              styleHashes.add(`'sha256-${hash}'`);
+            }
+          }
+
+          const scriptMatches = content.matchAll(
+            /<script\b(?![^>]*\bsrc=)(?:\s+[^>]*)?>([\s\S]*?)<\/script>/gi,
+          );
+          for (const match of scriptMatches) {
+            const code = match[1]?.trim();
+            if (code) {
+              const hash = crypto
+                .createHash('sha256')
+                .update(code)
                 .digest('base64');
               scriptHashes.add(`'sha256-${hash}'`);
             }
@@ -95,17 +95,17 @@ function inlineCsp() {
         }
 
         if (styleHashes.size > 0) {
-          const list = Array.from(styleHashes).join(' ');
+          const list = Array.from(styleHashes).sort().join(' ');
           headers = headers.replace(
-            /style-src 'self'[^;]*/,
+            /\bstyle-src\s+'self'(?:\s+'sha256-[^']*')*/,
             `style-src 'self' ${list}`,
           );
         }
 
         if (scriptHashes.size > 0) {
-          const list = Array.from(scriptHashes).join(' ');
+          const list = Array.from(scriptHashes).sort().join(' ');
           headers = headers.replace(
-            /script-src 'self'[^;]*/,
+            /\bscript-src\s+'self'(?:\s+'sha256-[^']*')*/,
             `script-src 'self' ${list}`,
           );
         }
@@ -116,14 +116,8 @@ function inlineCsp() {
   };
 }
 
-// https://astro.build/config
 export default defineConfig({
   site: process.env.SITE || 'https://ajmalbuv.pages.dev',
-  redirects: {
-    '/project/0': '/projects/edumanage',
-    '/project/1': '/projects/portfolio',
-    '/project': '/#work',
-  },
   env: {
     schema: {
       PUBLIC_GIT_HASH: envField.string({

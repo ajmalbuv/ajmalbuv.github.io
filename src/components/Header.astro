@@ -51,99 +51,83 @@ import { siteData } from '../data/site';
       </a>
     </nav>
 
-    <!-- Mobile Menu Toggle Button -->
+    <!-- Mobile Menu Toggle Button (Native HTML Popover API) -->
     <div class="sm:hidden">
       <button
-        id="mobile-menu-btn"
+        popovertarget="mobile-menu"
         type="button"
         aria-label="Toggle navigation menu"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
         class="p-2 text-neutral-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded cursor-pointer"
       >
-        <Icon name="mdi:menu" class="h-6 w-6 block group-data-[open=true]:hidden" id="menu-icon-open" />
-        <Icon name="mdi:close" class="h-6 w-6 hidden" id="menu-icon-close" />
+        <Icon name="mdi:menu" class="h-6 w-6" />
       </button>
     </div>
   </div>
 
-  <!-- Mobile Dropdown Menu -->
-  <div
+  <!-- Mobile Drawer Menu (Native HTML Popover API) -->
+  <nav
     id="mobile-menu"
-    class="hidden sm:hidden bg-[#0a0a0a] border-b border-neutral-800 px-4 py-4 space-y-3 transition-all"
+    popover
+    class="fixed top-16 inset-x-0 w-full m-0 p-6 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-neutral-800 text-neutral-200 shadow-2xl backdrop:bg-black/60 focus:outline-none sm:hidden"
   >
-    <a
-      href="/#home"
-      class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-2 px-3 rounded hover:bg-neutral-900 transition-colors"
-    >
-      Home
-    </a>
-    <a
-      href="/#about"
-      class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-2 px-3 rounded hover:bg-neutral-900 transition-colors"
-    >
-      About &amp; Experience
-    </a>
-    <a
-      href="/#work"
-      class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-2 px-3 rounded hover:bg-neutral-900 transition-colors"
-    >
-      Work &amp; Projects
-    </a>
-    <a
-      href="/#skills"
-      class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-2 px-3 rounded hover:bg-neutral-900 transition-colors"
-    >
-      Skills
-    </a>
-    <a
-      href="/#contact"
-      class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-2 px-3 rounded hover:bg-neutral-900 transition-colors"
-    >
-      Contact
-    </a>
-  </div>
+    <div class="max-w-5xl mx-auto space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-neutral-800/80">
+        <span class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold">
+          Navigation
+        </span>
+        <button
+          popovertarget="mobile-menu"
+          popovertargetaction="hide"
+          type="button"
+          aria-label="Close menu"
+          class="p-1 text-neutral-400 hover:text-white cursor-pointer"
+        >
+          <Icon name="mdi:close" class="h-5 w-5" />
+        </button>
+      </div>
+
+      <a
+        href="/#home"
+        class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-1.5 transition-colors"
+      >
+        Home
+      </a>
+      <a
+        href="/#about"
+        class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-1.5 transition-colors"
+      >
+        About &amp; Experience
+      </a>
+      <a
+        href="/#work"
+        class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-1.5 transition-colors"
+      >
+        Work &amp; Projects
+      </a>
+      <a
+        href="/#skills"
+        class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-1.5 transition-colors"
+      >
+        Skills
+      </a>
+      <a
+        href="/#contact"
+        class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-1.5 transition-colors"
+      >
+        Contact
+      </a>
+    </div>
+  </nav>
 </header>
 
 <script>
-  function initHeader() {
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    const openIcon = document.getElementById('menu-icon-open');
-    const closeIcon = document.getElementById('menu-icon-close');
-
-    if (!btn || !menu || btn.dataset['bound'] === 'true') return;
-    btn.dataset['bound'] = 'true';
-
-    const toggle = () => {
-      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-      const nextState = !isExpanded;
-      btn.setAttribute('aria-expanded', String(nextState));
-
-      if (nextState) {
-        menu.classList.remove('hidden');
-        openIcon?.classList.add('hidden');
-        closeIcon?.classList.remove('hidden');
-      } else {
-        menu.classList.add('hidden');
-        openIcon?.classList.remove('hidden');
-        closeIcon?.classList.add('hidden');
+  // Close the native popover when any navigation link is clicked
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (mobileMenu) {
+    mobileMenu.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) {
+        mobileMenu.hidePopover();
       }
-    };
-
-    btn.addEventListener('click', toggle);
-
-    // Close mobile menu when clicking any menu link
-    menu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        btn.setAttribute('aria-expanded', 'false');
-        menu.classList.add('hidden');
-        openIcon?.classList.remove('hidden');
-        closeIcon?.classList.add('hidden');
-      });
     });
   }
-
-  initHeader();
-  document.addEventListener('astro:page-load', initHeader);
 </script>

@@ -31,30 +31,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tooltip style using aria-label (Zero-JS) */
-[data-tooltip] {
-  position: relative;
-}
-
-[data-tooltip]:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #1a1a1a;
-  color: #fafafa;
-  border: 1px solid #333333;
-  padding: 4px 8px;
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
-  border-radius: 4px;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 50;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-}
-
 /* Scroll-driven animations with reduced motion guards */
 @media (prefers-reduced-motion: no-preference) {
   .animate-on-scroll {
