@@ -1,0 +1,35 @@
+---
+import { siteData } from '../data/site';
+
+const { skills } = siteData;
+---
+
+<section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+  <div class="mb-12">
+    <span class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold">
+      Capabilities &amp; Stack
+    </span>
+    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mt-1">
+      Technical Skills
+    </h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {
+      skills.map((group) => (
+        <div class="bg-[#121212] border border-neutral-800/90 rounded-xl p-6 hover:border-neutral-700 transition-colors">
+          <h3 class="font-mono text-sm uppercase tracking-wider text-[#fc7a00] font-bold mb-4">
+            {group.category}
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {group.items.map((skill) => (
+              <span class="px-3 py-1.5 text-xs font-mono font-medium rounded-md bg-neutral-900 text-neutral-200 border border-neutral-800 hover:border-neutral-600 hover:text-white transition-colors">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

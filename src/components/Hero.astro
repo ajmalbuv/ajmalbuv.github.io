@@ -1,0 +1,223 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import { siteData } from '../data/site';
+
+const { personal } = siteData;
+---
+
+<section
+  id="home"
+  class="relative w-full min-h-[92vh] bg-white text-black flex items-center justify-center overflow-hidden py-16 px-4 sm:px-6 lg:px-8"
+>
+  <!-- Particle Canvas Layer (Exact 0day structure) -->
+  <div
+    id="particles-js"
+    class="absolute inset-0 w-full h-full z-0 pointer-events-auto overflow-hidden"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Hero Content Layer (100% functional without JS) -->
+  <div class="relative z-10 w-full max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-14">
+    <!-- Circular Avatar (No border, clean shadow) -->
+    <div class="shrink-0">
+      <Image
+        src={personal.avatar}
+        alt={`${personal.name} (${personal.handle})`}
+        class="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full object-cover shadow-xl transition-transform duration-300 hover:scale-105"
+        width={208}
+        height={208}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+
+    <!-- Text & Links Column (0day alignment & structure) -->
+    <div class="flex flex-col items-center md:items-start text-center md:text-left">
+      <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-black font-sans leading-none mb-2">
+        {personal.handle}
+      </h1>
+      <h2 class="text-2xl sm:text-3xl font-semibold text-neutral-800 font-mono mb-2">
+        {personal.name}
+      </h2>
+      <p class="font-mono text-sm sm:text-base md:text-lg text-neutral-600 mb-6 max-w-md">
+        {personal.title}
+      </p>
+
+      <!-- Actions & Social Links Row -->
+      <div class="flex flex-wrap items-center justify-center md:justify-start gap-4">
+        <!-- 0day Social Icons -->
+        <div class="flex items-center gap-2">
+          {
+            personal.contact.socials.map((social) => (
+              <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.ariaLabel}
+                data-tooltip={social.name}
+                class="p-2.5 rounded-lg text-black hover:text-[#fc7a00] hover:bg-neutral-100 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+              >
+                <Icon name={social.icon} class="w-6 h-6" />
+              </a>
+            ))
+          }
+        </div>
+
+        <span class="hidden sm:inline-block w-px h-6 bg-neutral-300 mx-1" aria-hidden="true"></span>
+
+        <!-- Dynamic Resume Download Button -->
+        <button
+          id="download-resume-btn"
+          data-resume-url={personal.resumeUrl}
+          type="button"
+          class="inline-flex items-center gap-2 px-5 py-2.5 bg-black text-white font-mono text-xs sm:text-sm font-semibold rounded-full hover:bg-[#fc7a00] hover:text-black transition-colors duration-200 cursor-pointer shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+        >
+          <Icon name="mdi:file-document-outline" class="w-4 h-4" />
+          <span>Resume</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { type ISourceOptions, tsParticles } from '@tsparticles/engine';
+  import { loadSlim } from '@tsparticles/slim';
+
+  const particlesConfig: ISourceOptions = {
+    fpsLimit: 60,
+    particles: {
+      number: {
+        value: 70,
+        density: {
+          enable: true,
+          width: 800,
+          height: 800,
+        },
+      },
+      color: {
+        value: '#000000',
+      },
+      shape: {
+        type: 'circle',
+      },
+      opacity: {
+        value: { min: 0.1, max: 0.5 },
+      },
+      size: {
+        value: { min: 0.1, max: 6 },
+      },
+      links: {
+        enable: true,
+        distance: 150,
+        color: '#000000',
+        opacity: 0.4,
+        width: 3,
+      },
+      move: {
+        enable: true,
+        speed: 1.0,
+        direction: 'none',
+        random: false,
+        straight: false,
+        outModes: 'out',
+      },
+    },
+    interactivity: {
+      detectsOn: 'canvas',
+      events: {
+        onHover: {
+          enable: true,
+          mode: 'grab',
+        },
+        onClick: {
+          enable: false,
+          mode: 'push',
+        },
+      },
+      modes: {
+        grab: {
+          distance: 194.89853095232286,
+          links: {
+            opacity: 1,
+          },
+        },
+        bubble: {
+          distance: 400,
+          size: 40,
+          duration: 2,
+          opacity: 8,
+          speed: 3,
+        },
+        repulse: {
+          distance: 200,
+          duration: 0.4,
+        },
+        push: {
+          quantity: 4,
+        },
+        remove: {
+          quantity: 2,
+        },
+      },
+    },
+    detectRetina: true,
+  };
+
+  function initParticles() {
+    const container = document.getElementById('particles-js');
+    if (!container) return;
+
+    loadSlim(tsParticles).then(() => {
+      tsParticles.load({
+        id: 'particles-js',
+        options: particlesConfig,
+      });
+    });
+  }
+
+  function initResume() {
+    const resumeBtn = document.getElementById('download-resume-btn');
+    if (!resumeBtn || resumeBtn.dataset['initialized']) return;
+    resumeBtn.dataset['initialized'] = 'true';
+
+    resumeBtn.addEventListener('click', async () => {
+      const resumeUrl = resumeBtn.dataset['resumeUrl'];
+      if (!resumeUrl) return;
+
+      const originalText = resumeBtn.innerHTML;
+      resumeBtn.setAttribute('disabled', 'true');
+      resumeBtn.classList.add('opacity-70');
+
+      try {
+        const res = await fetch(resumeUrl);
+        if (!res.ok) throw new Error('Fetch failed');
+        const blob = await res.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'AjmalBasheer-Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(blobUrl);
+      } catch (e) {
+        console.warn('Fallback to direct window open:', e);
+        window.open(resumeUrl, '_blank', 'noopener,noreferrer');
+      } finally {
+        resumeBtn.removeAttribute('disabled');
+        resumeBtn.classList.remove('opacity-70');
+        resumeBtn.innerHTML = originalText;
+      }
+    });
+  }
+
+  // Initialize immediately and on view transitions
+  initParticles();
+  initResume();
+  document.addEventListener('astro:page-load', () => {
+    initParticles();
+    initResume();
+  });
+</script>

@@ -1,0 +1,72 @@
+---
+import { siteData } from '../data/site';
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+  image?: string | undefined;
+  canonicalURL?: URL | undefined;
+}
+
+const {
+  title = `${siteData.personal.name} | ${siteData.personal.title}`,
+  description = siteData.personal.bio,
+  image = siteData.personal.avatar.src,
+  canonicalURL = new URL(Astro.url.pathname, Astro.site),
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() || 'https://ajmalbuv.pages.dev';
+const avatarFullUrl = new URL(image, siteUrl).toString();
+
+// JSON-LD Person schema matching 0day/portfolio specifications
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: [
+    siteData.personal.name,
+    siteData.personal.handle,
+    'Ajmal Aju',
+    '_.aju',
+  ],
+  image: avatarFullUrl,
+  jobTitle: [
+    'Software Engineer',
+    'Systems Builder',
+    'Flutter Developer',
+    'Full Stack Developer',
+  ],
+  description: description,
+  url: siteUrl,
+  email: siteData.personal.contact.email,
+  sameAs: siteData.personal.contact.socials.map((s) => s.url),
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+<link rel="canonical" href={canonicalURL} />
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="author" content={siteData.personal.name} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={avatarFullUrl} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={avatarFullUrl} />
+
+<!-- Structured Data -->
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

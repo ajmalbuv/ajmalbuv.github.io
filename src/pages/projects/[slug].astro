@@ -1,0 +1,162 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { siteData } from '../../data/site';
+import Base from '../../layouts/Base.astro';
+import type { Project } from '../../types/index';
+
+export function getStaticPaths() {
+  return siteData.projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<Base
+  title={`${project.title} | Case Study`}
+  description={project.summary}
+  image={project.coverImage.src}
+>
+  <Header />
+
+  <main id="main-content" class="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <!-- Back to Projects Breadcrumb -->
+    <div class="mb-8">
+      <a
+        href="/#work"
+        class="inline-flex items-center gap-2 font-mono text-sm text-neutral-400 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#fc7a00] rounded"
+      >
+        <Icon name="mdi:arrow-left" class="w-4 h-4" />
+        <span>Back to all projects</span>
+      </a>
+    </div>
+
+    <!-- Project Header -->
+    <header class="mb-12">
+      <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+        {project.title}
+      </h1>
+      <p class="text-lg text-neutral-300 leading-relaxed max-w-3xl mb-6">
+        {project.summary}
+      </p>
+
+      <!-- Tech Badges -->
+      <div class="flex flex-wrap gap-2 mb-8">
+        {
+          project.techstack.map((tech) => (
+            <span class="px-3 py-1 text-xs font-mono font-medium rounded-md bg-neutral-900 text-neutral-200 border border-neutral-800">
+              {tech}
+            </span>
+          ))
+        }
+      </div>
+
+      <!-- Live / Code Action Links -->
+      <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-neutral-800">
+        {
+          project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#fc7a00] text-black font-mono font-bold text-sm rounded-full hover:bg-[#ff9429] transition-colors shadow-md"
+            >
+              <span>View Live Project</span>
+              <Icon name="mdi:open-in-new" class="w-4 h-4" />
+            </a>
+          )
+        }
+
+        {
+          project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 text-neutral-200 border border-neutral-700 font-mono text-sm rounded-full hover:bg-neutral-800 hover:text-white transition-colors"
+            >
+              <Icon name="mdi:github" class="w-4 h-4" />
+              <span>Source Repository</span>
+            </a>
+          )
+        }
+      </div>
+    </header>
+
+    <!-- Deep Dive Narrative -->
+    <section class="mb-16 bg-[#121212] border border-neutral-800/90 rounded-2xl p-6 sm:p-8">
+      <h2 class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold mb-3">
+        Overview &amp; Architecture
+      </h2>
+      <p class="text-neutral-300 text-base leading-relaxed whitespace-pre-line">
+        {project.fullDescription}
+      </p>
+    </section>
+
+    <!-- Key Features List -->
+    {
+      project.features && project.features.length > 0 && (
+        <section class="mb-16">
+          <h2 class="text-2xl font-bold text-white mb-6">Key Capabilities</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {project.features.map((feat) => (
+              <div class="bg-[#121212] border border-neutral-800 rounded-xl p-5">
+                <h3 class="font-bold text-white text-base mb-1.5 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#fc7a00]" />
+                  <span>{feat.heading}</span>
+                </h3>
+                <p class="text-sm text-neutral-400 leading-relaxed">
+                  {feat.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Visual Previews & Screenshots -->
+    {
+      project.screenshots && project.screenshots.length > 0 && (
+        <section class="mb-16">
+          <div class="flex items-baseline justify-between mb-6">
+            <h2 class="text-2xl font-bold text-white">Interface Previews</h2>
+            <span class="font-mono text-xs text-neutral-500">
+              {project.screenshots.length} screenshots
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {project.screenshots.map((shot, idx) => (
+              <div class="bg-[#121212] border border-neutral-800 rounded-xl overflow-hidden shadow-lg group">
+                <Image
+                  src={shot}
+                  alt={`${project.title} - Interface preview ${idx + 1}`}
+                  class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  loading="lazy"
+                  widths={[400, 800, 1200]}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div class="p-3 bg-neutral-900/90 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400 font-mono">
+                  <span>Figure {idx + 1}</span>
+                  <span class="text-neutral-500">Preview {idx + 1} of {project.screenshots.length}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </main>
+
+  <Footer />
+</Base>

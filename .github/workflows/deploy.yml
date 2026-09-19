@@ -34,11 +34,8 @@ jobs:
       - name: Install dependencies 🔧
         run: bun install --frozen-lockfile
 
-      - name: Biome Lint 🧹
-        run: bunx @biomejs/biome@2.1.4 ci .
-
-      - name: Astro Check 📋
-        run: bun run astro check
+      - name: Biome Lint & Format Check 🧹
+        run: bun run check
 
   github-pages:
     name: Deploy to GitHub Pages
@@ -60,9 +57,6 @@ jobs:
           package-manager: bun
         env:
           SITE: "https://ajmalbuv.github.io"
-          PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
-          PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
-          PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
 
       - name: Deploy 🚀
         id: deployment
@@ -96,9 +90,6 @@ jobs:
         run: bun run build
         env:
           SITE: "https://portfolio.ajmalbuv.duckdns.org"
-          PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
-          PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
-          PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
 
       - name: Push to VPS branch 🚀
         uses: JamesIves/github-pages-deploy-action@v4

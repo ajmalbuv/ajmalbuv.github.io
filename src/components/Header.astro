@@ -1,86 +1,149 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { siteData } from '../data/site';
 ---
 
-<header class="top-0 sticky z-50 transition-all duration-300" id="main-header">
-  <div class="flex justify-between items-center text-white lg:px-20">
-    <div class="p-3">
-      <h1 class="text-4xl lg:text-5xl font-semibold">Portfolio.</h1>
-    </div>
-    <nav
-      class="fixed w-full top-16 bg-black/95 sm:bg-transparent sm:relative sm:top-0 sm:w-[50%] overflow-hidden sm:overflow-visible"
-      id="sidebar"
+<header
+  class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#0a0a0a]/85 border-b border-neutral-800/70 transition-all duration-300"
+  id="main-header"
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <!-- Brand / Monospace Name -->
+    <a
+      href="/#home"
+      class="font-mono text-lg font-bold tracking-tight text-white hover:text-[#fc7a00] transition-colors flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded"
     >
-      <ul
-        class="flex flex-col sm:flex-row justify-between items-center p-3 gap-4 sm:gap-0"
+      <span>{siteData.personal.handle}</span>
+      <span class="inline-block w-2 h-2 rounded-full bg-[#fc7a00] animate-pulse"></span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden sm:flex items-center gap-8 text-sm font-medium">
+      <a
+        href="/#home"
+        class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
       >
-        <li><a href="/">Home</a></li>
-        <li><a href="/#about">About</a></li>
-        <li><a href="/#skill">Skills</a></li>
-        <li><a href="/#projects">Projects</a></li>
-        <li><a href="/#contact">Contact</a></li>
-      </ul>
+        Home
+      </a>
+      <a
+        href="/#about"
+        class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
+      >
+        About
+      </a>
+      <a
+        href="/#work"
+        class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
+      >
+        Work
+      </a>
+      <a
+        href="/#skills"
+        class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
+      >
+        Skills
+      </a>
+      <a
+        href="/#contact"
+        class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
+      >
+        Contact
+      </a>
     </nav>
-    <div class="sm:hidden p-3">
+
+    <!-- Mobile Menu Toggle Button -->
+    <div class="sm:hidden">
       <button
-        id="toggle-btn"
-        aria-label="Toggle navigation"
+        id="mobile-menu-btn"
+        type="button"
+        aria-label="Toggle navigation menu"
         aria-expanded="false"
-        aria-controls="sidebar"
-        class="group focus:outline-none cursor-pointer"
+        aria-controls="mobile-menu"
+        class="p-2 text-neutral-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded cursor-pointer"
       >
-        <Icon name="mdi:menu" class="h-10 w-10 block group-aria-expanded:hidden" />
-        <Icon name="mdi:close" class="h-10 w-10 hidden group-aria-expanded:block" />
+        <Icon name="mdi:menu" class="h-6 w-6 block group-data-[open=true]:hidden" id="menu-icon-open" />
+        <Icon name="mdi:close" class="h-6 w-6 hidden" id="menu-icon-close" />
       </button>
     </div>
   </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden sm:hidden bg-[#0a0a0a] border-b border-neutral-800 px-4 py-4 space-y-3 transition-all"
+  >
+    <a
+      href="/#home"
+      class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-2 px-3 rounded hover:bg-neutral-900 transition-colors"
+    >
+      Home
+    </a>
+    <a
+      href="/#about"
+      class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-2 px-3 rounded hover:bg-neutral-900 transition-colors"
+    >
+      About &amp; Experience
+    </a>
+    <a
+      href="/#work"
+      class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-2 px-3 rounded hover:bg-neutral-900 transition-colors"
+    >
+      Work &amp; Projects
+    </a>
+    <a
+      href="/#skills"
+      class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-2 px-3 rounded hover:bg-neutral-900 transition-colors"
+    >
+      Skills
+    </a>
+    <a
+      href="/#contact"
+      class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-2 px-3 rounded hover:bg-neutral-900 transition-colors"
+    >
+      Contact
+    </a>
+  </div>
 </header>
 
-<style>
-  header {
-    background: linear-gradient(135deg, #43639c 0%, #412653 70%);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-  }
-
-  /* Mobile drawer transition (handled entirely in CSS) */
-  @media (max-width: 639px) {
-    #sidebar {
-      max-height: 0;
-      opacity: 0;
-      pointer-events: none;
-      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    }
-    #sidebar[data-open="true"] {
-      max-height: 24rem;
-      opacity: 1;
-      pointer-events: auto;
-    }
-  }
-</style>
-
 <script>
-  document.addEventListener("click", (e) => {
-    const target = e.target;
-    if (!(target instanceof Element)) return;
+  function initHeader() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const openIcon = document.getElementById('menu-icon-open');
+    const closeIcon = document.getElementById('menu-icon-close');
 
-    const toggleBtn = target.closest("#toggle-btn");
-    if (toggleBtn) {
-      const sidebar = document.getElementById("sidebar");
-      const isOpen = sidebar?.getAttribute("data-open") === "true";
-      const nextState = !isOpen;
+    if (!btn || !menu || btn.dataset['bound'] === 'true') return;
+    btn.dataset['bound'] = 'true';
 
-      sidebar?.setAttribute("data-open", String(nextState));
-      toggleBtn.setAttribute("aria-expanded", String(nextState));
-      return;
-    }
+    const toggle = () => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      const nextState = !isExpanded;
+      btn.setAttribute('aria-expanded', String(nextState));
 
-    if (target.closest("#sidebar a")) {
-      const sidebar = document.getElementById("sidebar");
-      const toggle = document.getElementById("toggle-btn");
-      sidebar?.removeAttribute("data-open");
-      toggle?.setAttribute("aria-expanded", "false");
-    }
-  });
+      if (nextState) {
+        menu.classList.remove('hidden');
+        openIcon?.classList.add('hidden');
+        closeIcon?.classList.remove('hidden');
+      } else {
+        menu.classList.add('hidden');
+        openIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+      }
+    };
+
+    btn.addEventListener('click', toggle);
+
+    // Close mobile menu when clicking any menu link
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        btn.setAttribute('aria-expanded', 'false');
+        menu.classList.add('hidden');
+        openIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+      });
+    });
+  }
+
+  initHeader();
+  document.addEventListener('astro:page-load', initHeader);
 </script>

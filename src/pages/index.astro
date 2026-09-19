@@ -1,20 +1,22 @@
 ---
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import Home from '../components/Home.astro';
+import Hero from '../components/Hero.astro';
 import Projects from '../components/Projects.astro';
-import Skill from '../components/Skill.astro';
-import Layout from '../layouts/Layout.astro';
+import Skills from '../components/Skills.astro';
+import Base from '../layouts/Base.astro';
 ---
 
-<Layout>
+<Base>
   <Header />
-  <main>
-    <Home />
+  <main id="main-content">
+    <Hero />
     <About />
-    <Skill />
     <Projects />
+    <Skills />
     <Contact />
   </main>
-</Layout>
+  <Footer />
+</Base>

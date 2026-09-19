@@ -1,0 +1,44 @@
+---
+import { Icon } from 'astro-icon/components';
+import { siteData } from '../data/site';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="w-full border-t border-neutral-800/80 bg-[#080808] text-neutral-400 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
+  <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+    <div class="flex flex-col items-center sm:items-start gap-1">
+      <a
+        href="/#home"
+        class="font-mono text-white font-bold hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#fc7a00] rounded"
+      >
+        {siteData.personal.handle}
+      </a>
+      <p class="text-xs text-neutral-500">
+        © {currentYear} {siteData.personal.name}. All rights reserved.
+      </p>
+    </div>
+
+    <!-- Social Links -->
+    <div class="flex items-center gap-4">
+      {
+        siteData.personal.contact.socials.map((social) => (
+          <a
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={social.ariaLabel}
+            class="text-neutral-400 hover:text-[#fc7a00] transition-colors p-2 rounded-full hover:bg-neutral-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+          >
+            <Icon name={social.icon} class="w-5 h-5" />
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Attribution -->
+    <div class="text-xs text-neutral-500 font-mono text-center sm:text-right">
+      <span>Built with Astro 7 &amp; Tailwind CSS</span>
+    </div>
+  </div>
+</footer>

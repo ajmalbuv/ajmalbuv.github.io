@@ -1,98 +1,84 @@
 ---
-import { Certification } from '../data/Certification';
-import { Education } from '../data/Education';
-import { Experience } from '../data/Experience';
+import { siteData } from '../data/site';
+
+const { experiences, education } = siteData;
 ---
 
-<section class="flex flex-col justify-center" id="about">
-  <h1 class="text-2xl font-semibold m-3">Experience</h1>
-  {
-    Experience.map((experience) => (
-      <div class="mx-4 mb-6">
-        <div>
-          <h2 class="text-lg font-semibold py-2">{experience.designation}</h2>
-          <h3 class="text-base font-semibold">{experience.company}</h3>
-          <h4 class="text-sm font-semibold">{experience.duration}</h4>
-        </div>
-        <p class="py-3">{experience.description}</p>
-      </div>
-    ))
-  }
-
-  <h1 class="text-2xl font-semibold m-3">Education</h1>
-  <div class="edu flex flex-col justify-center">
-    {
-      Education.map((education, i) => (
-        <div class="mx-4 mb-6 border-4 flex-1">
-          <div class="p-3">
-            <h2 class="text-lg font-semibold">
-              {education.school.toUpperCase()}
-            </h2>
-            <h3 class="text-sm font-medium">{education.place}</h3>
-            <h4 class="text-sm font-normal">{education.duration}</h4>
-            <p
-              class:list={[
-                "py-3 font-bold",
-                i === 0 ? "text-2xl lg:text-3xl" : "text-5xl",
-              ]}
-            >
-              {education.degree}
-            </p>
-          </div>
-        </div>
-      ))
-    }
+<section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+  <div class="mb-12">
+    <span class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold">
+      Background &amp; Timeline
+    </span>
+    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mt-1">
+      Experience &amp; Education
+    </h2>
   </div>
 
-  <h1 class="text-2xl font-semibold m-3">Certification</h1>
-  <div class="cert grid grid-flow-row">
-    {
-      Certification.map((certification, i) => (
-        <div class="mx-4 mb-6 flex-1">
-          <div class:list={["p-3", i !== 0 ? "border-4" : ""]}>
-            <h2 class="text-lg font-semibold">{certification.course}</h2>
-            <h3 class="text-sm font-medium">{certification.centre}</h3>
-            <p class="text-sm font-normal">{certification.place}</p>
-            <p class="py-3 font-bold">{certification.duration}</p>
-          </div>
-        </div>
-      ))
-    }
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <!-- Work Experience Column -->
+    <div>
+      <h3 class="text-xl font-semibold text-neutral-200 mb-6 flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-[#fc7a00]"></span>
+        <span>Work Experience</span>
+      </h3>
+
+      <div class="space-y-8 relative before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-neutral-800">
+        {
+          experiences.map((exp) => (
+            <div class="relative pl-8 group">
+              <!-- Timeline Dot -->
+              <span class="absolute left-1.5 top-1.5 -translate-x-1/2 w-3 h-3 rounded-full border-2 border-[#fc7a00] bg-[#0a0a0a] group-hover:bg-[#fc7a00] transition-colors" />
+
+              <div class="bg-[#121212] border border-neutral-800/90 rounded-xl p-5 hover:border-neutral-700 transition-colors">
+                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
+                  <h4 class="text-base font-bold text-white">{exp.role}</h4>
+                  <span class="font-mono text-xs text-[#fc7a00] font-medium">
+                    {exp.duration}
+                  </span>
+                </div>
+                <p class="text-sm font-medium text-neutral-400 mb-3">
+                  {exp.company}
+                </p>
+                <p class="text-sm text-neutral-300 leading-relaxed mb-3">
+                  {exp.description}
+                </p>
+                {exp.highlights && exp.highlights.length > 0 && (
+                  <ul class="list-disc list-inside space-y-1 text-xs text-neutral-400">
+                    {exp.highlights.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Education Column -->
+    <div>
+      <h3 class="text-xl font-semibold text-neutral-200 mb-6 flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-neutral-400"></span>
+        <span>Education</span>
+      </h3>
+
+      <div class="space-y-6">
+        {
+          education.map((edu) => (
+            <div class="bg-[#121212] border border-neutral-800/90 rounded-xl p-5 hover:border-neutral-700 transition-colors">
+              <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
+                <h4 class="text-base font-bold text-white">{edu.degree}</h4>
+                <span class="font-mono text-xs text-neutral-400 font-medium">
+                  {edu.duration}
+                </span>
+              </div>
+              <p class="text-sm font-medium text-neutral-300">{edu.school}</p>
+              <p class="text-xs text-neutral-500 mt-1">{edu.location}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </section>
-
-<style>
-  @media (min-width: 1025px) {
-    #about {
-      padding: 10px;
-      width: 90%;
-      margin: auto;
-      margin-top: 10px;
-    }
-
-    .edu {
-      flex-direction: row;
-    }
-
-    .cert {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .edu > div {
-      scale: 0.6;
-      opacity: 0;
-      animation: fade-in linear forwards;
-      animation-timeline: view();
-      animation-range: entry;
-    }
-
-    @keyframes fade-in {
-      to {
-        scale: 1;
-        opacity: 1;
-      }
-    }
-  }
-</style>

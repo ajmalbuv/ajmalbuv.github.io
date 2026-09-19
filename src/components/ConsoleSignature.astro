@@ -1,5 +1,5 @@
 <script>
-  import { PUBLIC_GIT_HASH, PUBLIC_BUILD_TIME } from "astro:env/client";
+  import { PUBLIC_BUILD_TIME, PUBLIC_GIT_HASH } from "astro:env/client";
 
   const gitHash = PUBLIC_GIT_HASH || "dev";
   const buildTime = PUBLIC_BUILD_TIME || new Date().toISOString();
