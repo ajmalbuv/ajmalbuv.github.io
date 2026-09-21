@@ -1,12 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "ignore": [".svgo.config.js"],
-  "ignoreDependencies": [
-    "@astrojs/check",
-    "@iconify-json/devicon",
-    "@iconify-json/mdi",
-    "@iconify-json/simple-icons"
-  ],
+  "ignoreDependencies": ["@iconify-json/mdi"],
   "ignoreExportsUsedInFile": {
     "interface": true,
     "type": true
