@@ -25,7 +25,6 @@ const { projects } = siteData;
     {
       projects.map((project) => (
         <article class="bg-[#121212] border border-neutral-800 rounded-2xl overflow-hidden flex flex-col hover:border-neutral-700 transition-all duration-300 group hover:-translate-y-1">
-          <!-- Project Cover Image with Hover Zoom -->
           <a href={`/projects/${project.slug}`} class="block overflow-hidden relative aspect-video bg-neutral-900">
             <Image
               src={project.coverImage}
@@ -37,8 +36,6 @@ const { projects } = siteData;
             />
             <div class="absolute inset-0 bg-linear-to-t from-[#121212] via-transparent to-transparent opacity-80" />
           </a>
-
-          <!-- Content Body -->
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div>
               <h3 class="text-xl font-bold text-white group-hover:text-[#fc7a00] transition-colors mb-2">
@@ -50,8 +47,6 @@ const { projects } = siteData;
                 {project.summary}
               </p>
             </div>
-
-            <!-- Techstack Badges & Detail CTA -->
             <div>
               <div class="flex flex-wrap gap-1.5 mb-6">
                 {project.techstack.map((tech) => (

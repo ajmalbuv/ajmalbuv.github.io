@@ -7,7 +7,6 @@ const { personal } = siteData;
 
 <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
   <div class="bg-linear-to-br from-[#141414] to-[#0d0d0d] border border-neutral-800 rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
-    <!-- Subtle accent glow in background -->
     <div
       class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-[#fc7a00]/10 blur-3xl pointer-events-none rounded-full"
       aria-hidden="true"
@@ -23,8 +22,6 @@ const { personal } = siteData;
       <p class="text-neutral-400 text-sm sm:text-base leading-relaxed mb-8">
         I am always open to discussing new opportunities, systems architecture, Flutter projects, or open-source collaborations.
       </p>
-
-      <!-- Direct Email Action Button -->
       <div class="mb-10">
         <a
           href={`mailto:${personal.contact.email}`}
@@ -34,8 +31,6 @@ const { personal } = siteData;
           <span>{personal.contact.email}</span>
         </a>
       </div>
-
-      <!-- Quick Contact Info Pills -->
       <div class="flex flex-wrap items-center justify-center gap-6 pt-6 border-t border-neutral-800/80 text-sm text-neutral-400">
         <a
           href={`tel:${personal.contact.phone.replace(/\s+/g, '')}`}

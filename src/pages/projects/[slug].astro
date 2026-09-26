@@ -29,7 +29,6 @@ const { project } = Astro.props;
   <Header />
 
   <main id="main-content" class="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-    <!-- Back to Projects Breadcrumb -->
     <div class="mb-8">
       <a
         href="/#work"
@@ -39,8 +38,6 @@ const { project } = Astro.props;
         <span>Back to all projects</span>
       </a>
     </div>
-
-    <!-- Project Header -->
     <header class="mb-12">
       <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
         {project.title}
@@ -48,8 +45,6 @@ const { project } = Astro.props;
       <p class="text-lg text-neutral-300 leading-relaxed max-w-3xl mb-6">
         {project.summary}
       </p>
-
-      <!-- Tech Badges -->
       <div class="flex flex-wrap gap-2 mb-8">
         {
           project.techstack.map((tech) => (
@@ -59,8 +54,6 @@ const { project } = Astro.props;
           ))
         }
       </div>
-
-      <!-- Live / Code Action Links -->
       <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-neutral-800">
         {
           project.liveUrl && (
@@ -91,8 +84,6 @@ const { project } = Astro.props;
         }
       </div>
     </header>
-
-    <!-- Deep Dive Narrative -->
     <section class="mb-16 bg-[#121212] border border-neutral-800/90 rounded-2xl p-6 sm:p-8">
       <h2 class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold mb-3">
         Overview &amp; Architecture
@@ -101,8 +92,6 @@ const { project } = Astro.props;
         {project.fullDescription}
       </p>
     </section>
-
-    <!-- Key Features List -->
     {
       project.features && project.features.length > 0 && (
         <section class="mb-16">
@@ -123,8 +112,6 @@ const { project } = Astro.props;
         </section>
       )
     }
-
-    <!-- Visual Previews & Screenshots -->
     {
       project.screenshots && project.screenshots.length > 0 && (
         <section class="mb-16">

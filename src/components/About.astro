@@ -15,7 +15,6 @@ const { experiences, education } = siteData;
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-    <!-- Work Experience Column -->
     <div>
       <h3 class="text-xl font-semibold text-neutral-200 mb-6 flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-[#fc7a00]"></span>
@@ -26,9 +25,7 @@ const { experiences, education } = siteData;
         {
           experiences.map((exp) => (
             <div class="relative pl-8 group">
-              <!-- Timeline Dot -->
               <span class="absolute left-1.5 top-1.5 -translate-x-1/2 w-3 h-3 rounded-full border-2 border-[#fc7a00] bg-[#0a0a0a] group-hover:bg-[#fc7a00] transition-colors" />
-
               <div class="bg-[#121212] border border-neutral-800/90 rounded-xl p-5 hover:border-neutral-700 transition-colors">
                 <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
                   <h4 class="text-base font-bold text-white">{exp.role}</h4>
@@ -55,8 +52,6 @@ const { experiences, education } = siteData;
         }
       </div>
     </div>
-
-    <!-- Education Column -->
     <div>
       <h3 class="text-xl font-semibold text-neutral-200 mb-6 flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-neutral-400"></span>

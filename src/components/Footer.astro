@@ -18,8 +18,6 @@ const currentYear = new Date().getFullYear();
         © {currentYear} {siteData.personal.name}. All rights reserved.
       </p>
     </div>
-
-    <!-- Social Links -->
     <div class="flex items-center gap-4">
       {
         siteData.personal.contact.socials.map((social) => (
@@ -35,8 +33,6 @@ const currentYear = new Date().getFullYear();
         ))
       }
     </div>
-
-    <!-- Attribution -->
     <div class="text-xs text-neutral-500 font-mono text-center sm:text-right">
       <span>Built with Astro 7 &amp; Tailwind CSS</span>
     </div>

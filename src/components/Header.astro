@@ -8,7 +8,6 @@ import { siteData } from '../data/site';
   id="main-header"
 >
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-    <!-- Brand / Monospace Name -->
     <a
       href="/#home"
       class="font-mono text-lg font-bold tracking-tight text-white hover:text-[#fc7a00] transition-colors flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded"
@@ -16,8 +15,6 @@ import { siteData } from '../data/site';
       <span>{siteData.personal.handle}</span>
       <span class="inline-block w-2 h-2 rounded-full bg-[#fc7a00] animate-pulse"></span>
     </a>
-
-    <!-- Desktop Navigation -->
     <nav class="hidden sm:flex items-center gap-8 text-sm font-medium">
       <a
         href="/#home"
@@ -50,8 +47,6 @@ import { siteData } from '../data/site';
         Contact
       </a>
     </nav>
-
-    <!-- Mobile Menu Toggle Button (Native HTML Popover API) -->
     <div class="sm:hidden">
       <button
         popovertarget="mobile-menu"
@@ -63,8 +58,6 @@ import { siteData } from '../data/site';
       </button>
     </div>
   </div>
-
-  <!-- Mobile Drawer Menu (Native HTML Popover API) -->
   <nav
     id="mobile-menu"
     popover
