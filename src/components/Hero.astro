@@ -94,18 +94,13 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
 </section>
 
 <script>
-  import {
-    type Container,
-    type ISourceOptions,
-    tsParticles,
-  } from '@tsparticles/engine';
-  import { loadSlim } from '@tsparticles/slim';
+  import type { Container, ISourceOptions } from '@tsparticles/engine';
 
-  const particlesConfig: ISourceOptions = {
+  const getParticlesConfig = (isMobile: boolean): ISourceOptions => ({
     fpsLimit: 60,
     particles: {
       number: {
-        value: 70,
+        value: isMobile ? 25 : 70,
         density: {
           enable: true,
           width: 800,
@@ -113,7 +108,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
         },
         limit: {
           mode: 'delete',
-          value: 75,
+          value: isMobile ? 30 : 75,
         },
       },
       color: {
@@ -148,7 +143,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
       detectsOn: 'canvas',
       events: {
         onHover: {
-          enable: true,
+          enable: !isMobile,
           mode: 'grab',
         },
         onClick: {
@@ -183,9 +178,9 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
       },
     },
     detectRetina: true,
-  };
+  });
 
-  let pluginsPromise: Promise<void> | null = null;
+  let engineLoaded = false;
   let particleContainer: Container | undefined;
 
   async function initParticles() {
@@ -195,13 +190,20 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
     container.dataset['initialized'] = 'true';
 
     try {
-      if (!pluginsPromise) {
-        pluginsPromise = loadSlim(tsParticles);
+      const isMobile = window.innerWidth < 640;
+      const [{ tsParticles }, { loadSlim }] = await Promise.all([
+        import('@tsparticles/engine'),
+        import('@tsparticles/slim'),
+      ]);
+
+      if (!engineLoaded) {
+        await loadSlim(tsParticles);
+        engineLoaded = true;
       }
-      await pluginsPromise;
+
       const c = await tsParticles.load({
         id: 'particles-js',
-        options: particlesConfig,
+        options: getParticlesConfig(isMobile),
       });
       if (!container.isConnected) {
         c?.destroy();
@@ -209,7 +211,6 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
       }
       particleContainer = c;
     } catch (err) {
-      pluginsPromise = null;
       delete container.dataset['initialized'];
       console.warn('tsParticles initialization error:', err);
     }
