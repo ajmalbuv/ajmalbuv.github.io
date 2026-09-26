@@ -1,6 +1,7 @@
 import { execSync } from 'node:child_process';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
+import favicons from 'astro-favicons';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sitemap from '@astrojs/sitemap';
@@ -132,7 +133,15 @@ export default defineConfig({
       }),
     },
   },
-  integrations: [icon(), sitemap(), robotsTxt(), inlineCsp()],
+  integrations: [
+    icon(),
+    sitemap(),
+    favicons({
+      input: 'src/assets/favicon.svg',
+    }),
+    robotsTxt(),
+    inlineCsp(),
+  ],
   vite: {
     plugins: [tailwindcss(), llms()],
     build: {
