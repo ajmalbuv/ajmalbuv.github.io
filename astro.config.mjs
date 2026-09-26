@@ -132,17 +132,28 @@ export default defineConfig({
       }),
     },
   },
-  integrations: [
-    icon(),
-    sitemap(),
-    robotsTxt(),
-    inlineCsp(),
-  ],
+  integrations: [icon(), sitemap(), robotsTxt(), inlineCsp()],
   vite: {
     plugins: [tailwindcss(), llms()],
     build: {
       cssCodeSplit: false,
       assetsInlineLimit: 4096,
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [
+              {
+                name(moduleId) {
+                  if (moduleId.includes('@tsparticles')) {
+                    return 'tsparticles';
+                  }
+                  return null;
+                },
+              },
+            ],
+          },
+        },
+      },
     },
   },
   build: {
