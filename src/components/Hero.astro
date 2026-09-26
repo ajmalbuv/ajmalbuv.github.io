@@ -79,7 +79,7 @@ const { personal } = siteData;
         </button>
 
         <a
-          href={personal.resumeUrl}
+          href={`https://docs.google.com/gview?url=${encodeURIComponent(personal.resumeUrl)}`}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2 border border-neutral-300 text-neutral-800 font-mono text-xs font-medium rounded-full hover:border-black hover:text-black transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
