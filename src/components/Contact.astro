@@ -5,8 +5,11 @@ import { siteData } from '../data/site';
 const { personal } = siteData;
 ---
 
-<section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-  <div class="bg-linear-to-br from-[#141414] to-[#0d0d0d] border border-neutral-800 rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+<section
+  id="contact"
+  class="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl 2xl:max-w-6xl mx-auto"
+>
+  <div class="bg-linear-to-br from-[#141414] to-[#0d0d0d] border border-neutral-800 rounded-3xl p-6 sm:p-12 text-center relative overflow-hidden">
     <div
       class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-[#fc7a00]/10 blur-3xl pointer-events-none rounded-full"
       aria-hidden="true"
@@ -20,28 +23,38 @@ const { personal } = siteData;
         Let's Connect.
       </h2>
       <p class="text-neutral-400 text-sm sm:text-base leading-relaxed mb-8">
-        I am always open to discussing new opportunities, systems architecture, Flutter projects, or open-source collaborations.
+        I am always open to discussing new opportunities, systems architecture,
+        Flutter projects, or open-source collaborations.
       </p>
-      <div class="mb-10">
+      <div class="mb-10 w-full flex justify-center">
         <a
           href={`mailto:${personal.contact.email}`}
-          class="inline-flex items-center gap-3 px-8 py-4 bg-[#fc7a00] text-black font-mono font-bold text-base rounded-full hover:bg-[#ff9429] transition-all transform hover:scale-105 shadow-xl shadow-[#fc7a00]/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          class="inline-flex items-center justify-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 bg-[#fc7a00] text-black font-mono font-bold text-xs sm:text-base rounded-full hover:bg-[#ff9429] transition-all transform hover:scale-105 shadow-xl shadow-[#fc7a00]/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white max-w-full"
         >
-          <Icon name="mdi:email-outline" class="w-5 h-5" />
-          <span>{personal.contact.email}</span>
+          <Icon
+            name="mdi:email-outline"
+            class="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
+          />
+          <span class="truncate">{personal.contact.email}</span>
         </a>
       </div>
-      <div class="flex flex-wrap items-center justify-center gap-6 pt-6 border-t border-neutral-800/80 text-sm text-neutral-400">
+      <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 pt-6 border-t border-neutral-800/80 text-xs sm:text-sm text-neutral-400">
         <a
           href={`tel:${personal.contact.phone.replace(/\s+/g, '')}`}
-          class="inline-flex items-center gap-2 hover:text-[#fc7a00] transition-colors"
+          class="inline-flex items-center gap-1.5 sm:gap-2 hover:text-[#fc7a00] transition-colors"
         >
-          <Icon name="mdi:phone" class="w-4 h-4 text-neutral-500" />
+          <Icon
+            name="mdi:phone"
+            class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neutral-500 shrink-0"
+          />
           <span>{personal.contact.phone}</span>
         </a>
-        <span class="text-neutral-700">•</span>
-        <span class="inline-flex items-center gap-2">
-          <Icon name="mdi:map-marker" class="w-4 h-4 text-neutral-500" />
+        <span class="text-neutral-700 hidden sm:inline">•</span>
+        <span class="inline-flex items-center gap-1.5 sm:gap-2">
+          <Icon
+            name="mdi:map-marker"
+            class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neutral-500 shrink-0"
+          />
           <span>{personal.contact.location}</span>
         </span>
       </div>

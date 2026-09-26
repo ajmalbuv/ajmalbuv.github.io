@@ -13,8 +13,8 @@ const emsScreenshotMap = import.meta.glob<ImageMetadata>(
 // Sort screenshot paths numerically (edumanage-1, edumanage-2, ... edumanage-21)
 const emsScreenshots = Object.entries(emsScreenshotMap)
   .sort(([pathA], [pathB]) => {
-    const numA = Number.parseInt(pathA.match(/\d+/)?.[0] || '0', 10);
-    const numB = Number.parseInt(pathB.match(/\d+/)?.[0] || '0', 10);
+    const numA = Number.parseInt(/\d+/.exec(pathA)?.[0] ?? '0', 10);
+    const numB = Number.parseInt(/\d+/.exec(pathB)?.[0] ?? '0', 10);
     return numA - numB;
   })
   .map(([, img]) => img);
@@ -26,8 +26,8 @@ const portfolioScreenshotMap = import.meta.glob<ImageMetadata>(
 
 const portfolioScreenshots = Object.entries(portfolioScreenshotMap)
   .sort(([pathA], [pathB]) => {
-    const numA = Number.parseInt(pathA.match(/\d+/)?.[0] || '0', 10);
-    const numB = Number.parseInt(pathB.match(/\d+/)?.[0] || '0', 10);
+    const numA = Number.parseInt(/\d+/.exec(pathA)?.[0] ?? '0', 10);
+    const numB = Number.parseInt(/\d+/.exec(pathB)?.[0] ?? '0', 10);
     return numA - numB;
   })
   .map(([, img]) => img);

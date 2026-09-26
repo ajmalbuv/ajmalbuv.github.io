@@ -1,18 +1,18 @@
 <script>
-  import { PUBLIC_BUILD_TIME, PUBLIC_GIT_HASH } from "astro:env/client";
+  import { PUBLIC_BUILD_TIME, PUBLIC_GIT_HASH } from 'astro:env/client';
 
-  const gitHash = PUBLIC_GIT_HASH || "dev";
+  const gitHash = PUBLIC_GIT_HASH || 'dev';
   const buildTime = PUBLIC_BUILD_TIME || new Date().toISOString();
   const formattedBuildTime = new Date(buildTime).toLocaleString();
   const browserLocale = Intl.DateTimeFormat().resolvedOptions().locale;
 
-  const mauve = "color: #cba6f7";
-  const blue = "color: #89b4fa";
-  const peach = "color: #fab387";
-  const overlay = "color: #6c7086";
-  const green = "color: #a6e3a1";
-  const reset = "color: inherit";
-  const bold = "font-weight: bold";
+  const mauve = 'color: #cba6f7';
+  const blue = 'color: #89b4fa';
+  const peach = 'color: #fab387';
+  const overlay = 'color: #6c7086';
+  const green = 'color: #a6e3a1';
+  const reset = 'color: inherit';
+  const bold = 'font-weight: bold';
 
   const fontFamily =
     'font-family: "FiraCode Nerd Font", "Fira Code", monospace';
@@ -33,9 +33,9 @@
     `${mauve}; ${bold}; ${fontFamily}`,
     reset,
     `${mauve}; font-size: 14px; ${bold}; ${fontFamily}`,
-    "color: #585b70",
-    "color: #9399b2; font-style: italic",
-    "color: #313244",
+    'color: #585b70',
+    'color: #9399b2; font-style: italic',
+    'color: #313244',
     peach,
     reset,
     peach,
@@ -44,11 +44,11 @@
     blue,
     peach,
     blue,
-    "color: #313244",
+    'color: #313244',
     `${mauve}; ${bold}`,
     peach,
     blue,
-    "color: #313244",
+    'color: #313244',
     overlay,
     mauve,
     overlay,

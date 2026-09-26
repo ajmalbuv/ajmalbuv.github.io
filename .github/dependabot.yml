@@ -1,21 +1,21 @@
 version: 2
 updates:
   # Monitor GitHub Actions workflows (.github/workflows/)
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     groups:
       github-actions:
         patterns:
-          - "*"
+          - '*'
 
   # Monitor Bun and package.json dependencies
-  - package-ecosystem: "bun"
-    directory: "/"
+  - package-ecosystem: 'bun'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     groups:
       dependencies:
         patterns:
-          - "*"
+          - '*'

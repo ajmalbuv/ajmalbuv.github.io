@@ -4,12 +4,14 @@
   "type": "module",
   "scripts": {
     "astro": "astro",
-    "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "check": "astro check && biome check",
-    "lint": "biome lint",
-    "format": "biome format --write"
+    "check": "astro check && eslint .",
+    "dev": "astro dev",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -23,11 +25,17 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "@biomejs/biome": "^2.5.14",
+    "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.3.3",
     "astro-llms-md": "^3.0.2",
     "astro-robots-txt": "^1.0.0",
+    "eslint": "^10.11.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.0",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.70.1"
   }
 }

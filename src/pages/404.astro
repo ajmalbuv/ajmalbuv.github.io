@@ -5,10 +5,16 @@ import Header from '../components/Header.astro';
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="404 — Page Not Found" description="The requested page could not be located.">
+<Base
+  title="404 — Page Not Found"
+  description="The requested page could not be located."
+>
   <Header />
 
-  <main id="main-content" class="min-h-[70vh] flex items-center justify-center px-4 py-20">
+  <main
+    id="main-content"
+    class="min-h-[70vh] flex items-center justify-center px-4 py-20"
+  >
     <div class="text-center max-w-md mx-auto">
       <span class="font-mono text-5xl sm:text-7xl font-bold text-[#fc7a00] tracking-tight block mb-4">
         404
@@ -17,7 +23,8 @@ import Base from '../layouts/Base.astro';
         Page Not Found
       </h1>
       <p class="text-neutral-400 text-sm leading-relaxed mb-8">
-        The route you are looking for does not exist or has been relocated as part of the architecture overhaul.
+        The route you are looking for does not exist or has been relocated as
+        part of the architecture overhaul.
       </p>
 
       <a

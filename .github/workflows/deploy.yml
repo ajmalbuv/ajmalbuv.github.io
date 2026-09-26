@@ -34,14 +34,17 @@ jobs:
       - name: Install dependencies 🔧
         run: bun install --frozen-lockfile
 
-      - name: Biome Lint & Format Check 🧹
+      - name: Type & Lint Check 🧹
         run: bun run check
+
+      - name: Prettier Format Check 🎨
+        run: bun run format:check
 
   github-pages:
     name: Deploy to GitHub Pages
     needs: [check]
     concurrency:
-      group: "pages"
+      group: 'pages'
       cancel-in-progress: false
     environment:
       name: github-pages
@@ -56,7 +59,7 @@ jobs:
         with:
           package-manager: bun
         env:
-          SITE: "https://ajmalbuv.github.io"
+          SITE: 'https://ajmalbuv.github.io'
 
       - name: Deploy 🚀
         id: deployment
@@ -66,7 +69,7 @@ jobs:
     name: Deploy to VPS Branch
     needs: [check]
     concurrency:
-      group: "vps"
+      group: 'vps'
       cancel-in-progress: false
     runs-on: ubuntu-latest
     steps:
@@ -89,7 +92,7 @@ jobs:
       - name: Build 🏗️
         run: bun run build
         env:
-          SITE: "https://portfolio.ajmalbuv.duckdns.org"
+          SITE: 'https://portfolio.ajmalbuv.duckdns.org'
 
       - name: Push to VPS branch 🚀
         uses: JamesIves/github-pages-deploy-action@v4

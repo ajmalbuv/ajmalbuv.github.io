@@ -15,7 +15,7 @@ const {
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
 } = Astro.props;
 
-const siteUrl = Astro.site?.toString() || 'https://ajmalbuv.pages.dev';
+const siteUrl = Astro.site?.toString() ?? 'https://ajmalbuv.pages.dev';
 const avatarFullUrl = new URL(image, siteUrl).toString();
 
 // JSON-LD Person schema matching 0day/portfolio specifications
@@ -62,4 +62,8 @@ const schema = {
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={avatarFullUrl} />
-<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>
