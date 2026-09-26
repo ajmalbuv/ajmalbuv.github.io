@@ -5,8 +5,8 @@ import { siteData } from '../data/site';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="w-full border-t border-neutral-800/80 bg-[#080808] text-neutral-400 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
-  <div class="max-w-5xl 2xl:max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+<footer class="w-full border-t border-neutral-800/80 bg-[#080808] text-neutral-400 py-6 sm:py-8 px-4 sm:px-6 lg:px-8 transition-colors">
+  <div class="max-w-5xl 2xl:max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
     <div class="flex flex-col items-center sm:items-start gap-1">
       <a
         href="/#home"
@@ -18,7 +18,7 @@ const currentYear = new Date().getFullYear();
         © {currentYear} {siteData.personal.name}. All rights reserved.
       </p>
     </div>
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-2">
       {siteData.personal.contact.socials.map((social) => (
         <a
           href={social.url}
