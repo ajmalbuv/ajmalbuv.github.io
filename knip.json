@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "ignore": [".svgo.config.js"],
-  "ignoreDependencies": ["@iconify-json/mdi"],
+  "ignoreDependencies": ["@iconify-json/mdi", "globals", "sharp"],
   "ignoreExportsUsedInFile": {
     "interface": true,
     "type": true

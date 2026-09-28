@@ -1,16 +1,40 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import sharp from 'sharp';
+import { fileURLToPath } from 'node:url';
+import type { APIRoute } from 'astro';
+import sharp, { type OverlayOptions } from 'sharp';
+import { siteData } from '../data/site';
 
-async function generateOgImage() {
+export const prerender = true;
+
+const escapeXml = (str: string): string =>
+  str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+
+export const GET: APIRoute = async ({ site }) => {
   const width = 1200;
   const height = 630;
 
-  // Read personal photo if available to composite
-  const photoPath = path.resolve('src/assets/images/personal/photo2.jpeg');
-  let avatarCircleBuffer = null;
+  // Extract hostname dynamically from Astro.site (defaults to ajmalbuv.pages.dev if undefined)
+  const siteUrl = site ?? new URL('https://ajmalbuv.pages.dev');
+  const domain = siteUrl.hostname;
 
-  if (fs.existsSync(photoPath)) {
+  // Resolve personal avatar photo reliably across dev and build prerendering
+  const candidatePaths = [
+    path.resolve(process.cwd(), 'src/assets/images/personal/photo2.jpeg'),
+    path.resolve('src/assets/images/personal/photo2.jpeg'),
+    fileURLToPath(
+      new URL('../assets/images/personal/photo2.jpeg', import.meta.url),
+    ),
+  ];
+  const photoPath = candidatePaths.find((p) => fs.existsSync(p));
+
+  let avatarCircleBuffer: Buffer | null = null;
+  if (photoPath && fs.existsSync(photoPath)) {
     const avatarSize = 280;
     const roundedCorners = Buffer.from(
       `<svg><circle cx="${avatarSize / 2}" cy="${avatarSize / 2}" r="${avatarSize / 2}" fill="#fff"/></svg>`,
@@ -18,17 +42,15 @@ async function generateOgImage() {
 
     avatarCircleBuffer = await sharp(photoPath)
       .resize(avatarSize, avatarSize, { fit: 'cover', position: 'top' })
-      .composite([
-        {
-          input: roundedCorners,
-          blend: 'dest-in',
-        },
-      ])
+      .composite([{ input: roundedCorners, blend: 'dest-in' }])
       .png()
       .toBuffer();
   }
 
-  // Base SVG with modern typography, dark background, subtle accents
+  const name = escapeXml(siteData.personal.name);
+  const title = escapeXml(siteData.personal.title);
+  const safeDomain = escapeXml(domain);
+
   const svgBanner = `
   <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -45,9 +67,6 @@ async function generateOgImage() {
         <stop offset="0%" stop-color="#fc7a00" stop-opacity="0.18" />
         <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0" />
       </radialGradient>
-      <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-        <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.6"/>
-      </filter>
     </defs>
 
     <!-- Background -->
@@ -69,12 +88,12 @@ async function generateOgImage() {
 
       <!-- Main Name -->
       <text x="0" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="64" font-weight="800" fill="#ffffff" letter-spacing="-1">
-        Ajmal Basheer
+        ${name}
       </text>
 
       <!-- Subtitle -->
       <text x="0" y="170" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="url(#accent)">
-        Software Engineer &amp; Systems Builder
+        ${title}
       </text>
 
       <!-- Description / Stack -->
@@ -103,9 +122,9 @@ async function generateOgImage() {
         <text x="465" y="21" font-family="monospace" font-size="14" font-weight="600" fill="#e4e4e7" text-anchor="middle">Docker</text>
       </g>
 
-      <!-- Bottom Domain -->
+      <!-- Bottom Domain dynamically derived from Astro.site -->
       <g transform="translate(0, 420)">
-        <text x="0" y="0" font-family="monospace" font-size="18" font-weight="600" fill="#71717a">ajmalbuv.pages.dev</text>
+        <text x="0" y="0" font-family="monospace" font-size="18" font-weight="600" fill="#71717a">${safeDomain}</text>
       </g>
     </g>
 
@@ -117,8 +136,7 @@ async function generateOgImage() {
   </svg>
   `;
 
-  const composites = [];
-
+  const composites: OverlayOptions[] = [];
   if (avatarCircleBuffer) {
     composites.push({
       input: avatarCircleBuffer,
@@ -127,20 +145,15 @@ async function generateOgImage() {
     });
   }
 
-  const outDir = path.resolve('public');
-  const outputPath = path.join(outDir, 'og-image.png');
-
-  await sharp(Buffer.from(svgBanner))
+  const pngBuffer = await sharp(Buffer.from(svgBanner))
     .composite(composites)
     .png({ quality: 90 })
-    .toFile(outputPath);
+    .toBuffer();
 
-  console.log('Successfully generated 1200x630 OG image at:', outputPath);
-
-  const meta = await sharp(outputPath).metadata();
-  console.log(
-    `Generated image specs: ${meta.width}x${meta.height}, size: ${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB`,
-  );
-}
-
-generateOgImage().catch(console.error);
+  return new Response(pngBuffer, {
+    headers: {
+      'Content-Type': 'image/png',
+      'Cache-Control': 'public, max-age=31536000, immutable',
+    },
+  });
+};
