@@ -116,29 +116,6 @@ function inlineCsp() {
   };
 }
 
-/**
- * Duplicates the generated sitemap index to the standard /sitemap.xml path
- * so web crawlers and direct visits resolve with 200 OK without redirect roundtrips.
- *
- * @returns {import('astro').AstroIntegration}
- */
-function sitemapAlias() {
-  return {
-    name: 'sitemap-alias',
-    hooks: {
-      'astro:build:done': async ({ dir }) => {
-        const outDir = fileURLToPath(dir);
-        const sitemapIndex = path.join(outDir, 'sitemap-index.xml');
-        const sitemapTarget = path.join(outDir, 'sitemap.xml');
-
-        if (fs.existsSync(sitemapIndex)) {
-          fs.copyFileSync(sitemapIndex, sitemapTarget);
-        }
-      },
-    },
-  };
-}
-
 export default defineConfig({
   site: process.env.SITE || 'https://ajmalbuv.pages.dev',
   env: {
@@ -155,7 +132,7 @@ export default defineConfig({
       }),
     },
   },
-  integrations: [icon(), sitemap(), robotsTxt(), sitemapAlias(), inlineCsp()],
+  integrations: [icon(), sitemap(), robotsTxt(), inlineCsp()],
   vite: {
     plugins: [tailwindcss(), llms()],
     build: {

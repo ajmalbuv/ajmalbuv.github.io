@@ -19,27 +19,43 @@ const {
 const siteUrl = Astro.site?.toString() ?? 'https://ajmalbuv.pages.dev';
 const avatarFullUrl = new URL(image, siteUrl).toString();
 
-// JSON-LD Person schema matching 0day/portfolio specifications
+// JSON-LD Person & WebSite schemas matching 0day/portfolio specifications
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: [
-    siteData.personal.name,
-    siteData.personal.handle,
-    'Ajmal Aju',
-    '_.aju',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}/#person`,
+      name: [
+        siteData.personal.name,
+        siteData.personal.handle,
+        'Ajmal Aju',
+        '_.aju',
+      ],
+      image: avatarFullUrl,
+      jobTitle: [
+        'Software Engineer',
+        'Systems Builder',
+        'Flutter Developer',
+        'Full Stack Developer',
+      ],
+      description: description,
+      url: siteUrl,
+      email: siteData.personal.contact.email,
+      sameAs: siteData.personal.contact.socials.map((s) => s.url),
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: `${siteData.personal.name} | ${siteData.personal.title}`,
+      description: siteData.personal.bio,
+      publisher: {
+        '@id': `${siteUrl}/#person`,
+      },
+      inLanguage: 'en',
+    },
   ],
-  image: avatarFullUrl,
-  jobTitle: [
-    'Software Engineer',
-    'Systems Builder',
-    'Flutter Developer',
-    'Full Stack Developer',
-  ],
-  description: description,
-  url: siteUrl,
-  email: siteData.personal.contact.email,
-  sameAs: siteData.personal.contact.socials.map((s) => s.url),
 };
 ---
 
@@ -81,6 +97,8 @@ const schema = {
   href="/apple-touch-icon-180x180.png"
   sizes="180x180"
 />
+<link rel="manifest" href="/manifest.json" />
+<link rel="dns-prefetch" href="https://media.githubusercontent.com" />
 
 <script
   is:inline
