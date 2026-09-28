@@ -8,17 +8,43 @@ interface Props {
   title?: string | undefined;
   description?: string | undefined;
   image?: string | undefined;
+  imageAlt?: string | undefined;
+  imageWidth?: number | string | undefined;
+  imageHeight?: number | string | undefined;
+  imageType?: string | undefined;
   canonicalURL?: URL | undefined;
   lang?: string | undefined;
+  type?: 'website' | 'article' | undefined;
 }
 
-const { title, description, image, canonicalURL, lang = 'en' } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  imageAlt,
+  imageWidth,
+  imageHeight,
+  imageType,
+  canonicalURL,
+  lang = 'en',
+  type,
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang={lang} class="scroll-smooth">
   <head>
-    <Head {title} {description} {image} {canonicalURL} />
+    <Head
+      {title}
+      {description}
+      {image}
+      {imageAlt}
+      {imageWidth}
+      {imageHeight}
+      {imageType}
+      {canonicalURL}
+      {type}
+    />
     <ClientRouter />
   </head>
   <body class="bg-[#0a0a0a] text-[#fafafa] font-sans antialiased min-h-screen flex flex-col selection:bg-[#fc7a00] selection:text-black">
