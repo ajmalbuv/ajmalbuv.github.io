@@ -143,15 +143,15 @@ bun run preview
 
 ## 🛠️ Tech Stack & Tooling
 
-| Layer | Technologies |
-|---|---|
-| **Framework** | [Astro v7](https://astro.build/) (Static Site Generation / Islands) |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) (`@tailwindcss/vite`) |
-| **Language** | [TypeScript](https://www.typescriptlang.org/) (`strictest` profile) |
-| **Icons** | [astro-icon](https://github.com/natemoo-re/astro-icon) (`@iconify-json/mdi`) |
-| **Interactive Canvas** | [tsParticles Slim](https://particles.js.org/) (Lazy loaded via `requestIdleCallback`) |
-| **Typography** | [Geist Variable](https://vercel.com/font) & [Geist Mono](https://vercel.com/font) |
-| **Quality & Linting** | [ESLint v9+](https://eslint.org/), [Prettier](https://prettier.io/), [Knip](https://knip.dev/) |
+| Layer                  | Technologies                                                                                   |
+| ---------------------- | ---------------------------------------------------------------------------------------------- |
+| **Framework**          | [Astro v7](https://astro.build/) (Static Site Generation / Islands)                            |
+| **Styling**            | [Tailwind CSS v4](https://tailwindcss.com/) (`@tailwindcss/vite`)                              |
+| **Language**           | [TypeScript](https://www.typescriptlang.org/) (`strictest` profile)                            |
+| **Icons**              | [astro-icon](https://github.com/natemoo-re/astro-icon) (`@iconify-json/mdi`)                   |
+| **Interactive Canvas** | [tsParticles Slim](https://particles.js.org/) (Lazy loaded via `requestIdleCallback`)          |
+| **Typography**         | [Geist Variable](https://vercel.com/font) & [Geist Mono](https://vercel.com/font)              |
+| **Quality & Linting**  | [ESLint v9+](https://eslint.org/), [Prettier](https://prettier.io/), [Knip](https://knip.dev/) |
 
 ---
 
