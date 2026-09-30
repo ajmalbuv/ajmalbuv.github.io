@@ -2,7 +2,6 @@
 import ConsoleSignature from '../components/ConsoleSignature.astro';
 import Head from '../components/Head.astro';
 import '../styles/global.css';
-import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title?: string | undefined;
@@ -45,7 +44,6 @@ const {
       {canonicalURL}
       {type}
     />
-    <ClientRouter />
   </head>
   <body class="bg-[#0a0a0a] text-[#fafafa] font-sans antialiased min-h-screen flex flex-col selection:bg-[#fc7a00] selection:text-black">
     <a

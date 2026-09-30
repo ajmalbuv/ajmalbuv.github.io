@@ -136,14 +136,7 @@ export const siteData = {
       fullDescription:
         'typst_flutter is an open-source Flutter package that natively embeds the Typst document compiler into Flutter applications across Android, iOS, macOS, Windows, and Linux via a high-performance Rust FFI bridge. By avoiding heavy WebViews and WASM interpreters, it compiles complex Typst documents directly on-device in under 100 milliseconds.\n\nEngineered with an opaque handle memory architecture, compiled documents remain safely inside Rust memory to guarantee zero race conditions and zero memory leaks. It provides drop-in interactive widgets (TypstDocumentViewer), full Typst query() selector data extraction to structured JSON, bidirectional input passing via sys.inputs, and automated handling for the Typst universe package registry (@preview/*). Published on pub.dev and backed by comprehensive documentation.',
       coverImage: typstFlutterCover,
-      techstack: [
-        'Flutter',
-        'Dart',
-        'Rust',
-        'FFI',
-        'Typst',
-        'Cross-Platform',
-      ],
+      techstack: ['Flutter', 'Dart', 'Rust', 'FFI', 'Typst', 'Cross-Platform'],
       features: [
         {
           heading: 'Native Rust Core & FFI Bridge',
