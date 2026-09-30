@@ -79,14 +79,17 @@ export const siteData = {
   experiences: [
     {
       company: 'ETAYA INNOVATIONS Pvt Ltd, Bengaluru',
-      role: 'Flutter Developer Intern',
-      duration: 'Nov 2023 - Present',
+      role: 'Flutter Developer',
+      duration: 'Nov 2024 - Present',
       location: 'Bengaluru, Karnataka',
       description:
-        'Developing and maintaining cross-platform mobile applications for Android and iOS using Flutter and Dart. Implementing clean architecture with provider-based state management to enhance performance and maintainability. Integrated Firebase for real-time synchronization, authentication, and push notifications.',
+        'Working as a full-time Flutter developer building and maintaining high-performance cross-platform mobile applications for Android and iOS using Flutter and Dart. Implementing clean architecture and provider-based state management with robust Firebase cloud integrations.',
       highlights: [
-        'Reduced widget rebuilds and implemented lazy loading for smoother 60fps UI interactions',
-        'Automated and manual testing with Flutter testing framework and Firebase Crashlytics',
+        'Designed scalable mobile architectures implementing Clean Architecture, provider state management, and reusable UI components',
+        'Integrated RESTful APIs and Firebase services for real-time synchronization, authentication, push notifications, and cloud storage',
+        'Optimized widget tree rebuilds and implemented lazy loading, eliminating frame drops for smooth 60fps UI interactions',
+        'Conducted automated and manual quality testing using Flutter testing framework and Firebase Crashlytics to preempt UI inconsistencies and crashes',
+        'Collaborated in an Agile workflow, participating in sprint planning, peer code reviews, and cross-functional feature delivery',
       ],
     },
     {
@@ -95,24 +98,26 @@ export const siteData = {
       duration: 'May 2024 - June 2024',
       location: 'Bengaluru, Karnataka',
       description:
-        'Designed and implemented secure RESTful APIs using Node.js with JWT authentication and role-based access control. Assisted in database optimization by indexing MongoDB collections, improving query performance.',
+        'Designed and developed backend services and database optimizations, gaining hands-on experience with production APIs, access control, and industry-standard testing workflows.',
       highlights: [
-        'Automated API testing with Postman across CRUD operations',
-        'Participated in code reviews, debugging, and system integration',
+        'Designed and implemented secure RESTful APIs using Node.js with JWT authentication and role-based access control (RBAC)',
+        'Optimized MongoDB database indexing and collection schemas, significantly improving query performance and retrieval speeds',
+        'Automated comprehensive API testing using Postman across CRUD operations to validate data integrity and endpoint reliability',
+        'Engaged in code reviews, debugging, and cross-tier system integration to enhance system stability',
       ],
     },
   ],
   education: [
     {
       school: 'Krupanidhi Degree College',
-      degree: "Bachelor's in Computer Application",
-      duration: 'Oct 2021 - Sept 2024',
+      degree: 'Bachelor of Computer Applications',
+      duration: 'Aug 2021 - July 2024',
       location: 'Bengaluru, Karnataka',
     },
     {
       school: 'MIC Higher Secondary School',
-      degree: 'Senior Secondary School (Computer Science)',
-      duration: '2017 - 2019',
+      degree: 'Commerce',
+      duration: 'June 2017 - March 2019',
       location: 'Malappuram, Kerala',
     },
     {
