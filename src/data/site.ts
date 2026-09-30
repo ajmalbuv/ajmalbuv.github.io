@@ -137,7 +137,6 @@ export const siteData = {
         'Rust',
         'FFI',
         'Typst',
-        'C/C++',
         'Cross-Platform',
       ],
       features: [
