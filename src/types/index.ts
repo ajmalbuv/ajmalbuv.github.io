@@ -56,6 +56,7 @@ export interface Project {
   readonly features: readonly ProjectFeature[];
   readonly screenshots: readonly ImageMetadata[];
   readonly liveUrl?: string | undefined;
+  readonly liveUrlLabel?: string | undefined;
   readonly githubUrl?: string | undefined;
   readonly featured: boolean;
 }

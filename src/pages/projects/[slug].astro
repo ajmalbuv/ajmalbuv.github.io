@@ -63,7 +63,7 @@ const { project } = Astro.props;
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#fc7a00] text-black font-mono font-bold text-sm rounded-full hover:bg-[#ff9429] transition-colors shadow-md"
           >
-            <span>View Live Project</span>
+            <span>{project.liveUrlLabel ?? 'View Live Project'}</span>
             <Icon name="mdi:open-in-new" class="w-4 h-4" />
           </a>
         )}
