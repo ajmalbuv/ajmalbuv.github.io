@@ -1,5 +1,5 @@
 import type { ImageMetadata } from 'astro';
-import avatarImg from '../assets/images/personal/photo2.jpeg';
+import avatarImg from '../assets/images/personal/photo.jpeg';
 import blamrCover from '../assets/images/projects/images/blamr.webp';
 import emsCover from '../assets/images/projects/images/ems.webp';
 import portfolioCover from '../assets/images/projects/images/portfolio.webp';

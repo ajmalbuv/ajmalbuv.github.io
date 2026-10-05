@@ -25,10 +25,10 @@ export const GET: APIRoute = async ({ site }) => {
 
   // Resolve personal avatar photo reliably across dev and build prerendering
   const candidatePaths = [
-    path.resolve(process.cwd(), 'src/assets/images/personal/photo2.jpeg'),
-    path.resolve('src/assets/images/personal/photo2.jpeg'),
+    path.resolve(process.cwd(), 'src/assets/images/personal/photo.jpeg'),
+    path.resolve('src/assets/images/personal/photo.jpeg'),
     fileURLToPath(
-      new URL('../assets/images/personal/photo2.jpeg', import.meta.url),
+      new URL('../assets/images/personal/photo.jpeg', import.meta.url),
     ),
   ];
   const photoPath = candidatePaths.find((p) => fs.existsSync(p));
