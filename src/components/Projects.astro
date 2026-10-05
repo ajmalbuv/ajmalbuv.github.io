@@ -35,8 +35,8 @@ const { projects } = siteData;
           <Image
             src={project.coverImage}
             alt={`${project.title} cover image`}
-            width={640}
-            height={360}
+            widths={[380, 480, 640, 960, 1280]}
+            sizes="(min-width: 1536px) 528px, (min-width: 1024px) 464px, (min-width: 768px) 50vw, 100vw"
             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
