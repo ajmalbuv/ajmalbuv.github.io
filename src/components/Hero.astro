@@ -22,9 +22,11 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
       <Image
         src={personal.avatar}
         alt={`${personal.name} (${personal.handle})`}
-        class="w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full object-cover shadow-xl transition-transform duration-300 hover:scale-105"
+        class="w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full object-cover object-top shadow-xl transition-transform duration-300 hover:scale-105"
         width={208}
         height={208}
+        fit="cover"
+        position="top"
         loading="eager"
         fetchpriority="high"
       />
