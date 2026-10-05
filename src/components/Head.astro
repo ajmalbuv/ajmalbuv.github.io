@@ -1,6 +1,7 @@
 ---
 import { siteData } from '../data/site';
 import geistSansFont from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
+import geistMonoFont from '@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2?url';
 
 interface Props {
   title?: string | undefined;
@@ -75,6 +76,13 @@ const schema = {
 <link
   rel="preload"
   href={geistSansFont}
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href={geistMonoFont}
   as="font"
   type="font/woff2"
   crossorigin
