@@ -252,10 +252,41 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
   }
 
   const scheduleParticles = () => {
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(() => initParticles(), { timeout: 1500 });
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let scheduled = false;
+    const start = () => {
+      if (scheduled) return;
+      scheduled = true;
+      cleanup();
+      initParticles();
+    };
+
+    const cleanup = () => {
+      window.removeEventListener('pointermove', start);
+      window.removeEventListener('touchstart', start);
+      window.removeEventListener('scroll', start);
+    };
+
+    window.addEventListener('pointermove', start, {
+      once: true,
+      passive: true,
+    });
+    window.addEventListener('touchstart', start, { once: true, passive: true });
+    window.addEventListener('scroll', start, { once: true, passive: true });
+
+    const triggerIdle = () => {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(start, { timeout: 4000 });
+      } else {
+        setTimeout(start, 2500);
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      triggerIdle();
     } else {
-      setTimeout(initParticles, 300);
+      window.addEventListener('load', triggerIdle, { once: true });
     }
   };
 
@@ -263,7 +294,12 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
     initResume();
     scheduleParticles();
   };
-  boot();
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
   document.addEventListener('astro:page-load', boot);
   document.addEventListener('astro:before-swap', () => {
     particleContainer?.destroy();
