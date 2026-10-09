@@ -21,7 +21,7 @@ const { skills } = siteData;
     {skills.map((group, index) => (
       <div
         class:list={[
-          'bg-[#121212] border border-neutral-800/90 rounded-xl p-6 hover:border-neutral-700 transition-colors',
+          'relative z-10 bg-[#121212] border border-neutral-800/90 rounded-xl p-6 hover:border-neutral-700 transition-colors',
           index === 4 && 'md:col-span-2 lg:col-span-2',
         ]}
       >

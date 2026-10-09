@@ -100,9 +100,12 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
 
   const getParticlesConfig = (isMobile: boolean): ISourceOptions => ({
     fpsLimit: 60,
+    // fullScreen: {
+      // enable: false,
+    // },
     particles: {
       number: {
-        value: isMobile ? 25 : 70,
+        value: isMobile ? 35 : 70,
         density: {
           enable: true,
           width: 800,
@@ -142,7 +145,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
       },
     },
     interactivity: {
-      detectsOn: 'canvas',
+      detectsOn: 'window',
       events: {
         onHover: {
           enable: !isMobile,
@@ -155,27 +158,10 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
       },
       modes: {
         grab: {
-          distance: 194.89853095232286,
+          distance: 195,
           links: {
             opacity: 1,
           },
-        },
-        bubble: {
-          distance: 400,
-          size: 40,
-          duration: 2,
-          opacity: 8,
-          speed: 3,
-        },
-        repulse: {
-          distance: 200,
-          duration: 0.4,
-        },
-        push: {
-          quantity: 4,
-        },
-        remove: {
-          quantity: 2,
         },
       },
     },
@@ -184,6 +170,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
 
   let engineLoaded = false;
   let particleContainer: Container | undefined;
+  // let heroObserver: IntersectionObserver | undefined;
 
   async function initParticles() {
     const container = document.getElementById('particles-js');
@@ -212,6 +199,19 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
         return;
       }
       particleContainer = c;
+
+      // const heroSection = document.getElementById('home');
+      // if (heroSection && 'IntersectionObserver' in window) {
+      //   heroObserver?.disconnect();
+      //   heroObserver = new IntersectionObserver(([entry]) => {
+      //     if (entry?.isIntersecting) {
+      //       particleContainer?.play();
+      //     } else {
+      //       particleContainer?.pause();
+      //     }
+      //   });
+      //   heroObserver.observe(heroSection);
+      // }
     } catch (err) {
       delete container.dataset['initialized'];
       console.warn('tsParticles initialization error:', err);
@@ -304,6 +304,8 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
   }
   document.addEventListener('astro:page-load', boot);
   document.addEventListener('astro:before-swap', () => {
+    // heroObserver?.disconnect();
+    // heroObserver = undefined;
     particleContainer?.destroy();
     particleContainer = undefined;
   });
