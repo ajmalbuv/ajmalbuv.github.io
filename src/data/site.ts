@@ -43,7 +43,7 @@ export const siteData = {
     subtitle: 'Systems & Mobile Engineer | Flutter, Rust & Go',
     bio: 'Software engineer focused on scalable systems, high-performance Flutter applications, and modern cross-platform engineering with clean architecture.',
     resumeUrl:
-      'https://media.githubusercontent.com/media/ajmalbuv/resume/refs/heads/master/resume-no-image.pdf',
+      'https://media.githubusercontent.com/media/ajmalbuv/resume/refs/heads/main/resume-no-image.pdf',
     contact: {
       email: 'ajmalbuv@gmail.com',
       phone: '+91 9496444520',
