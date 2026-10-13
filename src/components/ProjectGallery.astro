@@ -33,29 +33,31 @@ if (!screenshots || screenshots.length === 0) {
   </div>
 
   <div class="gallery-root relative bg-[#121212] border border-neutral-800/90 rounded-2xl overflow-hidden shadow-2xl">
-    <!-- Main Display Viewport -->
-    <div class="relative aspect-video sm:aspect-16/10 bg-neutral-950 flex items-center justify-center overflow-hidden group">
-      {screenshots.map((shot, idx) => (
-        <div
-          class:list={[
-            'gallery-slide absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-300',
-            idx === 0
-              ? 'opacity-100 z-10'
-              : 'opacity-0 z-0 pointer-events-none',
-          ]}
-          data-slide-index={idx}
-        >
-          <Image
-            src={shot}
-            alt={`${title} - Preview ${idx + 1}`}
-            class="w-full h-full object-contain cursor-zoom-in"
-            loading={idx === 0 ? 'eager' : 'lazy'}
-            widths={[640, 960, 1280, 1920]}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1152px"
-            data-zoom-src={shot.src}
-          />
-        </div>
-      ))}
+    <!-- Main Display Viewport (Native CSS Scroll-Snap) -->
+    <div class="relative aspect-video sm:aspect-16/10 bg-neutral-950 overflow-hidden group">
+      <div
+        class="gallery-viewport flex w-full h-full overflow-x-auto snap-x snap-mandatory scroll-smooth overscroll-x-contain scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        role="region"
+        aria-label="Interface previews carousel"
+        tabindex="0"
+      >
+        {screenshots.map((shot, idx) => (
+          <div
+            class="gallery-slide shrink-0 w-full h-full snap-center flex items-center justify-center p-1 sm:p-2 select-none"
+            data-slide-index={idx}
+          >
+            <Image
+              src={shot}
+              alt={`${title} - Preview ${idx + 1}`}
+              class="w-full h-full object-contain cursor-zoom-in"
+              loading={idx === 0 ? 'eager' : 'lazy'}
+              widths={[640, 960, 1280, 1920]}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1152px"
+              data-zoom-src={shot.src}
+            />
+          </div>
+        ))}
+      </div>
 
       <!-- Overlay Prev/Next Arrows -->
       <button
@@ -87,7 +89,7 @@ if (!screenshots || screenshots.length === 0) {
 
     <!-- Thumbnail Strip -->
     <div class="p-3 sm:p-4 bg-neutral-900/95 border-t border-neutral-800">
-      <div class="gallery-thumbs flex gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent">
+      <div class="gallery-thumbs flex gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-thin scrollbar-neutral-700">
         {screenshots.map((shot, idx) => (
           <button
             type="button"
@@ -144,13 +146,17 @@ if (!screenshots || screenshots.length === 0) {
 </section>
 
 <script>
+  let cleanupGallery: (() => void) | undefined;
+
   function setupGallery() {
+    cleanupGallery?.();
+
     const root = document.querySelector<HTMLElement>('.gallery-root');
-    if (!root || root.dataset['initialized']) return;
-    root.dataset['initialized'] = 'true';
+    const viewport = root?.querySelector<HTMLElement>('.gallery-viewport');
+    if (!root || !viewport) return;
 
     const slides = Array.from(
-      root.querySelectorAll<HTMLElement>('.gallery-slide'),
+      viewport.querySelectorAll<HTMLElement>('.gallery-slide'),
     );
     const thumbs = Array.from(
       root.querySelectorAll<HTMLButtonElement>('.gallery-thumb'),
@@ -170,25 +176,16 @@ if (!screenshots || screenshots.length === 0) {
     const lightboxCounter = document.getElementById('lightbox-counter');
     const lightboxClose = document.getElementById('lightbox-close-btn');
 
-    let currentIndex = 0;
+    let activeIndex = 0;
     const total = slides.length;
+    if (total === 0) return;
 
-    function goToSlide(index: number) {
-      if (total === 0) return;
-      currentIndex = (index + total) % total;
-
-      slides.forEach((slide, idx) => {
-        if (idx === currentIndex) {
-          slide.classList.remove('opacity-0', 'pointer-events-none', 'z-0');
-          slide.classList.add('opacity-100', 'z-10');
-        } else {
-          slide.classList.remove('opacity-100', 'z-10');
-          slide.classList.add('opacity-0', 'pointer-events-none', 'z-0');
-        }
-      });
+    function updateActiveState(index: number) {
+      if (index === activeIndex) return;
+      activeIndex = index;
 
       thumbs.forEach((thumb, idx) => {
-        if (idx === currentIndex) {
+        if (idx === activeIndex) {
           thumb.classList.remove('border-neutral-800', 'opacity-60');
           thumb.classList.add(
             'border-[#fc7a00]',
@@ -215,84 +212,130 @@ if (!screenshots || screenshots.length === 0) {
       });
 
       if (counter) {
-        counter.textContent = `${currentIndex + 1} / ${total}`;
+        counter.textContent = `${activeIndex + 1} / ${total}`;
       }
 
       if (lightbox && lightbox.open && lightboxImg) {
-        const activeImg = slides[currentIndex]?.querySelector('img');
+        const activeImg = slides[activeIndex]?.querySelector('img');
         const zoomSrc = activeImg?.dataset['zoomSrc'] || activeImg?.src;
         if (zoomSrc) lightboxImg.src = zoomSrc;
-        if (lightboxCounter)
-          lightboxCounter.textContent = `${currentIndex + 1} / ${total}`;
+        if (lightboxCounter) {
+          lightboxCounter.textContent = `${activeIndex + 1} / ${total}`;
+        }
       }
     }
 
-    prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
-    nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
-
-    thumbs.forEach((thumb) => {
-      thumb.addEventListener('click', () => {
-        const idx = Number.parseInt(thumb.dataset['thumbIndex'] || '0', 10);
-        goToSlide(idx);
+    function scrollToSlide(index: number) {
+      const targetIndex = (index + total) % total;
+      slides[targetIndex]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start',
       });
-    });
+    }
 
-    // Touch swipe handling on main display
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    root.addEventListener(
-      'touchstart',
-      (e) => {
-        touchStartX = (e as TouchEvent).changedTouches?.[0]?.screenX ?? 0;
-      },
-      { passive: true },
-    );
-
-    root.addEventListener(
-      'touchend',
-      (e) => {
-        touchEndX = (e as TouchEvent).changedTouches?.[0]?.screenX ?? 0;
-        const diff = touchStartX - touchEndX;
-        if (Math.abs(diff) > 40) {
-          if (diff > 0) goToSlide(currentIndex + 1);
-          else goToSlide(currentIndex - 1);
+    // IntersectionObserver to observe which slide is snapped into view
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const idx = Number.parseInt(
+              (entry.target as HTMLElement).dataset['slideIndex'] || '0',
+              10,
+            );
+            updateActiveState(idx);
+          }
         }
       },
-      { passive: true },
+      {
+        root: viewport,
+        threshold: 0.6,
+      },
     );
+
+    slides.forEach((slide) => observer.observe(slide));
+
+    const onPrev = () => {
+      viewport.scrollBy({ left: -viewport.clientWidth, behavior: 'smooth' });
+    };
+    const onNext = () => {
+      viewport.scrollBy({ left: viewport.clientWidth, behavior: 'smooth' });
+    };
+
+    prevBtn?.addEventListener('click', onPrev);
+    nextBtn?.addEventListener('click', onNext);
+
+    const onThumbClicks: Array<{
+      btn: HTMLButtonElement;
+      handler: () => void;
+    }> = [];
+    thumbs.forEach((thumb) => {
+      const idx = Number.parseInt(thumb.dataset['thumbIndex'] || '0', 10);
+      const handler = () => scrollToSlide(idx);
+      thumb.addEventListener('click', handler);
+      onThumbClicks.push({ btn: thumb, handler });
+    });
 
     // Lightbox modal logic
     function openLightbox() {
       if (!lightbox || !lightboxImg) return;
-      const activeImg = slides[currentIndex]?.querySelector('img');
+      const activeImg = slides[activeIndex]?.querySelector('img');
       const zoomSrc = activeImg?.dataset['zoomSrc'] || activeImg?.src;
       if (!zoomSrc) return;
       lightboxImg.src = zoomSrc;
-      if (lightboxCounter)
-        lightboxCounter.textContent = `${currentIndex + 1} / ${total}`;
+      if (lightboxCounter) {
+        lightboxCounter.textContent = `${activeIndex + 1} / ${total}`;
+      }
       lightbox.showModal();
     }
 
     expandBtn?.addEventListener('click', openLightbox);
+    const onSlideClicks: Array<{ img: Element; handler: () => void }> = [];
     slides.forEach((slide) => {
-      slide.querySelector('img')?.addEventListener('click', openLightbox);
-    });
-
-    lightboxClose?.addEventListener('click', () => lightbox?.close());
-    lightbox?.addEventListener('click', (e) => {
-      if (e.target === lightbox) lightbox.close();
-    });
-
-    // Keyboard navigation when gallery or lightbox is active
-    window.addEventListener('keydown', (e) => {
-      if (lightbox && lightbox.open) {
-        if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
-        if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+      const img = slide.querySelector('img');
+      if (img) {
+        img.addEventListener('click', openLightbox);
+        onSlideClicks.push({ img, handler: openLightbox });
       }
     });
+
+    const onCloseLightbox = () => lightbox?.close();
+    lightboxClose?.addEventListener('click', onCloseLightbox);
+
+    const onLightboxBackdrop = (e: MouseEvent) => {
+      if (e.target === lightbox) lightbox?.close();
+    };
+    lightbox?.addEventListener('click', onLightboxBackdrop);
+
+    // Keyboard arrow navigation
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (lightbox && lightbox.open) {
+        if (e.key === 'ArrowRight') scrollToSlide(activeIndex + 1);
+        if (e.key === 'ArrowLeft') scrollToSlide(activeIndex - 1);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+
+    cleanupGallery = () => {
+      observer.disconnect();
+      prevBtn?.removeEventListener('click', onPrev);
+      nextBtn?.removeEventListener('click', onNext);
+      expandBtn?.removeEventListener('click', openLightbox);
+      lightboxClose?.removeEventListener('click', onCloseLightbox);
+      lightbox?.removeEventListener('click', onLightboxBackdrop);
+      window.removeEventListener('keydown', onKeyDown);
+      onThumbClicks.forEach(({ btn, handler }) =>
+        btn.removeEventListener('click', handler),
+      );
+      onSlideClicks.forEach(({ img, handler }) =>
+        img.removeEventListener('click', handler),
+      );
+    };
   }
 
   document.addEventListener('DOMContentLoaded', setupGallery);
   document.addEventListener('astro:page-load', setupGallery);
+  document.addEventListener('astro:before-swap', () => {
+    cleanupGallery?.();
+  });
 </script>
