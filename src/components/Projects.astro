@@ -25,13 +25,10 @@ const { projects } = siteData;
     </p>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
     {projects.map((project) => (
-      <article class="relative z-10 bg-[#121212] border border-neutral-800 rounded-2xl overflow-hidden flex flex-col hover:border-neutral-700 transition-all duration-300 group hover:-translate-y-1">
-        <a
-          href={`/projects/${project.slug}`}
-          class="block overflow-hidden relative aspect-video bg-neutral-900"
-        >
+      <article class="relative z-10 bg-[#121212] border border-neutral-800 rounded-2xl overflow-hidden flex flex-col hover:border-[#fc7a00]/50 hover:shadow-xl hover:shadow-[#fc7a00]/5 transition-all duration-300 group hover:-translate-y-1">
+        <div class="block overflow-hidden relative aspect-video bg-neutral-900">
           <Image
             src={project.coverImage}
             alt={`${project.title} cover image`}
@@ -41,41 +38,38 @@ const { projects } = siteData;
             loading="lazy"
           />
           <div class="absolute inset-0 bg-linear-to-t from-[#121212] via-transparent to-transparent opacity-80" />
-        </a>
-        <div class="p-6 flex-1 flex flex-col justify-between">
+        </div>
+        <div class="p-4 sm:p-6 flex-1 flex flex-col justify-between">
           <div>
-            <h3 class="text-xl font-bold text-white group-hover:text-[#fc7a00] transition-colors mb-2">
+            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-[#fc7a00] transition-colors mb-2">
               <a
                 href={`/projects/${project.slug}`}
-                class="focus:outline-none focus-visible:ring-1 focus-visible:ring-[#fc7a00] rounded"
+                class="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded after:absolute after:inset-0 after:z-10"
               >
                 {project.title}
               </a>
             </h3>
-            <p class="text-sm text-neutral-300 leading-relaxed mb-6">
+            <p class="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-5">
               {project.summary}
             </p>
           </div>
           <div>
-            <div class="flex flex-wrap gap-1.5 mb-6">
+            <div class="flex flex-wrap gap-1.5 mb-5 relative z-20">
               {project.techstack.map((tech) => (
-                <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-neutral-900 text-neutral-300 border border-neutral-800">
+                <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs font-mono font-medium rounded bg-neutral-900 text-neutral-300 border border-neutral-800">
                   {tech}
                 </span>
               ))}
             </div>
 
-            <div class="flex items-center justify-between pt-4 border-t border-neutral-800/80">
-              <a
-                href={`/projects/${project.slug}`}
-                class="inline-flex items-center gap-1 text-sm font-semibold text-white hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#fc7a00] rounded"
-              >
-                <span>Explore Case Study</span>
+            <div class="flex items-center justify-between pt-4 border-t border-neutral-800/80 relative z-20">
+              <span class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-neutral-300 group-hover:text-[#fc7a00] transition-colors">
+                <span>View Project</span>
                 <Icon
                   name="mdi:arrow-right"
                   class="w-4 h-4 transition-transform group-hover:translate-x-1"
                 />
-              </a>
+              </span>
 
               {project.githubUrl && (
                 <a
@@ -83,7 +77,7 @@ const { projects } = siteData;
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View ${project.title} on GitHub`}
-                  class="text-neutral-400 hover:text-white transition-colors p-1"
+                  class="text-neutral-400 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
                 >
                   <Icon name="mdi:github" class="w-5 h-5" />
                 </a>

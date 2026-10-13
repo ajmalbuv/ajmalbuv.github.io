@@ -7,9 +7,9 @@ const { personal } = siteData;
 
 <section
   id="contact"
-  class="py-8 sm:py-10 px-4 sm:px-6 lg:px-8 max-w-5xl 2xl:max-w-6xl mx-auto"
+  class="py-8 sm:py-10 px-3.5 sm:px-6 lg:px-8 max-w-5xl 2xl:max-w-6xl mx-auto"
 >
-  <div class="bg-linear-to-br from-[#141414] to-[#0d0d0d] border border-neutral-800 rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden">
+  <div class="bg-linear-to-br from-[#141414] to-[#0d0d0d] border border-neutral-800 rounded-3xl p-5 sm:p-10 lg:p-12 relative overflow-hidden">
     <div
       class="absolute top-0 right-0 w-96 h-48 bg-[#fc7a00]/10 blur-3xl pointer-events-none rounded-full"
       aria-hidden="true"
@@ -29,15 +29,15 @@ const { personal } = siteData;
           collaborations.
         </p>
 
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-xs sm:text-sm text-neutral-400">
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-neutral-400">
           <a
             href={`tel:${personal.contact.phone.replace(/\s+/g, '')}`}
-            class="inline-flex items-center gap-2 bg-neutral-900/80 px-3.5 py-2 rounded-xl border border-neutral-800/80 hover:border-neutral-700 hover:text-white transition-colors"
+            class="inline-flex items-center gap-2 bg-neutral-900/80 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-neutral-800/80 hover:border-neutral-700 hover:text-white transition-colors"
           >
             <Icon name="mdi:phone" class="w-4 h-4 text-neutral-500 shrink-0" />
             <span>{personal.contact.phone}</span>
           </a>
-          <span class="inline-flex items-center gap-2 bg-neutral-900/80 px-3.5 py-2 rounded-xl border border-neutral-800/80 text-neutral-300">
+          <span class="inline-flex items-center gap-2 bg-neutral-900/80 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-neutral-800/80 text-neutral-300">
             <Icon
               name="mdi:map-marker"
               class="w-4 h-4 text-neutral-500 shrink-0"
@@ -48,7 +48,7 @@ const { personal } = siteData;
       </div>
 
       <div class="lg:col-span-5 w-full flex flex-col gap-4">
-        <div class="bg-[#121212] border border-neutral-800 p-6 sm:p-7 rounded-2xl flex flex-col gap-4 text-center lg:text-left shadow-xl">
+        <div class="bg-[#121212] border border-neutral-800 p-5 sm:p-7 rounded-2xl flex flex-col gap-4 text-center lg:text-left shadow-xl">
           <div>
             <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 font-bold block mb-1">
               Direct Contact
@@ -60,9 +60,12 @@ const { personal } = siteData;
 
           <a
             href={`mailto:${personal.contact.email}`}
-            class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-[#fc7a00] text-black font-mono font-bold text-sm sm:text-base rounded-xl hover:bg-[#ff9429] transition-all transform hover:scale-[1.02] shadow-lg shadow-[#fc7a00]/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white max-w-full"
+            class="inline-flex items-center justify-center gap-2 px-4 py-3 sm:px-6 sm:py-3.5 bg-[#fc7a00] text-black font-mono font-bold text-xs sm:text-sm md:text-base rounded-xl hover:bg-[#ff9429] transition-all transform hover:scale-[1.02] shadow-lg shadow-[#fc7a00]/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white max-w-full"
           >
-            <Icon name="mdi:email-outline" class="w-5 h-5 shrink-0" />
+            <Icon
+              name="mdi:email-outline"
+              class="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
+            />
             <span class="truncate">{personal.contact.email}</span>
           </a>
         </div>

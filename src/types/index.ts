@@ -58,7 +58,6 @@ export interface Project {
   readonly liveUrl?: string | undefined;
   readonly liveUrlLabel?: string | undefined;
   readonly githubUrl?: string | undefined;
-  readonly featured: boolean;
 }
 
 export interface SkillGroup {

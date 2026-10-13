@@ -10,7 +10,7 @@
 [![Runtime](https://img.shields.io/badge/Runtime-Bun-fbf0df?style=flat-square&logo=bun&logoColor=black)](https://bun.sh/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
-[🌐 View Production Site](https://ajmalbuv.pages.dev) • [📄 Case Studies](https://ajmalbuv.pages.dev/#work) • [📬 Contact](https://ajmalbuv.pages.dev/#contact)
+[🌐 View Production Site](https://ajmalbuv.pages.dev) • [📄 Projects](https://ajmalbuv.pages.dev/#work) • [📬 Contact](https://ajmalbuv.pages.dev/#contact)
 
 </div>
 
@@ -25,7 +25,7 @@ A high-performance, accessible, and hardened personal portfolio engineered with 
 - **Zero Client JS Default**: Content is server-rendered as static HTML via Astro's Island architecture. Client JavaScript is strictly isolated to deferred interactive elements (`tsParticles` canvas).
 - **Automated SHA-256 CSP Pipeline**: A custom Astro build hook (`inline-csp` in `astro.config.mjs`) scans generated HTML, hashes all inline `<style>` and `<script>` tags, and injects SHA-256 hashes into the Cloudflare `_headers` file—eliminating `unsafe-inline` entirely.
 - **Strict Hardened Security**: Preconfigured with `HSTS` (31536000 with preload), `X-Frame-Options: DENY`, `Permissions-Policy`, `COOP: same-origin`, `COEP: require-corp`, and `CORP: same-origin`.
-- **Type-Safe Content Store**: All portfolio data, project case studies, and personal timeline records reside in [`src/data/site.ts`](src/data/site.ts) typed with strict immutable TypeScript interfaces.
+- **Type-Safe Content Store**: All portfolio data, projects, and personal timeline records reside in [`src/data/site.ts`](src/data/site.ts) typed with strict immutable TypeScript interfaces.
 - **Accessibility & Motion Compliance**: Features keyboard skip-to-content links, `focus-visible` outlines, ARIA attributes, native HTML5 Popover API for zero-JS mobile navigation, and `@media (prefers-reduced-motion)` guards.
 - **Modern Typography**: Self-hosted variable font pairing using `@fontsource-variable/geist` and `@fontsource-variable/geist-mono` with preloading for core Latin glyph subsets.
 
@@ -51,7 +51,7 @@ ajmalbuv.github.io/
 │   │   ├── Head.astro       # SEO metadata, Open Graph, & JSON-LD schema
 │   │   ├── Header.astro     # Responsive header with Popover mobile nav
 │   │   ├── Hero.astro       # Hero section with lazy tsParticles integration
-│   │   ├── Projects.astro   # Featured projects showcase
+│   │   ├── Projects.astro   # projects showcase
 │   │   └── Skills.astro     # Technical competencies matrix
 │   ├── data/
 │   │   └── site.ts          # Central source of truth for site content
@@ -61,7 +61,7 @@ ajmalbuv.github.io/
 │   │   ├── 404.astro        # Custom 404 error page
 │   │   ├── index.astro      # Single-page portfolio root
 │   │   └── projects/
-│   │       └── [slug].astro # Dynamic case study route
+│   │       └── [slug].astro # Dynamic projects route
 │   ├── styles/
 │   │   └── global.css       # Tailwind CSS v4 entry & scroll animations
 │   └── types/

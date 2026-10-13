@@ -1,0 +1,298 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  screenshots: readonly ImageMetadata[];
+}
+
+const { title, screenshots } = Astro.props;
+if (!screenshots || screenshots.length === 0) {
+  return;
+}
+---
+
+<section class="mb-12 sm:mb-16" id="project-gallery-section">
+  <div class="flex items-baseline justify-between mb-4 sm:mb-6">
+    <div>
+      <span class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold">
+        Visual Showcase
+      </span>
+      <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">
+        Interface Previews
+      </h2>
+    </div>
+    <span
+      id="gallery-counter"
+      class="font-mono text-xs text-neutral-400 bg-neutral-900 px-2.5 py-1 rounded-full border border-neutral-800"
+    >
+      1 / {screenshots.length}
+    </span>
+  </div>
+
+  <div class="gallery-root relative bg-[#121212] border border-neutral-800/90 rounded-2xl overflow-hidden shadow-2xl">
+    <!-- Main Display Viewport -->
+    <div class="relative aspect-video sm:aspect-16/10 bg-neutral-950 flex items-center justify-center overflow-hidden group">
+      {screenshots.map((shot, idx) => (
+        <div
+          class:list={[
+            'gallery-slide absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-300',
+            idx === 0
+              ? 'opacity-100 z-10'
+              : 'opacity-0 z-0 pointer-events-none',
+          ]}
+          data-slide-index={idx}
+        >
+          <Image
+            src={shot}
+            alt={`${title} - Preview ${idx + 1}`}
+            class="w-full h-full object-contain cursor-zoom-in"
+            loading={idx === 0 ? 'eager' : 'lazy'}
+            widths={[640, 960, 1280, 1920]}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1152px"
+            data-zoom-src={shot.src}
+          />
+        </div>
+      ))}
+
+      <!-- Overlay Prev/Next Arrows -->
+      <button
+        type="button"
+        class="gallery-prev-btn absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-2.5 rounded-full bg-black/70 hover:bg-[#fc7a00] text-white hover:text-black backdrop-blur-md border border-white/10 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] opacity-80 sm:opacity-0 group-hover:opacity-100 cursor-pointer"
+        aria-label="Previous preview"
+      >
+        <Icon name="mdi:chevron-left" class="w-5 h-5 sm:w-6 sm:h-6" />
+      </button>
+
+      <button
+        type="button"
+        class="gallery-next-btn absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-2.5 rounded-full bg-black/70 hover:bg-[#fc7a00] text-white hover:text-black backdrop-blur-md border border-white/10 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] opacity-80 sm:opacity-0 group-hover:opacity-100 cursor-pointer"
+        aria-label="Next preview"
+      >
+        <Icon name="mdi:chevron-right" class="w-5 h-5 sm:w-6 sm:h-6" />
+      </button>
+
+      <!-- Fullscreen zoom prompt button -->
+      <button
+        type="button"
+        class="gallery-expand-btn absolute bottom-3 right-3 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/80 hover:bg-[#fc7a00] text-neutral-300 hover:text-black font-mono text-xs backdrop-blur-md border border-white/10 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] cursor-pointer"
+        aria-label="Open fullscreen preview"
+      >
+        <Icon name="mdi:arrow-expand" class="w-4 h-4" />
+        <span class="hidden sm:inline">Fullscreen</span>
+      </button>
+    </div>
+
+    <!-- Thumbnail Strip -->
+    <div class="p-3 sm:p-4 bg-neutral-900/95 border-t border-neutral-800">
+      <div class="gallery-thumbs flex gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent">
+        {screenshots.map((shot, idx) => (
+          <button
+            type="button"
+            class:list={[
+              'gallery-thumb shrink-0 relative w-16 sm:w-20 md:w-24 aspect-video rounded-lg overflow-hidden border-2 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]',
+              idx === 0
+                ? 'border-[#fc7a00] ring-1 ring-[#fc7a00]/50 scale-105'
+                : 'border-neutral-800 opacity-60 hover:opacity-100 hover:border-neutral-600',
+            ]}
+            data-thumb-index={idx}
+            aria-label={`View screenshot ${idx + 1}`}
+          >
+            <Image
+              src={shot}
+              alt={`Thumbnail ${idx + 1}`}
+              class="w-full h-full object-cover"
+              widths={[96, 192]}
+              loading="lazy"
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Native Lightbox Dialog -->
+  <dialog
+    id="gallery-lightbox"
+    class="backdrop:bg-black/90 bg-transparent p-0 m-auto max-w-[95vw] max-h-[95vh] outline-none border-none text-white rounded-2xl overflow-hidden"
+  >
+    <div class="relative flex flex-col items-center justify-center p-2 sm:p-6">
+      <button
+        id="lightbox-close-btn"
+        type="button"
+        class="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/80 hover:bg-[#fc7a00] text-white hover:text-black border border-white/10 transition-colors cursor-pointer"
+        aria-label="Close fullscreen view"
+      >
+        <Icon name="mdi:close" class="w-6 h-6" />
+      </button>
+
+      <img
+        id="lightbox-img"
+        src=""
+        alt="Fullscreen interface preview"
+        class="max-w-[92vw] max-h-[85vh] object-contain rounded-xl shadow-2xl"
+      />
+
+      <div class="mt-3 flex items-center justify-between w-full max-w-md px-4 font-mono text-xs text-neutral-400">
+        <span id="lightbox-counter">1 / {screenshots.length}</span>
+        <span>Press ESC to close</span>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  function setupGallery() {
+    const root = document.querySelector<HTMLElement>('.gallery-root');
+    if (!root || root.dataset['initialized']) return;
+    root.dataset['initialized'] = 'true';
+
+    const slides = Array.from(
+      root.querySelectorAll<HTMLElement>('.gallery-slide'),
+    );
+    const thumbs = Array.from(
+      root.querySelectorAll<HTMLButtonElement>('.gallery-thumb'),
+    );
+    const counter = document.getElementById('gallery-counter');
+    const prevBtn = root.querySelector<HTMLButtonElement>('.gallery-prev-btn');
+    const nextBtn = root.querySelector<HTMLButtonElement>('.gallery-next-btn');
+    const expandBtn = root.querySelector<HTMLButtonElement>(
+      '.gallery-expand-btn',
+    );
+    const lightbox = document.getElementById(
+      'gallery-lightbox',
+    ) as HTMLDialogElement | null;
+    const lightboxImg = document.getElementById(
+      'lightbox-img',
+    ) as HTMLImageElement | null;
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const lightboxClose = document.getElementById('lightbox-close-btn');
+
+    let currentIndex = 0;
+    const total = slides.length;
+
+    function goToSlide(index: number) {
+      if (total === 0) return;
+      currentIndex = (index + total) % total;
+
+      slides.forEach((slide, idx) => {
+        if (idx === currentIndex) {
+          slide.classList.remove('opacity-0', 'pointer-events-none', 'z-0');
+          slide.classList.add('opacity-100', 'z-10');
+        } else {
+          slide.classList.remove('opacity-100', 'z-10');
+          slide.classList.add('opacity-0', 'pointer-events-none', 'z-0');
+        }
+      });
+
+      thumbs.forEach((thumb, idx) => {
+        if (idx === currentIndex) {
+          thumb.classList.remove('border-neutral-800', 'opacity-60');
+          thumb.classList.add(
+            'border-[#fc7a00]',
+            'ring-1',
+            'ring-[#fc7a00]/50',
+            'scale-105',
+            'opacity-100',
+          );
+          thumb.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center',
+          });
+        } else {
+          thumb.classList.remove(
+            'border-[#fc7a00]',
+            'ring-1',
+            'ring-[#fc7a00]/50',
+            'scale-105',
+            'opacity-100',
+          );
+          thumb.classList.add('border-neutral-800', 'opacity-60');
+        }
+      });
+
+      if (counter) {
+        counter.textContent = `${currentIndex + 1} / ${total}`;
+      }
+
+      if (lightbox && lightbox.open && lightboxImg) {
+        const activeImg = slides[currentIndex]?.querySelector('img');
+        const zoomSrc = activeImg?.dataset['zoomSrc'] || activeImg?.src;
+        if (zoomSrc) lightboxImg.src = zoomSrc;
+        if (lightboxCounter)
+          lightboxCounter.textContent = `${currentIndex + 1} / ${total}`;
+      }
+    }
+
+    prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        const idx = Number.parseInt(thumb.dataset['thumbIndex'] || '0', 10);
+        goToSlide(idx);
+      });
+    });
+
+    // Touch swipe handling on main display
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    root.addEventListener(
+      'touchstart',
+      (e) => {
+        touchStartX = (e as TouchEvent).changedTouches?.[0]?.screenX ?? 0;
+      },
+      { passive: true },
+    );
+
+    root.addEventListener(
+      'touchend',
+      (e) => {
+        touchEndX = (e as TouchEvent).changedTouches?.[0]?.screenX ?? 0;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) goToSlide(currentIndex + 1);
+          else goToSlide(currentIndex - 1);
+        }
+      },
+      { passive: true },
+    );
+
+    // Lightbox modal logic
+    function openLightbox() {
+      if (!lightbox || !lightboxImg) return;
+      const activeImg = slides[currentIndex]?.querySelector('img');
+      const zoomSrc = activeImg?.dataset['zoomSrc'] || activeImg?.src;
+      if (!zoomSrc) return;
+      lightboxImg.src = zoomSrc;
+      if (lightboxCounter)
+        lightboxCounter.textContent = `${currentIndex + 1} / ${total}`;
+      lightbox.showModal();
+    }
+
+    expandBtn?.addEventListener('click', openLightbox);
+    slides.forEach((slide) => {
+      slide.querySelector('img')?.addEventListener('click', openLightbox);
+    });
+
+    lightboxClose?.addEventListener('click', () => lightbox?.close());
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) lightbox.close();
+    });
+
+    // Keyboard navigation when gallery or lightbox is active
+    window.addEventListener('keydown', (e) => {
+      if (lightbox && lightbox.open) {
+        if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
+        if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupGallery);
+  document.addEventListener('astro:page-load', setupGallery);
+</script>

@@ -173,7 +173,6 @@ export const siteData = {
       liveUrl: 'https://pub.dev/packages/typst_flutter',
       liveUrlLabel: 'View on Pub.dev',
       githubUrl: 'https://github.com/ajmalbuv/typst_flutter',
-      featured: true,
     },
     {
       slug: 'blamr',
@@ -228,7 +227,6 @@ export const siteData = {
       liveUrl: 'https://github.com/ajmalbuv/blamr/releases',
       liveUrlLabel: 'Download Binaries',
       githubUrl: 'https://github.com/ajmalbuv/blamr',
-      featured: true,
     },
     {
       slug: 'edumanage',
@@ -278,8 +276,7 @@ export const siteData = {
       ],
       screenshots: emsScreenshots,
       liveUrl: undefined,
-      githubUrl: 'https://github.com/ajmalbuv',
-      featured: true,
+      githubUrl: 'https://github.com/ajmalbuv/edumanage',
     },
     {
       slug: 'portfolio',
@@ -317,7 +314,6 @@ export const siteData = {
       screenshots: portfolioScreenshots,
       liveUrl: 'https://ajmalbuv.pages.dev',
       githubUrl: 'https://github.com/ajmalbuv/ajmalbuv.github.io',
-      featured: true,
     },
   ],
   skills: [

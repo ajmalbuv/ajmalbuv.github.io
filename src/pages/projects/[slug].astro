@@ -1,28 +1,35 @@
 ---
-import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
+import ProjectGallery from '../../components/ProjectGallery.astro';
 import { siteData } from '../../data/site';
 import Base from '../../layouts/Base.astro';
 import type { Project } from '../../types/index';
 
 export function getStaticPaths() {
-  return siteData.projects.map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
-  }));
+  return siteData.projects.map((project, idx) => {
+    const prevProject = idx > 0 ? siteData.projects[idx - 1] : null;
+    const nextProject =
+      idx < siteData.projects.length - 1 ? siteData.projects[idx + 1] : null;
+    return {
+      params: { slug: project.slug },
+      props: { project, prevProject, nextProject },
+    };
+  });
 }
 
 interface Props {
   project: Project;
+  prevProject?: Project | null;
+  nextProject?: Project | null;
 }
 
-const { project } = Astro.props;
+const { project, prevProject, nextProject } = Astro.props;
 ---
 
 <Base
-  title={`${project.title} | Case Study`}
+  title={`${project.title} — Overview`}
   description={project.summary}
   image={project.coverImage.src}
 >
@@ -30,38 +37,39 @@ const { project } = Astro.props;
 
   <main
     id="main-content"
-    class="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl 2xl:max-w-6xl mx-auto"
+    class="py-8 sm:py-12 px-3.5 sm:px-6 lg:px-8 max-w-5xl 2xl:max-w-6xl mx-auto"
   >
-    <div class="mb-8">
+    <div class="mb-6 sm:mb-8">
       <a
         href="/#work"
-        class="inline-flex items-center gap-2 font-mono text-sm text-neutral-400 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#fc7a00] rounded"
+        class="inline-flex items-center gap-2 font-mono text-xs sm:text-sm text-neutral-400 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#fc7a00] rounded"
       >
         <Icon name="mdi:arrow-left" class="w-4 h-4" />
         <span>Back to all projects</span>
       </a>
     </div>
-    <header class="mb-12">
-      <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+
+    <header class="mb-10 sm:mb-12">
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-3 sm:mb-4 wrap-break-word">
         {project.title}
       </h1>
-      <p class="text-lg text-neutral-300 leading-relaxed max-w-3xl mb-6">
+      <p class="text-sm sm:text-lg text-neutral-300 leading-relaxed max-w-3xl mb-6">
         {project.summary}
       </p>
-      <div class="flex flex-wrap gap-2 mb-8">
+      <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
         {project.techstack.map((tech) => (
-          <span class="px-3 py-1 text-xs font-mono font-medium rounded-md bg-neutral-900 text-neutral-200 border border-neutral-800">
+          <span class="px-2.5 py-1 text-xs font-mono font-medium rounded-md bg-neutral-900 text-neutral-200 border border-neutral-800">
             {tech}
           </span>
         ))}
       </div>
-      <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-neutral-800">
+      <div class="flex flex-wrap items-center gap-3 sm:gap-4 pt-4 border-t border-neutral-800">
         {project.liveUrl && (
           <a
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#fc7a00] text-black font-mono font-bold text-sm rounded-full hover:bg-[#ff9429] transition-colors shadow-md"
+            class="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-[#fc7a00] text-black font-mono font-bold text-xs sm:text-sm rounded-full hover:bg-[#ff9429] transition-colors shadow-md"
           >
             <span>{project.liveUrlLabel ?? 'View Live Project'}</span>
             <Icon name="mdi:open-in-new" class="w-4 h-4" />
@@ -73,7 +81,7 @@ const { project } = Astro.props;
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 text-neutral-200 border border-neutral-700 font-mono text-sm rounded-full hover:bg-neutral-800 hover:text-white transition-colors"
+            class="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-neutral-900 text-neutral-200 border border-neutral-700 font-mono text-xs sm:text-sm rounded-full hover:bg-neutral-800 hover:text-white transition-colors"
           >
             <Icon name="mdi:github" class="w-4 h-4" />
             <span>Source Repository</span>
@@ -81,25 +89,29 @@ const { project } = Astro.props;
         )}
       </div>
     </header>
-    <section class="mb-16 bg-[#121212] border border-neutral-800/90 rounded-2xl p-6 sm:p-8">
+
+    <section class="mb-12 sm:mb-16 bg-[#121212] border border-neutral-800/90 rounded-2xl p-5 sm:p-8">
       <h2 class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold mb-3">
         Overview &amp; Architecture
       </h2>
-      <p class="text-neutral-300 text-base leading-relaxed whitespace-pre-line">
+      <p class="text-neutral-300 text-sm sm:text-base leading-relaxed whitespace-pre-line">
         {project.fullDescription}
       </p>
     </section>
+
     {project.features && project.features.length > 0 && (
-      <section class="mb-10 sm:mb-12">
-        <h2 class="text-2xl font-bold text-white mb-6">Key Capabilities</h2>
+      <section class="mb-12 sm:mb-16">
+        <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
+          Key Capabilities
+        </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           {project.features.map((feat) => (
-            <div class="bg-[#121212] border border-neutral-800 rounded-xl p-5">
-              <h3 class="font-bold text-white text-base mb-1.5 flex items-center gap-2">
+            <div class="bg-[#121212] border border-neutral-800 rounded-xl p-4 sm:p-5">
+              <h3 class="font-bold text-white text-sm sm:text-base mb-1.5 flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#fc7a00]" />
                 <span>{feat.heading}</span>
               </h3>
-              <p class="text-sm text-neutral-400 leading-relaxed">
+              <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed">
                 {feat.description}
               </p>
             </div>
@@ -107,37 +119,55 @@ const { project } = Astro.props;
         </div>
       </section>
     )}
-    {project.screenshots && project.screenshots.length > 0 && (
-      <section class="mb-10 sm:mb-12">
-        <div class="flex items-baseline justify-between mb-6">
-          <h2 class="text-2xl font-bold text-white">Interface Previews</h2>
-          <span class="font-mono text-xs text-neutral-500">
-            {project.screenshots.length} screenshots
-          </span>
-        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {project.screenshots.map((shot, idx) => (
-            <div class="bg-[#121212] border border-neutral-800 rounded-xl overflow-hidden shadow-lg group">
-              <Image
-                src={shot}
-                alt={`${project.title} - Interface preview ${idx + 1}`}
-                class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                loading="lazy"
-                widths={[400, 800, 1200]}
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div class="p-3 bg-neutral-900/90 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400 font-mono">
-                <span>Figure {idx + 1}</span>
-                <span class="text-neutral-500">
-                  Preview {idx + 1} of {project.screenshots.length}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+    {project.screenshots && project.screenshots.length > 0 && (
+      <ProjectGallery title={project.title} screenshots={project.screenshots} />
     )}
+
+    <nav
+      aria-label="Project navigation"
+      class="mt-12 sm:mt-16 pt-8 border-t border-neutral-800 grid grid-cols-1 sm:grid-cols-2 gap-4"
+    >
+      {prevProject ? (
+        <a
+          href={`/projects/${prevProject.slug}`}
+          class="group p-4 sm:p-5 bg-[#121212] border border-neutral-800 rounded-xl hover:border-neutral-700 transition-all flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+        >
+          <span class="font-mono text-xs text-neutral-400 flex items-center gap-1.5 mb-1 group-hover:text-[#fc7a00] transition-colors">
+            <Icon
+              name="mdi:arrow-left"
+              class="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1"
+            />
+            <span>Previous Project</span>
+          </span>
+          <span class="text-sm sm:text-base font-bold text-white group-hover:text-[#fc7a00] transition-colors truncate">
+            {prevProject.title}
+          </span>
+        </a>
+      ) : (
+        <div class="hidden sm:block" />
+      )}
+
+      {nextProject ? (
+        <a
+          href={`/projects/${nextProject.slug}`}
+          class="group p-4 sm:p-5 bg-[#121212] border border-neutral-800 rounded-xl hover:border-neutral-700 transition-all flex flex-col sm:items-end text-left sm:text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+        >
+          <span class="font-mono text-xs text-neutral-400 flex items-center sm:flex-row-reverse gap-1.5 mb-1 group-hover:text-[#fc7a00] transition-colors">
+            <Icon
+              name="mdi:arrow-right"
+              class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
+            />
+            <span>Next Project</span>
+          </span>
+          <span class="text-sm sm:text-base font-bold text-white group-hover:text-[#fc7a00] transition-colors truncate">
+            {nextProject.title}
+          </span>
+        </a>
+      ) : (
+        <div class="hidden sm:block" />
+      )}
+    </nav>
   </main>
 
   <Footer />
