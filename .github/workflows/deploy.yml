@@ -37,7 +37,7 @@ jobs:
       - name: Type & Lint Check 🧹
         run: bun run check
 
-      - name: Prettier Format Check 🎨
+      - name: Bun Format Check 🎨
         run: bun run format:check
 
   github-pages:

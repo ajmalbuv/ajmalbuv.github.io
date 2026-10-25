@@ -8,8 +8,8 @@
     "check": "astro check && eslint .",
     "clean": "node scripts/clean.mjs",
     "dev": "astro dev",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "bun fmt .",
+    "format:check": "bun fmt --check .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "astro preview"
@@ -21,23 +21,20 @@
     "@iconify-json/mdi": "^1.2.3",
     "@tsparticles/engine": "^4.4.0",
     "@tsparticles/slim": "^4.4.0",
-    "astro": "7.3.8",
+    "astro": "7.4.2",
     "astro-icon": "^1.2.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "^0.9.12",
     "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.3.3",
     "astro-llms-md": "^3.0.2",
     "astro-robots-txt": "^1.0.0",
-    "eslint": "^10.12.0",
+    "eslint": "^10.13.0",
     "eslint-plugin-astro": "^3.2.1",
-    "prettier": "^3.9.10",
-    "prettier-plugin-astro": "^1.1.1",
-    "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.71.2"
+    "typescript-eslint": "^8.72.0"
   },
   "trustedDependencies": [
     "@tsparticles/engine"

@@ -1,4 +1,5 @@
 import type { ImageMetadata } from 'astro';
+
 import avatarImg from '../assets/images/personal/photo.jpeg';
 import blamrCover from '../assets/images/projects/images/blamr.webp';
 import emsCover from '../assets/images/projects/images/ems.webp';
@@ -9,7 +10,7 @@ import type { SiteData } from '../types/index';
 // Eagerly resolve screenshots in alphabetical order
 const emsScreenshotMap = import.meta.glob<ImageMetadata>(
   '../assets/images/projects/screenshots/EduManage/*.webp',
-  { eager: true, import: 'default' },
+  { eager: true, import: 'default' }
 );
 
 // Sort screenshot paths numerically (edumanage-1, edumanage-2, ... edumanage-21)
@@ -23,7 +24,7 @@ const emsScreenshots = Object.entries(emsScreenshotMap)
 
 const portfolioScreenshotMap = import.meta.glob<ImageMetadata>(
   '../assets/images/projects/screenshots/portfolio/*.webp',
-  { eager: true, import: 'default' },
+  { eager: true, import: 'default' }
 );
 
 const portfolioScreenshots = Object.entries(portfolioScreenshotMap)

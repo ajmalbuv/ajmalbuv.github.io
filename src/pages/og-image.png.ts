@@ -1,8 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import type { APIRoute } from 'astro';
 import sharp, { type OverlayOptions } from 'sharp';
+
 import { siteData } from '../data/site';
 
 export const prerender = true;
@@ -28,7 +30,7 @@ export const GET: APIRoute = async ({ site }) => {
     path.resolve(process.cwd(), 'src/assets/images/personal/photo.jpeg'),
     path.resolve('src/assets/images/personal/photo.jpeg'),
     fileURLToPath(
-      new URL('../assets/images/personal/photo.jpeg', import.meta.url),
+      new URL('../assets/images/personal/photo.jpeg', import.meta.url)
     ),
   ];
   const photoPath = candidatePaths.find((p) => fs.existsSync(p));
@@ -37,7 +39,7 @@ export const GET: APIRoute = async ({ site }) => {
   if (photoPath && fs.existsSync(photoPath)) {
     const avatarSize = 280;
     const roundedCorners = Buffer.from(
-      `<svg><circle cx="${avatarSize / 2}" cy="${avatarSize / 2}" r="${avatarSize / 2}" fill="#fff"/></svg>`,
+      `<svg><circle cx="${avatarSize / 2}" cy="${avatarSize / 2}" r="${avatarSize / 2}" fill="#fff"/></svg>`
     );
 
     avatarCircleBuffer = await sharp(photoPath)

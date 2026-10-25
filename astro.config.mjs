@@ -3,12 +3,13 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig, envField } from 'astro/config';
 import icon from 'astro-icon';
 import llms from 'astro-llms-md';
 import robotsTxt from 'astro-robots-txt';
+import { defineConfig, envField } from 'astro/config';
 
 // Future-proof Git Hash detection for Cloudflare, GitHub, and Local
 const getGitHash = () => {
@@ -66,7 +67,7 @@ function inlineCsp() {
           const content = fs.readFileSync(file, 'utf8');
 
           const styleMatches = content.matchAll(
-            /<style(?:\s+[^>]*)?>([\s\S]*?)<\/style>/gi,
+            /<style(?:\s+[^>]*)?>([\s\S]*?)<\/style>/gi
           );
           for (const match of styleMatches) {
             const css = match[1]?.trim();
@@ -80,7 +81,7 @@ function inlineCsp() {
           }
 
           const scriptMatches = content.matchAll(
-            /<script\b(?![^>]*\bsrc=)(?:\s+[^>]*)?>([\s\S]*?)<\/script>/gi,
+            /<script\b(?![^>]*\bsrc=)(?:\s+[^>]*)?>([\s\S]*?)<\/script>/gi
           );
           for (const match of scriptMatches) {
             const code = match[1]?.trim();
@@ -98,7 +99,7 @@ function inlineCsp() {
           const list = Array.from(styleHashes).sort().join(' ');
           headers = headers.replace(
             /\bstyle-src\s+'self'(?:\s+'sha256-[^']*')*/,
-            `style-src 'self' ${list}`,
+            `style-src 'self' ${list}`
           );
         }
 
@@ -106,7 +107,7 @@ function inlineCsp() {
           const list = Array.from(scriptHashes).sort().join(' ');
           headers = headers.replace(
             /\bscript-src\s+'self'(?:\s+'sha256-[^']*')*/,
-            `script-src 'self' ${list}`,
+            `script-src 'self' ${list}`
           );
         }
 
