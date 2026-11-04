@@ -179,49 +179,50 @@ export const siteData = {
       slug: 'blamr',
       title: 'blamr — Fast Concurrent Git Blame CLI & Attribution Engine',
       summary:
-        'Ultra-fast, zero-dependency concurrent git-blame author attribution and line statistics CLI engine written in pure Go with SIMD binary sniffing.',
+        'Blazing-fast, zero-dependency concurrent git-blame author attribution and line statistics CLI engine written in modern Rust with in-process Gitoxide repository scanning.',
       fullDescription:
-        'blamr is a high-performance command-line developer tool and Git subcommand written in pure Go (zero CGO) designed to analyze repository authorship and line attribution at lightning speeds. By orchestrating a parallel worker goroutine pool sized to host CPU cores, blamr dramatically accelerates git-blame analysis over large codebases.\n\nIt features an 8KB stack-allocated SIMD null-byte inspector for instantaneous binary and noise detection, UTF-16 BOM handling, Git LFS pointer recognition, and automated filtering of machine-generated lockfiles and minified bundles. With built-in whitespace churn resilience (-w flag pass-through), terminal TTY ghosting prevention, and structured JSON output for CI/CD pipelines, blamr delivers production-grade repository intelligence.',
+        'blamr is a high-performance command-line developer tool and native Git subcommand written in pure Rust (Edition 2024) designed to analyze repository authorship and line attribution at extreme speeds. Built directly on top of Gitoxide (gix), blamr bypasses the git binary and process-forking overhead entirely, reading the object database and index in-process across CPU-core-scaled worker threads.\n\nUnlike traditional blame tools that only inspect historical commits, blamr features a real-time diff-overlay engine powered by gix-imara-diff (Histogram algorithm) that attributes dirty working tree changes and uncommitted edits on the fly. With Arc<str> author interning, zero-copy Cow<[u8]> line scanning, bounded crossbeam-channel event pipelines, automated lockfile/minified noise exclusion, mailmap canonicalization, and full GNU CLI option compliance (lexopt), blamr delivers production-grade repository intelligence for developers and CI/CD pipelines.',
       coverImage: blamrCover,
       techstack: [
-        'Go',
-        'Git',
-        'CLI',
+        'Rust',
+        'Gitoxide (gix)',
         'Concurrency',
-        'Goroutines',
-        'SIMD',
+        'Rayon',
+        'Crossbeam',
+        'CLI',
         'CI/CD',
+        'Systems Programming',
       ],
       features: [
         {
-          heading: 'Parallel Worker Goroutine Pool',
+          heading: 'In-Process Gitoxide (gix) Engine',
           description:
-            'Dispatches git-blame streams across CPU-core-scaled worker goroutines for concurrent processing of entire codebases in seconds.',
+            'Directly traverses repository indices, trees, and commit graphs without shelling out to external git processes, eliminating IPC latency.',
         },
         {
-          heading: 'SIMD Binary & Noise Sniffing',
+          heading: 'Worktree Dirty-Line Diff Overlay',
           description:
-            'Zero-allocation 8KB chunk inspector using SIMD null-byte detection (bytes.IndexByte) to skip binaries, UTF-16 BOMs, and Git LFS pointers.',
+            'Uses histogram diffing (gix-imara-diff) to map live working tree edits back to original authors while attributing fresh uncommitted lines in real time.',
         },
         {
-          heading: 'Automated Noise & Lockfile Exclusion',
+          heading: 'Multi-Threaded Worker Pipeline',
           description:
-            'Pre-filters vendor manifests, lockfiles (package-lock.json, bun.lock, go.sum), and minified assets to preserve authentic author stats.',
+            'Orchestrates index enumeration with Rayon and dispatches file blame across CPU-core-scaled worker threads over bounded crossbeam channels.',
         },
         {
-          heading: 'Whitespace Churn Resilience',
+          heading: 'Extreme Memory Efficiency & Interning',
           description:
-            'Passes -w flags to underlying blame runners, ensuring mass formatting, indentation changes, and linter churn do not distort credit.',
+            'Employs Arc<str> author deduplication and compact 4-byte tracking slots (Vec<Option<u32>>), slashing memory consumption by ~83% on monorepos.',
         },
         {
-          heading: 'Dual Standalone & Git Subcommand Mode',
+          heading: 'Automated Noise & Lockfile Pruning',
           description:
-            'Invokable as both standalone blamr executable and seamless git blamr subcommand with identical argument parsing.',
+            'Heuristically detects binary files via 8KB buffer sniffing, skips UTF-16 BOMs and Git LFS pointers, and filters machine-generated lockfiles and minified bundles.',
         },
         {
-          heading: 'Terminal TTY Polish & Automation JSON',
+          heading: 'GNU CLI Flags & Short Option Clustering',
           description:
-            'In-place ANSI line clearing with auto-detection for non-interactive CI environments, plus full -json export for bots and dashboards.',
+            'Supports standard POSIX/GNU flags (--jobs, --email, -j4, -e, -w), clustered short flags (-acn), mailmap aliasing (.mailmap), and structured JSON export.',
         },
       ],
       screenshots: [],
