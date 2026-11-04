@@ -1,7 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
 import avatarImg from '../assets/images/personal/photo.jpeg';
-import blamrCover from '../assets/images/projects/images/blamr.webp';
+import blamrCover from '../assets/images/projects/images/blamr.svg';
 import emsCover from '../assets/images/projects/images/ems.webp';
 import portfolioCover from '../assets/images/projects/images/portfolio.webp';
 import typstFlutterCover from '../assets/images/projects/images/typst-flutter.webp';
