@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <defs>
+        <linearGradient id="badgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#141414"/>
+            <stop offset="100%" stop-color="#0a0a0a"/>
+        </linearGradient>
+    </defs>
+    <rect width="64" height="64" rx="14" fill="url(#badgeGrad)"/>
+    <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" fill="none" stroke="#262626" stroke-width="1.5"/>
+    <path d="M38.5 20h-6v4.2C30.7 21.6 27.8 20 24 20c-6.9 0-11.5 5.5-11.5 12.5S17.1 45 24 45c3.8 0 6.7-1.6 8.5-4.2V44h6zm-13 19.2c-4.4 0-7.2-3.2-7.2-6.7s2.8-6.7 7.2-6.7 7.2 3.2 7.2 6.7-2.8 6.7-7.2 6.7" fill="#fafafa"/>
+    <circle cx="47.5" cy="40.5" r="4.5" fill="#fc7a00"/>
+</svg>

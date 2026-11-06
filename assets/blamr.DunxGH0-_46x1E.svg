@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <!-- Background gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c10" />
+      <stop offset="50%" stop-color="#08090c" />
+      <stop offset="100%" stop-color="#050608" />
+    </linearGradient>
+
+    <!-- Emerald Glow -->
+    <radialGradient id="emeraldGlow" cx="25%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.14" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Orange / Rust Glow -->
+    <radialGradient id="orangeGlow" cx="85%" cy="75%" r="55%">
+      <stop offset="0%" stop-color="#fc7a00" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#fc7a00" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Card Background -->
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#161b22" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#0d1117" stop-opacity="0.95" />
+    </linearGradient>
+
+    <!-- Progress bar gradient -->
+    <linearGradient id="barGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+
+    <!-- Dirty line progress bar gradient -->
+    <linearGradient id="dirtyBarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+
+    <!-- Subtle drop shadow -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.02" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&amp;family=Inter:wght@400;600;700&amp;display=swap');
+    .title { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 44px; fill: #ffffff; letter-spacing: -1.5px; }
+    .title-accent { fill: #10b981; }
+    .subtitle { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; fill: #8b949e; letter-spacing: 0.2px; }
+    .badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+    .terminal-text { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 13.5px; fill: #c9d1d9; }
+    .header-text { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 13.5px; font-weight: 700; fill: #f0f6fc; }
+    .dim { fill: #484f58; }
+    .cmd { fill: #58a6ff; font-weight: 600; }
+    .author-name { fill: #e6edf3; }
+    .author-dirty { fill: #fbbf24; font-weight: 600; }
+    .pct { fill: #7ee787; font-weight: 600; }
+    .pct-dirty { fill: #fcd34d; font-weight: 600; }
+    .total-label { fill: #ffffff; font-weight: 700; }
+    .footer-stat { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: #3fb950; font-weight: 600; }
+    .dag-node { fill: #161b22; stroke-width: 2.5; }
+    .dag-edge { stroke-width: 2; fill: none; stroke-linecap: round; }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)" />
+  <rect width="100%" height="100%" fill="url(#grid)" />
+  <circle cx="280" cy="180" r="380" fill="url(#emeraldGlow)" />
+  <circle cx="1020" cy="520" r="420" fill="url(#orangeGlow)" />
+
+  <!-- Background Commit Graph DAG (Right side aesthetic) -->
+  <g opacity="0.25">
+    <path class="dag-edge" stroke="#10b981" d="M 880 120 L 960 120 L 1020 180 L 1120 180" />
+    <path class="dag-edge" stroke="#58a6ff" d="M 960 120 L 1000 120 L 1060 120 L 1120 120" />
+    <path class="dag-edge" stroke="#fc7a00" d="M 920 120 L 960 180 L 1000 240 L 1120 240" />
+    <path class="dag-edge" stroke="#34d399" d="M 1020 180 L 1060 180 L 1100 120" />
+
+    <circle cx="880" cy="120" r="6" class="dag-node" stroke="#10b981" />
+    <circle cx="920" cy="120" r="6" class="dag-node" stroke="#fc7a00" />
+    <circle cx="960" cy="120" r="7" class="dag-node" stroke="#58a6ff" />
+    <circle cx="1020" cy="180" r="6" class="dag-node" stroke="#10b981" />
+    <circle cx="1060" cy="120" r="6" class="dag-node" stroke="#58a6ff" />
+    <circle cx="1000" cy="240" r="6" class="dag-node" stroke="#fc7a00" />
+    <circle cx="1120" cy="120" r="7" class="dag-node" stroke="#58a6ff" fill="#58a6ff" />
+  </g>
+
+  <!-- Top Hero Header -->
+  <g transform="translate(60, 65)">
+    <!-- Logo & Title -->
+    <text x="0" y="32" class="title">blam<tspan class="title-accent">r</tspan></text>
+    <text x="148" y="28" class="subtitle">Concurrent Git-Blame &amp; Worktree Attribution Engine</text>
+
+    <!-- Tech Badges -->
+    <g transform="translate(148, 38)">
+      <!-- Rust 2024 -->
+      <rect x="0" y="0" width="82" height="22" rx="4" fill="#fc7a00" fill-opacity="0.12" stroke="#fc7a00" stroke-opacity="0.4" stroke-width="1" />
+      <text x="41" y="15" text-anchor="middle" class="badge" fill="#fc7a00">Rust 2024</text>
+
+      <!-- Gitoxide -->
+      <rect x="90" y="0" width="102" height="22" rx="4" fill="#38bdf8" fill-opacity="0.12" stroke="#38bdf8" stroke-opacity="0.4" stroke-width="1" />
+      <text x="141" y="15" text-anchor="middle" class="badge" fill="#38bdf8">Gitoxide (gix)</text>
+
+      <!-- Rayon Concurrency -->
+      <rect x="200" y="0" width="68" height="22" rx="4" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-opacity="0.4" stroke-width="1" />
+      <text x="234" y="15" text-anchor="middle" class="badge" fill="#10b981">Rayon</text>
+
+      <!-- Worktree Diff -->
+      <rect x="276" y="0" width="138" height="22" rx="4" fill="#a855f7" fill-opacity="0.12" stroke="#a855f7" stroke-opacity="0.4" stroke-width="1" />
+      <text x="345" y="15" text-anchor="middle" class="badge" fill="#c084fc">Worktree Overlay</text>
+
+      <!-- GNU CLI -->
+      <rect x="422" y="0" width="76" height="22" rx="4" fill="#f43f5e" fill-opacity="0.12" stroke="#f43f5e" stroke-opacity="0.4" stroke-width="1" />
+      <text x="460" y="15" text-anchor="middle" class="badge" fill="#fb7185">GNU CLI</text>
+    </g>
+  </g>
+
+  <!-- Central Terminal Window -->
+  <g transform="translate(60, 155)" filter="url(#shadow)">
+    <!-- Window Border / Glass Container -->
+    <rect width="1080" height="465" rx="12" fill="url(#cardBg)" stroke="#30363d" stroke-width="1.2" />
+
+    <!-- Terminal Titlebar -->
+    <rect width="1080" height="42" rx="12" fill="#161b22" />
+    <rect y="30" width="1080" height="12" fill="#161b22" />
+    <line x1="0" y1="42" x2="1080" y2="42" stroke="#30363d" stroke-width="1" />
+
+    <!-- Window Dots -->
+    <circle cx="24" cy="21" r="6" fill="#ff5f56" />
+    <circle cx="44" cy="21" r="6" fill="#ffbd2e" />
+    <circle cx="64" cy="21" r="6" fill="#27c93f" />
+
+    <!-- Title in Titlebar -->
+    <text x="540" y="26" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" fill="#8b949e">
+      blamr — terminal output (8 workers • in-process Gitoxide ODB)
+    </text>
+
+    <!-- Terminal Body Content -->
+    <g transform="translate(36, 75)">
+      <!-- Command prompt -->
+      <text x="0" y="0" class="terminal-text">
+        <tspan fill="#7ee787">~/projects/repo</tspan> <tspan fill="#8b949e">on</tspan> <tspan fill="#f0883e">main</tspan> <tspan fill="#58a6ff">❯</tspan> <tspan class="cmd">blamr</tspan>
+      </text>
+
+      <!-- Table divider -->
+      <text x="0" y="28" class="dim terminal-text">─────────────────────────────────────────────────────────────────────────────</text>
+
+      <!-- Table Header -->
+      <text x="0" y="52" class="header-text">
+        <tspan x="0">Author</tspan>
+        <tspan x="360">Lines</tspan>
+        <tspan x="470">%</tspan>
+      </text>
+
+      <text x="0" y="74" class="dim terminal-text">─────────────────────────────────────────────────────────────────────────────</text>
+
+      <!-- Row 1: Alice Johnson -->
+      <text x="0" y="104" class="terminal-text">
+        <tspan x="0" class="author-name">Alice Johnson</tspan>
+        <tspan x="352">14,820</tspan>
+        <tspan x="460" class="pct">42.3%</tspan>
+      </text>
+      <!-- Row 1 Bar -->
+      <rect x="530" y="93" width="232" height="13" rx="2.5" fill="url(#barGrad)" />
+
+      <!-- Row 2: Bob Smith -->
+      <text x="0" y="136" class="terminal-text">
+        <tspan x="0" class="author-name">Bob Smith</tspan>
+        <tspan x="360">9,150</tspan>
+        <tspan x="460" class="pct">26.1%</tspan>
+      </text>
+      <!-- Row 2 Bar -->
+      <rect x="530" y="125" width="143" height="13" rx="2.5" fill="url(#barGrad)" fill-opacity="0.9" />
+
+      <!-- Row 3: Carol Chen -->
+      <text x="0" y="168" class="terminal-text">
+        <tspan x="0" class="author-name">Carol Chen</tspan>
+        <tspan x="360">5,420</tspan>
+        <tspan x="460" class="pct">15.5%</tspan>
+      </text>
+      <!-- Row 3 Bar -->
+      <rect x="530" y="157" width="85" height="13" rx="2.5" fill="url(#barGrad)" fill-opacity="0.8" />
+
+      <!-- Row 4: David Kim -->
+      <text x="0" y="200" class="terminal-text">
+        <tspan x="0" class="author-name">David Kim</tspan>
+        <tspan x="360">3,210</tspan>
+        <tspan x="468" class="pct">9.2%</tspan>
+      </text>
+      <!-- Row 4 Bar -->
+      <rect x="530" y="189" width="50" height="13" rx="2.5" fill="url(#barGrad)" fill-opacity="0.7" />
+
+      <!-- Row 5: Not Committed Yet (Dirty Worktree Overlay Highlight) -->
+      <text x="0" y="232" class="terminal-text">
+        <tspan x="0" class="author-dirty">Not Committed Yet</tspan>
+        <tspan x="360" class="author-dirty">2,400</tspan>
+        <tspan x="468" class="pct-dirty">6.9%</tspan>
+      </text>
+      <!-- Row 5 Bar -->
+      <rect x="530" y="221" width="38" height="13" rx="2.5" fill="url(#dirtyBarGrad)" />
+      <!-- Indicator badge for dirty overlay -->
+      <text x="580" y="232" font-family="'JetBrains Mono', monospace" font-size="11" fill="#f59e0b" font-weight="600">
+        ← live worktree diff overlay
+      </text>
+
+      <!-- Bottom divider -->
+      <text x="0" y="260" class="dim terminal-text">─────────────────────────────────────────────────────────────────────────────</text>
+
+      <!-- Total Row -->
+      <text x="0" y="286" class="terminal-text">
+        <tspan x="0" class="total-label">Total</tspan>
+        <tspan x="352" class="total-label">35,000</tspan>
+      </text>
+
+      <!-- Performance Status Box -->
+      <g transform="translate(0, 318)">
+        <rect width="1008" height="38" rx="6" fill="#0d1117" stroke="#21262d" stroke-width="1" />
+        <circle cx="18" cy="19" r="4" fill="#3fb950" />
+        <text x="32" y="23" class="footer-stat">
+          Repository scan complete: 284 tracked files attributed in 46ms • Zero external git binary forks • Memory: 14.2 MB
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
