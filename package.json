@@ -19,22 +19,22 @@
     "@fontsource-variable/geist": "^5.2.5",
     "@fontsource-variable/geist-mono": "^5.2.5",
     "@iconify-json/mdi": "^1.2.3",
-    "@tsparticles/engine": "^4.5.1",
-    "@tsparticles/slim": "^4.5.1",
-    "astro": "7.4.5",
+    "@tsparticles/engine": "^4.5.3",
+    "@tsparticles/slim": "^4.5.3",
+    "astro": "7.4.8",
     "astro-icon": "^1.2.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@eslint/js": "^10.0.1",
-    "@tailwindcss/vite": "^4.3.4",
-    "astro-llms-md": "^3.0.2",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro-llms-md": "^3.0.3",
     "astro-robots-txt": "^1.0.0",
     "eslint": "^10.14.0",
     "eslint-plugin-astro": "^3.2.1",
-    "tailwindcss": "^4.3.4",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.72.1"
+    "tailwindcss": "^4.3.5",
+    "typescript": "^7.0.2",
+    "typescript-eslint": "^8.72.2"
   },
   "trustedDependencies": [
     "@tsparticles/engine"
