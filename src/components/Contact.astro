@@ -34,13 +34,14 @@ const { personal } = siteData;
             href={`tel:${personal.contact.phone.replace(/\s+/g, '')}`}
             class="inline-flex items-center gap-2 bg-neutral-900/80 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-neutral-800/80 hover:border-neutral-700 hover:text-white transition-colors"
           >
-            <Icon name="mdi:phone" class="w-4 h-4 text-neutral-500 shrink-0" />
+            <Icon name="mdi:phone" class="w-4 h-4 text-neutral-500 shrink-0" aria-hidden="true" />
             <span>{personal.contact.phone}</span>
           </a>
           <span class="inline-flex items-center gap-2 bg-neutral-900/80 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-neutral-800/80 text-neutral-300">
             <Icon
               name="mdi:map-marker"
               class="w-4 h-4 text-neutral-500 shrink-0"
+              aria-hidden="true"
             />
             <span>{personal.contact.location}</span>
           </span>
@@ -53,18 +54,19 @@ const { personal } = siteData;
             <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 font-bold block mb-1">
               Direct Contact
             </span>
-            <p class="text-xs text-neutral-500">
+            <p class="text-xs text-neutral-400">
               Reach out directly for freelance, consulting, or full-time roles.
             </p>
           </div>
 
           <a
             href={`mailto:${personal.contact.email}`}
-            class="inline-flex items-center justify-center gap-2 px-4 py-3 sm:px-6 sm:py-3.5 bg-[#fc7a00] text-black font-mono font-bold text-xs sm:text-sm md:text-base rounded-xl hover:bg-[#ff9429] transition-all transform hover:scale-[1.02] shadow-lg shadow-[#fc7a00]/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white max-w-full"
+            class="inline-flex items-center justify-center gap-2 px-4 py-3 sm:px-6 sm:py-3.5 bg-[#fc7a00] text-black font-mono font-bold text-xs sm:text-sm md:text-base rounded-xl hover:bg-[#ff9429] transition-all transform hover:scale-[1.02] shadow-lg shadow-[#fc7a00]/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:ring-offset-[#fc7a00] max-w-full"
           >
             <Icon
               name="mdi:email-outline"
               class="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
+              aria-hidden="true"
             />
             <span class="truncate">{personal.contact.email}</span>
           </a>

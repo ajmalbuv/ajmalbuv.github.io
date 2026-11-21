@@ -14,6 +14,7 @@ interface Props {
   canonicalURL?: URL | undefined;
   lang?: string | undefined;
   type?: 'website' | 'article' | undefined;
+  noindex?: boolean | undefined;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
   canonicalURL,
   lang = 'en',
   type,
+  noindex = false,
 } = Astro.props;
 ---
 
@@ -43,6 +45,7 @@ const {
       {imageType}
       {canonicalURL}
       {type}
+      {noindex}
     />
   </head>
   <body class="bg-[#0a0a0a] text-[#fafafa] font-sans antialiased min-h-screen flex flex-col selection:bg-[#fc7a00] selection:text-black">

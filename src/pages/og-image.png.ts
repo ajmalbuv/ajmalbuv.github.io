@@ -6,6 +6,7 @@ import type { APIRoute } from 'astro';
 import sharp, { type OverlayOptions } from 'sharp';
 
 import { siteData } from '../data/site';
+import { getSite } from '../utils/url';
 
 export const prerender = true;
 
@@ -17,12 +18,11 @@ const escapeXml = (str: string): string =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
 
-export const GET: APIRoute = async ({ site }) => {
+export const GET: APIRoute = async ({ site, url }) => {
   const width = 1200;
   const height = 630;
 
-  // Extract hostname dynamically from Astro.site (defaults to ajmalbuv.pages.dev if undefined)
-  const siteUrl = site ?? new URL('https://ajmalbuv.pages.dev');
+  const siteUrl = getSite(site, url);
   const domain = siteUrl.hostname;
 
   // Resolve personal avatar photo reliably across dev and build prerendering
@@ -155,7 +155,7 @@ export const GET: APIRoute = async ({ site }) => {
   return new Response(pngBuffer, {
     headers: {
       'Content-Type': 'image/png',
-      'Cache-Control': 'public, max-age=31536000, immutable',
+      'Cache-Control': 'public, max-age=86400, must-revalidate',
     },
   });
 };

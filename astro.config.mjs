@@ -119,6 +119,10 @@ function inlineCsp() {
 
 export default defineConfig({
   site: process.env.SITE || 'https://ajmalbuv.pages.dev',
+  trailingSlash: 'always',
+  image: {
+    dangerouslyProcessSVG: true,
+  },
   env: {
     schema: {
       PUBLIC_GIT_HASH: envField.string({
@@ -133,9 +137,9 @@ export default defineConfig({
       }),
     },
   },
-  integrations: [icon(), sitemap(), robotsTxt(), inlineCsp()],
+  integrations: [icon(), sitemap(), robotsTxt(), llms(), inlineCsp()],
   vite: {
-    plugins: [tailwindcss(), llms()],
+    plugins: [tailwindcss()],
     build: {
       cssCodeSplit: false,
       assetsInlineLimit: 4096,
@@ -159,6 +163,6 @@ export default defineConfig({
   },
   build: {
     assets: 'assets',
-    inlineStylesheets: 'always',
+    inlineStylesheets: 'auto',
   },
 });

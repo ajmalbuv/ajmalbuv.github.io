@@ -6,6 +6,7 @@ import ProjectGallery from '../../components/ProjectGallery.astro';
 import { siteData } from '../../data/site';
 import Base from '../../layouts/Base.astro';
 import type { Project } from '../../types/index';
+import { absolute, canonical, projectPath, safeJsonLd } from '../../utils/url';
 
 export function getStaticPaths() {
   return siteData.projects.map((project, idx) => {
@@ -26,25 +27,65 @@ interface Props {
 }
 
 const { project, prevProject, nextProject } = Astro.props;
+
+const site = Astro.site ?? new URL(Astro.url.origin);
+const projectUrl = absolute(projectPath(project.slug), site);
+const projectImage = absolute(project.coverImage.src, site);
+const personId = absolute('/#person', site);
+const imageType =
+  project.coverImage.format === 'svg'
+    ? 'image/svg+xml'
+    : `image/${project.coverImage.format === 'jpg' ? 'jpeg' : project.coverImage.format}`;
+const projectSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': `${projectUrl}#software`,
+  name: project.title,
+  description: project.summary,
+  url: projectUrl,
+  image: projectImage,
+  applicationCategory:
+    project.slug === 'edumanage'
+      ? 'EducationalApplication'
+      : 'DeveloperApplication',
+  operatingSystem: 'Cross-platform',
+  author: { '@id': personId },
+  publisher: { '@id': personId },
+  ...(project.githubUrl ? { codeRepository: project.githubUrl } : {}),
+  ...(project.liveUrl ? { sameAs: [project.liveUrl] } : {}),
+};
 ---
 
 <Base
   title={`${project.title} — Overview`}
   description={project.summary}
   image={project.coverImage.src}
+  imageAlt={`${project.title} cover image`}
+  imageWidth={project.coverImage.width}
+  imageHeight={project.coverImage.height}
+  imageType={imageType}
+  canonicalURL={canonical(Astro.url, Astro.site)}
+  type="article"
 >
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={safeJsonLd(projectSchema)}
+  />
+
   <Header />
 
   <main
     id="main-content"
-    class="py-8 sm:py-12 px-3.5 sm:px-6 lg:px-8 max-w-5xl 2xl:max-w-6xl mx-auto"
+    tabindex="-1"
+    class="py-8 sm:py-12 px-3.5 sm:px-6 lg:px-8 max-w-5xl 2xl:max-w-6xl mx-auto focus:outline-none"
   >
     <div class="mb-6 sm:mb-8">
       <a
         href="/#work"
         class="inline-flex items-center gap-2 font-mono text-xs sm:text-sm text-neutral-400 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#fc7a00] rounded"
       >
-        <Icon name="mdi:arrow-left" class="w-4 h-4" />
+        <Icon name="mdi:arrow-left" class="w-4 h-4" aria-hidden="true" />
         <span>Back to all projects</span>
       </a>
     </div>
@@ -72,7 +113,8 @@ const { project, prevProject, nextProject } = Astro.props;
             class="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-[#fc7a00] text-black font-mono font-bold text-xs sm:text-sm rounded-full hover:bg-[#ff9429] transition-colors shadow-md"
           >
             <span>{project.liveUrlLabel ?? 'View Live Project'}</span>
-            <Icon name="mdi:open-in-new" class="w-4 h-4" />
+            <Icon name="mdi:open-in-new" class="w-4 h-4" aria-hidden="true" />
+            <span class="sr-only">(opens in new tab)</span>
           </a>
         )}
 
@@ -83,8 +125,9 @@ const { project, prevProject, nextProject } = Astro.props;
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-neutral-900 text-neutral-200 border border-neutral-700 font-mono text-xs sm:text-sm rounded-full hover:bg-neutral-800 hover:text-white transition-colors"
           >
-            <Icon name="mdi:github" class="w-4 h-4" />
+            <Icon name="mdi:github" class="w-4 h-4" aria-hidden="true" />
             <span>Source Repository</span>
+            <span class="sr-only">(opens in new tab)</span>
           </a>
         )}
       </div>
@@ -130,13 +173,14 @@ const { project, prevProject, nextProject } = Astro.props;
     >
       {prevProject ? (
         <a
-          href={`/projects/${prevProject.slug}`}
+          href={projectPath(prevProject.slug)}
           class="group p-4 sm:p-5 bg-[#121212] border border-neutral-800 rounded-xl hover:border-neutral-700 transition-all flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
         >
           <span class="font-mono text-xs text-neutral-400 flex items-center gap-1.5 mb-1 group-hover:text-[#fc7a00] transition-colors">
             <Icon
               name="mdi:arrow-left"
               class="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1"
+              aria-hidden="true"
             />
             <span>Previous Project</span>
           </span>
@@ -150,13 +194,14 @@ const { project, prevProject, nextProject } = Astro.props;
 
       {nextProject ? (
         <a
-          href={`/projects/${nextProject.slug}`}
+          href={projectPath(nextProject.slug)}
           class="group p-4 sm:p-5 bg-[#121212] border border-neutral-800 rounded-xl hover:border-neutral-700 transition-all flex flex-col sm:items-end text-left sm:text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
         >
           <span class="font-mono text-xs text-neutral-400 flex items-center sm:flex-row-reverse gap-1.5 mb-1 group-hover:text-[#fc7a00] transition-colors">
             <Icon
               name="mdi:arrow-right"
               class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
+              aria-hidden="true"
             />
             <span>Next Project</span>
           </span>

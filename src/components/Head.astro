@@ -1,5 +1,6 @@
 ---
 import { siteData } from '../data/site';
+import { absolute, canonical, getSite, safeJsonLd } from '../utils/url';
 import geistSansFont from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
 import geistMonoFont from '@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2?url';
 
@@ -13,6 +14,7 @@ interface Props {
   imageType?: string | undefined;
   canonicalURL?: URL | undefined;
   type?: 'website' | 'article' | undefined;
+  noindex?: boolean | undefined;
 }
 
 const {
@@ -23,14 +25,22 @@ const {
   imageWidth = 1200,
   imageHeight = 630,
   imageType = 'image/png',
-  canonicalURL = new URL(Astro.url.pathname, Astro.site),
+  canonicalURL = canonical(Astro.url, Astro.site),
   type = 'website',
+  noindex = false,
 } = Astro.props;
 
-const siteUrl = Astro.site?.toString().replace(/\/$/, '');
-const ogImageFullUrl = new URL(image, siteUrl).toString();
-const avatarFullUrl = new URL(siteData.personal.avatar.src, siteUrl).toString();
+const site = getSite(Astro.site, Astro.url);
+const siteUrl = site.href;
+const ogImageFullUrl = absolute(image, site);
+const avatarFullUrl = absolute(siteData.personal.avatar.src, site);
+const personId = absolute('/#person', site);
+const websiteId = absolute('/#website', site);
 const twitterHandle = `@${siteData.personal.handle}`;
+
+const httpSocials = siteData.personal.contact.socials
+  .filter((s) => s.url.startsWith('http'))
+  .map((s) => s.url);
 
 // JSON-LD Person & WebSite schemas matching 0day/portfolio specifications
 const schema = {
@@ -38,7 +48,7 @@ const schema = {
   '@graph': [
     {
       '@type': 'Person',
-      '@id': `${siteUrl}/#person`,
+      '@id': personId,
       name: siteData.personal.name,
       alternateName: [siteData.personal.handle, 'Ajmal Aju', '_.aju'],
       image: avatarFullUrl,
@@ -48,19 +58,19 @@ const schema = {
         'Flutter Developer',
         'Full Stack Developer',
       ],
-      description: description,
+      description: siteData.personal.bio,
       url: siteUrl,
       email: siteData.personal.contact.email,
-      sameAs: siteData.personal.contact.socials.map((s) => s.url),
+      sameAs: httpSocials,
     },
     {
       '@type': 'WebSite',
-      '@id': `${siteUrl}/#website`,
+      '@id': websiteId,
       url: siteUrl,
       name: `${siteData.personal.name} | ${siteData.personal.title}`,
       description: siteData.personal.bio,
       publisher: {
-        '@id': `${siteUrl}/#person`,
+        '@id': personId,
       },
       inLanguage: 'en',
     },
@@ -92,6 +102,7 @@ const schema = {
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="author" content={siteData.personal.name} />
+{noindex && <meta name="robots" content="noindex, follow" />}
 <link rel="canonical" href={canonicalURL} />
 <meta name="generator" content={Astro.generator} />
 <meta name="theme-color" content="#0a0a0a" />
@@ -134,5 +145,5 @@ const schema = {
 <script
   is:inline
   type="application/ld+json"
-  set:html={JSON.stringify(schema)}
+  set:html={safeJsonLd(schema)}
 />

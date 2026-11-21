@@ -16,6 +16,7 @@
 html {
   font-family: var(--font-sans);
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
   color-scheme: dark;
 }
 
@@ -33,6 +34,10 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body:has(dialog:modal) {
+  overflow: hidden;
 }
 
 /* Scroll-driven animations with reduced motion and browser support guards */

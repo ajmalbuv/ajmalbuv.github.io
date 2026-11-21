@@ -1,7 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
-import { siteData } from '../data/site';
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import { siteData } from "../data/site";
 
 const { personal } = siteData;
 const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(personal.resumeUrl)}`;
@@ -45,25 +45,36 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
 
       <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4">
         <div class="flex items-center gap-1.5 sm:gap-2">
-          {personal.contact.socials.map((social) => (
-            <div class="group relative inline-flex items-center justify-center">
-              <a
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.ariaLabel}
-                class="p-2 sm:p-2.5 rounded-lg text-black hover:text-[#fc7a00] hover:bg-neutral-100 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
-              >
-                <Icon name={social.icon} class="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
-              <span
-                aria-hidden="true"
-                class="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-neutral-900 px-2 py-1 font-mono text-xs text-neutral-200 opacity-0 shadow-lg border border-neutral-800 transition-opacity duration-200 group-hover:opacity-100 group-has-focus-visible:opacity-100 z-50"
-              >
-                {social.name}
-              </span>
-            </div>
-          ))}
+          {personal.contact.socials.map((social) => {
+            const isExternal = social.url.startsWith("http");
+            return (
+              <div class="group relative inline-flex items-center justify-center">
+                <a
+                  href={social.url}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  aria-label={
+                    isExternal
+                      ? `${social.ariaLabel} (opens in new tab)`
+                      : social.ariaLabel
+                  }
+                  class="p-2 sm:p-2.5 rounded-lg text-black hover:text-[#b85400] hover:bg-neutral-100 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b85400]"
+                >
+                  <Icon
+                    name={social.icon}
+                    class="w-5 h-5 sm:w-6 sm:h-6"
+                    aria-hidden="true"
+                  />
+                </a>
+                <span
+                  aria-hidden="true"
+                  class="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-neutral-900 px-2 py-1 font-mono text-xs text-neutral-200 opacity-0 shadow-lg border border-neutral-800 transition-opacity duration-200 group-hover:opacity-100 group-has-focus-visible:opacity-100 z-50"
+                >
+                  {social.name}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         <span
@@ -75,18 +86,24 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
           id="download-resume-btn"
           data-resume-url={personal.resumeUrl}
           type="button"
-          class="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-black text-white font-mono text-xs sm:text-sm font-semibold rounded-full hover:bg-[#fc7a00] hover:text-black transition-colors duration-200 cursor-pointer shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] aria-busy:pointer-events-none aria-busy:cursor-wait aria-busy:opacity-70"
+          aria-describedby="resume-status"
+          class="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-black text-white font-mono text-xs sm:text-sm font-semibold rounded-full hover:bg-[#fc7a00] hover:text-black transition-colors duration-200 cursor-pointer shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b85400] aria-busy:pointer-events-none aria-busy:cursor-wait aria-busy:opacity-70"
         >
-          <Icon name="mdi:file-document-outline" class="w-4 h-4" />
-          <span>Download Resume</span>
+          <Icon
+            name="mdi:file-document-outline"
+            class="w-4 h-4"
+            aria-hidden="true"
+          />
+          <span id="download-resume-text">Download Resume</span>
         </button>
+        <span id="resume-status" class="sr-only" aria-live="polite"></span>
         <a
           href={resumeViewerUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2 border border-neutral-300 text-neutral-800 font-mono text-xs font-medium rounded-full hover:border-black hover:text-black transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2 border border-neutral-300 text-neutral-800 font-mono text-xs font-medium rounded-full hover:border-black hover:text-black transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b85400]"
         >
-          <Icon name="mdi:open-in-new" class="w-3.5 h-3.5" />
+          <Icon name="mdi:open-in-new" class="w-3.5 h-3.5" aria-hidden="true" />
           <span>View Online</span>
           <span class="sr-only">(opens in new tab)</span>
         </a>
@@ -96,7 +113,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
 </section>
 
 <script>
-  import type { Container, ISourceOptions } from '@tsparticles/engine';
+  import type { Container, ISourceOptions } from "@tsparticles/engine";
 
   const getParticlesConfig = (isMobile: boolean): ISourceOptions => ({
     fpsLimit: 60,
@@ -112,15 +129,15 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
           height: 800,
         },
         limit: {
-          mode: 'delete',
+          mode: "delete",
           value: isMobile ? 30 : 75,
         },
       },
       color: {
-        value: '#000000',
+        value: "#000000",
       },
       shape: {
-        type: 'circle',
+        type: "circle",
       },
       opacity: {
         value: { min: 0.1, max: 0.5 },
@@ -131,29 +148,29 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
       links: {
         enable: true,
         distance: 150,
-        color: '#000000',
+        color: "#000000",
         opacity: 0.4,
         width: 3,
       },
       move: {
         enable: true,
         speed: 1.0,
-        direction: 'none',
+        direction: "none",
         random: false,
         straight: false,
-        outModes: 'out',
+        outModes: "out",
       },
     },
     interactivity: {
-      detectsOn: 'window',
+      detectsOn: "window",
       events: {
         onHover: {
           enable: !isMobile,
-          mode: 'grab',
+          mode: "grab",
         },
         onClick: {
           enable: false,
-          mode: 'push',
+          mode: "push",
         },
       },
       modes: {
@@ -170,19 +187,18 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
 
   let engineLoaded = false;
   let particleContainer: Container | undefined;
-  // let heroObserver: IntersectionObserver | undefined;
 
   async function initParticles() {
-    const container = document.getElementById('particles-js');
-    if (!container || container.dataset['initialized']) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    container.dataset['initialized'] = 'true';
+    const container = document.getElementById("particles-js");
+    if (!container || container.dataset["initialized"]) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    container.dataset["initialized"] = "true";
 
     try {
       const isMobile = window.innerWidth < 640;
       const [{ tsParticles }, { loadSlim }] = await Promise.all([
-        import('@tsparticles/engine'),
-        import('@tsparticles/slim'),
+        import("@tsparticles/engine"),
+        import("@tsparticles/slim"),
       ]);
 
       if (!engineLoaded) {
@@ -191,7 +207,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
       }
 
       const c = await tsParticles.load({
-        id: 'particles-js',
+        id: "particles-js",
         options: getParticlesConfig(isMobile),
       });
       if (!container.isConnected) {
@@ -199,62 +215,57 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
         return;
       }
       particleContainer = c;
-
-      // const heroSection = document.getElementById('home');
-      // if (heroSection && 'IntersectionObserver' in window) {
-      //   heroObserver?.disconnect();
-      //   heroObserver = new IntersectionObserver(([entry]) => {
-      //     if (entry?.isIntersecting) {
-      //       particleContainer?.play();
-      //     } else {
-      //       particleContainer?.pause();
-      //     }
-      //   });
-      //   heroObserver.observe(heroSection);
-      // }
     } catch (err) {
-      delete container.dataset['initialized'];
-      console.warn('tsParticles initialization error:', err);
+      delete container.dataset["initialized"];
+      console.warn("tsParticles initialization error:", err);
     }
   }
 
   function initResume() {
-    const resumeBtn = document.getElementById('download-resume-btn');
-    if (!resumeBtn || resumeBtn.dataset['initialized']) return;
-    resumeBtn.dataset['initialized'] = 'true';
+    const resumeBtn = document.getElementById("download-resume-btn");
+    const resumeText = document.getElementById("download-resume-text");
+    const resumeStatus = document.getElementById("resume-status");
+    if (!resumeBtn || resumeBtn.dataset["initialized"]) return;
+    resumeBtn.dataset["initialized"] = "true";
 
-    resumeBtn.addEventListener('click', async () => {
-      const resumeUrl = resumeBtn.dataset['resumeUrl'];
-      if (!resumeUrl || resumeBtn.getAttribute('aria-busy') === 'true') return;
+    resumeBtn.addEventListener("click", async () => {
+      const resumeUrl = resumeBtn.dataset["resumeUrl"];
+      if (!resumeUrl || resumeBtn.getAttribute("aria-busy") === "true") return;
 
-      const originalHtml = resumeBtn.innerHTML;
-      resumeBtn.setAttribute('aria-busy', 'true');
-      resumeBtn.innerHTML = '<span>Downloading...</span>';
+      const originalText = resumeText?.textContent || "Download Resume";
+      resumeBtn.setAttribute("aria-busy", "true");
+      if (resumeText) resumeText.textContent = "Downloading...";
+      if (resumeStatus) {
+        resumeStatus.textContent = "";
+        resumeStatus.textContent = "Preparing resume download...";
+      }
 
       try {
         const res = await fetch(resumeUrl);
-        if (!res.ok) throw new Error('Fetch failed');
+        if (!res.ok) throw new Error("Fetch failed");
         const blob = await res.blob();
         const blobUrl = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = blobUrl;
-        link.download = 'AjmalBasheer-Resume.pdf';
+        link.download = "AjmalBasheer-Resume.pdf";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+        if (resumeStatus)
+          resumeStatus.textContent = "Resume downloaded successfully.";
       } catch (err) {
-        console.warn('Direct fallback on fetch error:', err);
+        console.warn("Direct fallback on fetch error:", err);
         window.location.href = resumeUrl;
       } finally {
-        resumeBtn.removeAttribute('aria-busy');
-        resumeBtn.innerHTML = originalHtml;
+        resumeBtn.removeAttribute("aria-busy");
+        if (resumeText) resumeText.textContent = originalText;
       }
     });
   }
 
   const scheduleParticles = () => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let scheduled = false;
     const start = () => {
@@ -265,30 +276,30 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
     };
 
     const cleanup = () => {
-      window.removeEventListener('pointermove', start);
-      window.removeEventListener('touchstart', start);
-      window.removeEventListener('scroll', start);
+      window.removeEventListener("pointermove", start);
+      window.removeEventListener("touchstart", start);
+      window.removeEventListener("scroll", start);
     };
 
-    window.addEventListener('pointermove', start, {
+    window.addEventListener("pointermove", start, {
       once: true,
       passive: true,
     });
-    window.addEventListener('touchstart', start, { once: true, passive: true });
-    window.addEventListener('scroll', start, { once: true, passive: true });
+    window.addEventListener("touchstart", start, { once: true, passive: true });
+    window.addEventListener("scroll", start, { once: true, passive: true });
 
     const triggerIdle = () => {
-      if ('requestIdleCallback' in window) {
+      if ("requestIdleCallback" in window) {
         window.requestIdleCallback(start, { timeout: 4000 });
       } else {
         setTimeout(start, 2500);
       }
     };
 
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       triggerIdle();
     } else {
-      window.addEventListener('load', triggerIdle, { once: true });
+      window.addEventListener("load", triggerIdle, { once: true });
     }
   };
 
@@ -297,16 +308,30 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
     scheduleParticles();
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
   } else {
     boot();
   }
-  document.addEventListener('astro:page-load', boot);
-  document.addEventListener('astro:before-swap', () => {
-    // heroObserver?.disconnect();
-    // heroObserver = undefined;
+  const cleanup = () => {
     particleContainer?.destroy();
     particleContainer = undefined;
+    const container = document.getElementById("particles-js");
+    if (container) delete container.dataset["initialized"];
+  };
+
+  window.addEventListener("pagehide", cleanup);
+  window.addEventListener("pageshow", (event) => {
+    if (!event.persisted) return;
+    initResume();
+    const container = document.getElementById("particles-js");
+    if (container) delete container.dataset["initialized"];
+    if (document.readyState === "complete") {
+      void initParticles();
+    } else {
+      window.addEventListener("load", () => void initParticles(), {
+        once: true,
+      });
+    }
   });
 </script>

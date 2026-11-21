@@ -15,7 +15,7 @@ import { siteData } from '../data/site';
       <span>{siteData.personal.handle}</span>
       <span class="inline-block w-2 h-2 rounded-full bg-[#fc7a00] animate-pulse"></span>
     </a>
-    <nav class="hidden sm:flex items-center gap-8 text-sm font-medium">
+    <nav aria-label="Primary" class="hidden sm:flex items-center gap-8 text-sm font-medium">
       <a
         href="/#home"
         class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
@@ -54,13 +54,14 @@ import { siteData } from '../data/site';
         aria-label="Toggle navigation menu"
         class="p-2 text-neutral-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded cursor-pointer"
       >
-        <Icon name="mdi:menu" class="h-6 w-6" />
+        <Icon name="mdi:menu" class="h-6 w-6" aria-hidden="true" />
       </button>
     </div>
   </div>
   <nav
     id="mobile-menu"
     popover
+    aria-label="Mobile navigation"
     class="fixed top-16 inset-x-0 w-full m-0 p-4 sm:p-6 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-neutral-800 text-neutral-200 shadow-2xl backdrop:bg-black/60 focus:outline-none sm:hidden"
   >
     <div class="max-w-5xl 2xl:max-w-6xl mx-auto space-y-4">
@@ -75,7 +76,7 @@ import { siteData } from '../data/site';
           aria-label="Close menu"
           class="p-1 text-neutral-400 hover:text-white cursor-pointer"
         >
-          <Icon name="mdi:close" class="h-5 w-5" />
+          <Icon name="mdi:close" class="h-5 w-5" aria-hidden="true" />
         </button>
       </div>
 
