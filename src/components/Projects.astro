@@ -13,7 +13,7 @@ const { projects } = siteData;
 >
   <div class="mb-8 sm:mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
     <div>
-      <span class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold">
+      <span class="font-mono text-xs uppercase tracking-widest text-accent font-bold">
         Selected Engineering
       </span>
       <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mt-1">
@@ -28,7 +28,7 @@ const { projects } = siteData;
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
     {projects.map((project) => (
-      <article class="relative z-10 bg-[#121212] border border-neutral-800 rounded-2xl overflow-hidden flex flex-col hover:border-[#fc7a00]/50 hover:shadow-xl hover:shadow-[#fc7a00]/5 transition-all duration-300 group hover:-translate-y-1">
+      <article class="relative z-10 bg-surface-card border border-neutral-800 rounded-2xl overflow-hidden flex flex-col hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5 transition-all duration-300 group hover:-translate-y-1">
         <div class="block overflow-hidden relative aspect-video bg-neutral-900">
           <Image
             src={project.coverImage}
@@ -39,14 +39,14 @@ const { projects } = siteData;
             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-linear-to-t from-[#121212] via-transparent to-transparent opacity-80" />
+          <div class="absolute inset-0 bg-linear-to-t from-surface-card via-transparent to-transparent opacity-80" />
         </div>
         <div class="p-4 sm:p-6 flex-1 flex flex-col justify-between">
           <div>
-            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-[#fc7a00] transition-colors mb-2">
+            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-accent transition-colors mb-2">
               <a
                 href={projectPath(project.slug)}
-                class="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded after:absolute after:inset-0 after:z-10"
+                class="focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded after:absolute after:inset-0 after:z-10"
               >
                 {project.title}
               </a>
@@ -65,7 +65,7 @@ const { projects } = siteData;
             </div>
 
             <div class="flex items-center justify-between pt-4 border-t border-neutral-800/80 relative z-20">
-              <span class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-neutral-300 group-hover:text-[#fc7a00] transition-colors">
+              <span class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-neutral-300 group-hover:text-accent transition-colors">
                 <span>View Project</span>
                 <Icon
                   name="mdi:arrow-right"
@@ -80,7 +80,7 @@ const { projects } = siteData;
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View ${project.title} on GitHub`}
-                  class="text-neutral-400 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+                  class="text-neutral-400 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <Icon name="mdi:github" class="w-5 h-5" aria-hidden="true" />
                 </a>

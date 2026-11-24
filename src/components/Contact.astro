@@ -9,15 +9,15 @@ const { personal } = siteData;
   id="contact"
   class="py-8 sm:py-10 px-3.5 sm:px-6 lg:px-8 max-w-5xl 2xl:max-w-6xl mx-auto"
 >
-  <div class="bg-linear-to-br from-[#141414] to-[#0d0d0d] border border-neutral-800 rounded-3xl p-5 sm:p-10 lg:p-12 relative overflow-hidden">
+  <div class="bg-linear-to-br from-surface-card to-surface-bg border border-neutral-800 rounded-3xl p-5 sm:p-10 lg:p-12 relative overflow-hidden">
     <div
-      class="absolute top-0 right-0 w-96 h-48 bg-[#fc7a00]/10 blur-3xl pointer-events-none rounded-full"
+      class="absolute top-0 right-0 w-96 h-48 bg-accent/10 blur-3xl pointer-events-none rounded-full"
       aria-hidden="true"
     ></div>
 
     <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-7 text-center lg:text-left">
-        <span class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold block mb-2">
+        <span class="font-mono text-xs uppercase tracking-widest text-accent font-bold block mb-2">
           Get In Touch
         </span>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
@@ -49,7 +49,7 @@ const { personal } = siteData;
       </div>
 
       <div class="lg:col-span-5 w-full flex flex-col gap-4">
-        <div class="bg-[#121212] border border-neutral-800 p-5 sm:p-7 rounded-2xl flex flex-col gap-4 text-center lg:text-left shadow-xl">
+        <div class="bg-surface-card border border-neutral-800 p-5 sm:p-7 rounded-2xl flex flex-col gap-4 text-center lg:text-left shadow-xl">
           <div>
             <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 font-bold block mb-1">
               Direct Contact
@@ -61,7 +61,7 @@ const { personal } = siteData;
 
           <a
             href={`mailto:${personal.contact.email}`}
-            class="inline-flex items-center justify-center gap-2 px-4 py-3 sm:px-6 sm:py-3.5 bg-[#fc7a00] text-black font-mono font-bold text-xs sm:text-sm md:text-base rounded-xl hover:bg-[#ff9429] transition-all transform hover:scale-[1.02] shadow-lg shadow-[#fc7a00]/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:ring-offset-[#fc7a00] max-w-full"
+            class="inline-flex items-center justify-center gap-2 px-4 py-3 sm:px-6 sm:py-3.5 bg-accent text-black font-mono font-bold text-xs sm:text-sm md:text-base rounded-xl hover:bg-accent-hover transition-all transform hover:scale-[1.02] shadow-lg shadow-accent/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:ring-offset-accent max-w-full"
           >
             <Icon
               name="mdi:email-outline"

@@ -83,7 +83,7 @@ const projectSchema = {
     <div class="mb-6 sm:mb-8">
       <a
         href="/#work"
-        class="inline-flex items-center gap-2 font-mono text-xs sm:text-sm text-neutral-400 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#fc7a00] rounded"
+        class="inline-flex items-center gap-2 font-mono text-xs sm:text-sm text-neutral-400 hover:text-accent transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded"
       >
         <Icon name="mdi:arrow-left" class="w-4 h-4" aria-hidden="true" />
         <span>Back to all projects</span>
@@ -110,7 +110,7 @@ const projectSchema = {
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-[#fc7a00] text-black font-mono font-bold text-xs sm:text-sm rounded-full hover:bg-[#ff9429] transition-colors shadow-md"
+            class="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-accent text-black font-mono font-bold text-xs sm:text-sm rounded-full hover:bg-accent-hover transition-colors shadow-md"
           >
             <span>{project.liveUrlLabel ?? 'View Live Project'}</span>
             <Icon name="mdi:open-in-new" class="w-4 h-4" aria-hidden="true" />
@@ -133,8 +133,8 @@ const projectSchema = {
       </div>
     </header>
 
-    <section class="mb-12 sm:mb-16 bg-[#121212] border border-neutral-800/90 rounded-2xl p-5 sm:p-8">
-      <h2 class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold mb-3">
+    <section class="mb-12 sm:mb-16 bg-surface-card border border-neutral-800/90 rounded-2xl p-5 sm:p-8">
+      <h2 class="font-mono text-xs uppercase tracking-widest text-accent font-bold mb-3">
         Overview &amp; Architecture
       </h2>
       <p class="text-neutral-300 text-sm sm:text-base leading-relaxed whitespace-pre-line">
@@ -149,9 +149,9 @@ const projectSchema = {
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           {project.features.map((feat) => (
-            <div class="bg-[#121212] border border-neutral-800 rounded-xl p-4 sm:p-5">
+            <div class="bg-surface-card border border-neutral-800 rounded-xl p-4 sm:p-5">
               <h3 class="font-bold text-white text-sm sm:text-base mb-1.5 flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#fc7a00]" />
+                <span class="w-1.5 h-1.5 rounded-full bg-accent" />
                 <span>{feat.heading}</span>
               </h3>
               <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed">
@@ -174,9 +174,9 @@ const projectSchema = {
       {prevProject ? (
         <a
           href={projectPath(prevProject.slug)}
-          class="group p-4 sm:p-5 bg-[#121212] border border-neutral-800 rounded-xl hover:border-neutral-700 transition-all flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+          class="group p-4 sm:p-5 bg-surface-card border border-neutral-800 rounded-xl hover:border-neutral-700 transition-all flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
-          <span class="font-mono text-xs text-neutral-400 flex items-center gap-1.5 mb-1 group-hover:text-[#fc7a00] transition-colors">
+          <span class="font-mono text-xs text-neutral-400 flex items-center gap-1.5 mb-1 group-hover:text-accent transition-colors">
             <Icon
               name="mdi:arrow-left"
               class="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1"
@@ -184,7 +184,7 @@ const projectSchema = {
             />
             <span>Previous Project</span>
           </span>
-          <span class="text-sm sm:text-base font-bold text-white group-hover:text-[#fc7a00] transition-colors truncate">
+          <span class="text-sm sm:text-base font-bold text-white group-hover:text-accent transition-colors truncate">
             {prevProject.title}
           </span>
         </a>
@@ -195,9 +195,9 @@ const projectSchema = {
       {nextProject ? (
         <a
           href={projectPath(nextProject.slug)}
-          class="group p-4 sm:p-5 bg-[#121212] border border-neutral-800 rounded-xl hover:border-neutral-700 transition-all flex flex-col sm:items-end text-left sm:text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00]"
+          class="group p-4 sm:p-5 bg-surface-card border border-neutral-800 rounded-xl hover:border-neutral-700 transition-all flex flex-col sm:items-end text-left sm:text-right focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
-          <span class="font-mono text-xs text-neutral-400 flex items-center sm:flex-row-reverse gap-1.5 mb-1 group-hover:text-[#fc7a00] transition-colors">
+          <span class="font-mono text-xs text-neutral-400 flex items-center sm:flex-row-reverse gap-1.5 mb-1 group-hover:text-accent transition-colors">
             <Icon
               name="mdi:arrow-right"
               class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
@@ -205,7 +205,7 @@ const projectSchema = {
             />
             <span>Next Project</span>
           </span>
-          <span class="text-sm sm:text-base font-bold text-white group-hover:text-[#fc7a00] transition-colors truncate">
+          <span class="text-sm sm:text-base font-bold text-white group-hover:text-accent transition-colors truncate">
             {nextProject.title}
           </span>
         </a>

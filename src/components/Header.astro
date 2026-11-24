@@ -4,55 +4,58 @@ import { siteData } from '../data/site';
 ---
 
 <header
-  class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#0a0a0a]/85 border-b border-neutral-800/70 transition-all duration-300"
+  class="sticky top-0 z-40 w-full backdrop-blur-md bg-surface-bg/85 border-b border-neutral-800/70 pt-[env(safe-area-inset-top,0px)] transition-all duration-300"
   id="main-header"
 >
   <div class="max-w-5xl 2xl:max-w-6xl mx-auto px-3.5 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
     <a
       href="/#home"
-      class="font-mono text-base sm:text-lg font-bold tracking-tight text-white hover:text-[#fc7a00] transition-colors flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded"
+      class="font-mono text-base sm:text-lg font-bold tracking-tight text-white hover:text-accent transition-colors flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded min-h-11 min-w-11"
     >
       <span>{siteData.personal.handle}</span>
-      <span class="inline-block w-2 h-2 rounded-full bg-[#fc7a00] animate-pulse"></span>
+      <span class="inline-block w-2 h-2 rounded-full bg-accent animate-pulse"></span>
     </a>
-    <nav aria-label="Primary" class="hidden sm:flex items-center gap-8 text-sm font-medium">
+    <nav aria-label="Primary" class="hidden sm:flex items-center gap-1 md:gap-2 text-sm font-medium">
       <a
         href="/#home"
-        class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
+        class="text-neutral-300 hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg px-3 py-2 min-h-10 flex items-center"
       >
         Home
       </a>
       <a
         href="/#about"
-        class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
+        class="text-neutral-300 hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg px-3 py-2 min-h-10 flex items-center"
       >
         About
       </a>
       <a
         href="/#work"
-        class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
+        class="text-neutral-300 hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg px-3 py-2 min-h-10 flex items-center"
       >
         Work
       </a>
       <a
         href="/#skills"
-        class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
+        class="text-neutral-300 hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg px-3 py-2 min-h-10 flex items-center"
       >
         Skills
       </a>
       <a
         href="/#contact"
-        class="text-neutral-300 hover:text-[#fc7a00] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded px-1"
+        class="text-neutral-300 hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg px-3 py-2 min-h-10 flex items-center"
       >
         Contact
       </a>
     </nav>
     <div class="sm:hidden">
       <button
+        id="mobile-menu-toggle"
         popovertarget="mobile-menu"
         type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
         aria-label="Toggle navigation menu"
-        class="p-2 text-neutral-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fc7a00] rounded cursor-pointer"
+        class="min-w-11 min-h-11 p-2 text-neutral-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded cursor-pointer flex items-center justify-center active:scale-95 transition-transform"
       >
         <Icon name="mdi:menu" class="h-6 w-6" aria-hidden="true" />
       </button>
@@ -62,11 +65,11 @@ import { siteData } from '../data/site';
     id="mobile-menu"
     popover
     aria-label="Mobile navigation"
-    class="fixed top-16 inset-x-0 w-full m-0 p-4 sm:p-6 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-neutral-800 text-neutral-200 shadow-2xl backdrop:bg-black/60 focus:outline-none sm:hidden"
+    class="fixed top-[calc(4rem+env(safe-area-inset-top,0px))] inset-x-0 w-full m-0 p-4 sm:p-6 pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] bg-surface-bg/95 backdrop-blur-xl border-b border-neutral-800 text-neutral-200 shadow-2xl backdrop:bg-black/60 focus:outline-none sm:hidden"
   >
-    <div class="max-w-5xl 2xl:max-w-6xl mx-auto space-y-4">
-      <div class="flex items-center justify-between pb-3 border-b border-neutral-800/80">
-        <span class="font-mono text-xs uppercase tracking-widest text-[#fc7a00] font-bold">
+    <div class="max-w-5xl 2xl:max-w-6xl mx-auto space-y-2">
+      <div class="flex items-center justify-between pb-3 mb-2 border-b border-neutral-800/80">
+        <span class="font-mono text-xs uppercase tracking-widest text-accent font-bold">
           Navigation
         </span>
         <button
@@ -74,7 +77,7 @@ import { siteData } from '../data/site';
           popovertargetaction="hide"
           type="button"
           aria-label="Close menu"
-          class="p-1 text-neutral-400 hover:text-white cursor-pointer"
+          class="min-w-11 min-h-11 p-2 text-neutral-400 hover:text-white cursor-pointer flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded active:scale-95 transition-transform"
         >
           <Icon name="mdi:close" class="h-5 w-5" aria-hidden="true" />
         </button>
@@ -82,31 +85,31 @@ import { siteData } from '../data/site';
 
       <a
         href="/#home"
-        class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-1.5 transition-colors"
+        class="flex items-center min-h-11 text-base font-medium text-neutral-200 hover:text-accent hover:bg-neutral-900/60 active:bg-neutral-800 px-3 py-2.5 rounded-xl transition-colors"
       >
         Home
       </a>
       <a
         href="/#about"
-        class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-1.5 transition-colors"
+        class="flex items-center min-h-11 text-base font-medium text-neutral-200 hover:text-accent hover:bg-neutral-900/60 active:bg-neutral-800 px-3 py-2.5 rounded-xl transition-colors"
       >
         About &amp; Experience
       </a>
       <a
         href="/#work"
-        class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-1.5 transition-colors"
+        class="flex items-center min-h-11 text-base font-medium text-neutral-200 hover:text-accent hover:bg-neutral-900/60 active:bg-neutral-800 px-3 py-2.5 rounded-xl transition-colors"
       >
         Work &amp; Projects
       </a>
       <a
         href="/#skills"
-        class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-1.5 transition-colors"
+        class="flex items-center min-h-11 text-base font-medium text-neutral-200 hover:text-accent hover:bg-neutral-900/60 active:bg-neutral-800 px-3 py-2.5 rounded-xl transition-colors"
       >
         Skills
       </a>
       <a
         href="/#contact"
-        class="block text-base font-medium text-neutral-200 hover:text-[#fc7a00] py-1.5 transition-colors"
+        class="flex items-center min-h-11 text-base font-medium text-neutral-200 hover:text-accent hover:bg-neutral-900/60 active:bg-neutral-800 px-3 py-2.5 rounded-xl transition-colors"
       >
         Contact
       </a>
@@ -115,13 +118,20 @@ import { siteData } from '../data/site';
 </header>
 
 <script>
-  // Close the native popover when any navigation link is clicked
+  // Close the native popover when any navigation link is clicked and sync aria-expanded
   const mobileMenu = document.getElementById('mobile-menu');
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+
   if (mobileMenu) {
     mobileMenu.addEventListener('click', (e) => {
       if ((e.target as HTMLElement).closest('a')) {
         mobileMenu.hidePopover();
       }
+    });
+
+    mobileMenu.addEventListener('toggle', (event) => {
+      const isExpanded = (event as ToggleEvent).newState === 'open';
+      toggleBtn?.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
     });
   }
 </script>

@@ -58,7 +58,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
                       ? `${social.ariaLabel} (opens in new tab)`
                       : social.ariaLabel
                   }
-                  class="p-2 sm:p-2.5 rounded-lg text-black hover:text-[#b85400] hover:bg-neutral-100 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b85400]"
+                  class="min-w-11 min-h-11 flex items-center justify-center p-2 sm:p-2.5 rounded-lg text-black hover:text-accent-dark hover:bg-neutral-100 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark"
                 >
                   <Icon
                     name={social.icon}
@@ -87,7 +87,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
           data-resume-url={personal.resumeUrl}
           type="button"
           aria-describedby="resume-status"
-          class="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 bg-black text-white font-mono text-xs sm:text-sm font-semibold rounded-full hover:bg-[#fc7a00] hover:text-black transition-colors duration-200 cursor-pointer shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b85400] aria-busy:pointer-events-none aria-busy:cursor-wait aria-busy:opacity-70"
+          class="inline-flex items-center gap-2 min-h-11 px-4 py-2 sm:px-5 sm:py-2.5 bg-black text-white font-mono text-xs sm:text-sm font-semibold rounded-full hover:bg-accent hover:text-black transition-colors duration-200 cursor-pointer shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark aria-busy:pointer-events-none aria-busy:cursor-wait aria-busy:opacity-70 active:scale-95"
         >
           <Icon
             name="mdi:file-document-outline"
@@ -101,7 +101,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
           href={resumeViewerUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2 border border-neutral-300 text-neutral-800 font-mono text-xs font-medium rounded-full hover:border-black hover:text-black transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b85400]"
+          class="inline-flex items-center gap-1.5 min-h-11 px-3.5 py-2 sm:px-4 sm:py-2 border border-neutral-300 text-neutral-800 font-mono text-xs font-medium rounded-full hover:border-black hover:text-black transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark active:scale-95"
         >
           <Icon name="mdi:open-in-new" class="w-3.5 h-3.5" aria-hidden="true" />
           <span>View Online</span>
