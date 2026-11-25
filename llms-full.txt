@@ -1,0 +1,514 @@
+# Site
+
+URL: https://portfolio.ajmalbuv.duckdns.org
+
+## ajmalbuv
+
+URL: https://portfolio.ajmalbuv.duckdns.org
+
+Software engineer focused on scalable systems, high-performance Flutter applications, and modern cross-platform engineering with clean architecture.
+
+![Ajmal Basheer (ajmalbuv)](/assets/photo.BmLb9wpd_ZrJc7u.webp)
+
+# ajmalbuv
+
+## Ajmal Basheer
+
+Software Engineer & Systems Builder
+
+[](https://github.com/ajmalbuv)GitHub
+
+[](https://www.linkedin.com/in/ajmalbuv/)LinkedIn
+
+[](https://www.instagram.com/_.aju)Instagram
+
+[](mailto:ajmalbuv@gmail.com)Email
+
+Download Resume[View Online(opens in new tab)](https://docs.google.com/gview?url=https%3A%2F%2Fmedia.githubusercontent.com%2Fmedia%2Fajmalbuv%2Fresume%2Frefs%2Fheads%2Fmain%2Fresume-no-image.pdf)
+
+Try again[Open PDF directly(opens in new tab)](https://media.githubusercontent.com/media/ajmalbuv/resume/refs/heads/main/resume-no-image.pdf)
+
+Background & Timeline
+
+## Experience & Education
+
+### Work Experience
+
+#### Flutter Developer
+
+Nov 2024 - Present
+
+ETAYA INNOVATIONS Pvt Ltd, Bengaluru
+
+Working as a full-time Flutter developer building and maintaining high-performance cross-platform mobile applications for Android and iOS using Flutter and Dart. Implementing clean architecture and provider-based state management with robust Firebase cloud integrations.
+
+-   Designed scalable mobile architectures implementing Clean Architecture, provider state management, and reusable UI components
+-   Integrated RESTful APIs and Firebase services for real-time synchronization, authentication, push notifications, and cloud storage
+-   Optimized widget tree rebuilds and implemented lazy loading, eliminating frame drops for smooth 60fps UI interactions
+-   Conducted automated and manual quality testing using Flutter testing framework and Firebase Crashlytics to preempt UI inconsistencies and crashes
+-   Collaborated in an Agile workflow, participating in sprint planning, peer code reviews, and cross-functional feature delivery
+
+#### Software Engineer Intern
+
+May 2024 - June 2024
+
+WIMD Technologies Pvt Ltd, Bengaluru
+
+Designed and developed backend services and database optimizations, gaining hands-on experience with production APIs, access control, and industry-standard testing workflows.
+
+-   Designed and implemented secure RESTful APIs using Node.js with JWT authentication and role-based access control (RBAC)
+-   Optimized MongoDB database indexing and collection schemas, significantly improving query performance and retrieval speeds
+-   Automated comprehensive API testing using Postman across CRUD operations to validate data integrity and endpoint reliability
+-   Engaged in code reviews, debugging, and cross-tier system integration to enhance system stability
+
+### Education
+
+#### Bachelor of Computer Applications
+
+Aug 2021 - July 2024
+
+Krupanidhi Degree College
+
+Bengaluru, Karnataka
+
+#### Commerce
+
+June 2017 - March 2019
+
+MIC Higher Secondary School
+
+Malappuram, Kerala
+
+#### Secondary School
+
+2017
+
+International Indian School Dammam
+
+Dammam, KSA
+
+Selected Engineering
+
+## Featured Work
+
+Production applications and systems built with high performance, clean architecture, and responsive UX.
+
+![typst\_flutter — Native Typst Compiler for Flutter cover image](/assets/typst-flutter.BVxmRj4T_YP8aB.webp)
+
+### [typst\_flutter — Native Typst Compiler for Flutter](/projects/typst-flutter/)
+
+Embed the Typst typesetting compiler natively into Flutter apps via Rust FFI with zero WASM/WebView overhead, sub-100ms compilation, and drop-in widgets.
+
+FlutterDartRustFFITypstCross-Platform
+
+View Project[](https://github.com/ajmalbuv/typst_flutter)
+
+![blamr — Fast Concurrent Git Blame CLI & Attribution Engine cover image](/assets/blamr.CDLyu6R9_Y4fqE.webp)
+
+### [blamr — Fast Concurrent Git Blame CLI & Attribution Engine](/projects/blamr/)
+
+Blazing-fast, zero-dependency concurrent git-blame author attribution and line statistics CLI engine written in modern Rust with in-process Gitoxide repository scanning.
+
+RustGitoxide (gix)ConcurrencyRayonCrossbeamCLICI/CDSystems Programming
+
+View Project[](https://github.com/ajmalbuv/blamr)
+
+![EduManage — College Management System cover image](/assets/ems.CnvQCF9L_11muOh.webp)
+
+### [EduManage — College Management System](/projects/edumanage/)
+
+A comprehensive web-based academic administration platform built with Django and PostgreSQL, streamlining student enrollment, attendance tracking, and grading.
+
+PythonDjangoPostgreSQLDockerJavaScriptBootstrapGunicornNginxVercel
+
+View Project[](https://github.com/ajmalbuv/edumanage)
+
+![Personal Portfolio & Design System cover image](/assets/portfolio.BuA-n-tY_Z1TxwhX.webp)
+
+### [Personal Portfolio & Design System](/projects/portfolio/)
+
+High-performance personal website engineered with Astro 7, Tailwind CSS 4, and TypeScript, featuring zero-overhead architecture and strict CSP headers.
+
+Astro 7TypeScriptTailwind CSS 4tsParticlesGeist VariableCloudflare Pages
+
+View Project[](https://github.com/ajmalbuv/ajmalbuv.github.io)
+
+Capabilities & Stack
+
+## Technical Skills
+
+### Languages
+
+RustGoDartPythonTypeScriptJavaScriptJavaSQL
+
+### Frontend & Mobile
+
+FlutterAstroAngularVue.jsTailwind CSSHTML5CSS3
+
+### Backend & APIs
+
+DjangoFastAPINode.jsExpress.jsRESTful APIsJWT
+
+### Databases & Storage
+
+PostgreSQLMySQLMongoDBRedisFirebase Firestore
+
+### DevOps, Cloud & Tooling
+
+DockerKubernetesGit & GitHubAWSCloudflare PagesVercelNginxLinux VPS
+
+Get In Touch
+
+## Let's Build Together.
+
+I am always open to discussing new opportunities, systems architecture, high-performance Flutter applications, or open-source collaborations.
+
+[+91 9496444520](tel:+919496444520)Bengaluru, Karnataka
+
+Direct Contact
+
+Reach out directly for freelance, consulting, or full-time roles.
+
+[ajmalbuv@gmail.com](mailto:ajmalbuv@gmail.com)
+
+---
+
+## blamr — Fast Concurrent Git Blame CLI & Attribution Engine
+
+URL: https://portfolio.ajmalbuv.duckdns.org/projects/blamr
+
+Blazing-fast, zero-dependency concurrent git-blame author attribution and line statistics CLI engine written in modern Rust with in-process Gitoxide repository scanning.
+
+[Back to all projects](/#work)
+
+## Overview & Architecture
+
+blamr is a high-performance command-line developer tool and native Git subcommand written in pure Rust (Edition 2024) designed to analyze repository authorship and line attribution at extreme speeds. Built directly on top of Gitoxide (gix), blamr bypasses the git binary and process-forking overhead entirely, reading the object database and index in-process across CPU-core-scaled worker threads. Unlike traditional blame tools that only inspect historical commits, blamr features a real-time diff-overlay engine powered by gix-imara-diff (Histogram algorithm) that attributes dirty working tree changes and uncommitted edits on the fly. With Arc<str> author interning, zero-copy Cow<\[u8\]> line scanning, bounded crossbeam-channel event pipelines, automated lockfile/minified noise exclusion, mailmap canonicalization, and full GNU CLI option compliance (lexopt), blamr delivers production-grade repository intelligence for developers and CI/CD pipelines.
+
+## Key Capabilities
+
+### In-Process Gitoxide (gix) Engine
+
+Directly traverses repository indices, trees, and commit graphs without shelling out to external git processes, eliminating IPC latency.
+
+### Worktree Dirty-Line Diff Overlay
+
+Uses histogram diffing (gix-imara-diff) to map live working tree edits back to original authors while attributing fresh uncommitted lines in real time.
+
+### Multi-Threaded Worker Pipeline
+
+Orchestrates index enumeration with Rayon and dispatches file blame across CPU-core-scaled worker threads over bounded crossbeam channels.
+
+### Extreme Memory Efficiency & Interning
+
+Employs Arc<str> author deduplication and compact 4-byte tracking slots (Vec<Option<u32>>), slashing memory consumption by ~83% on monorepos.
+
+### Automated Noise & Lockfile Pruning
+
+Heuristically detects binary files via 8KB buffer sniffing, skips UTF-16 BOMs and Git LFS pointers, and filters machine-generated lockfiles and minified bundles.
+
+### GNU CLI Flags & Short Option Clustering
+
+Supports standard POSIX/GNU flags (--jobs, --email, -j4, -e, -w), clustered short flags (-acn), mailmap aliasing (.mailmap), and structured JSON export.
+
+---
+
+## EduManage — College Management System
+
+URL: https://portfolio.ajmalbuv.duckdns.org/projects/edumanage
+
+A comprehensive web-based academic administration platform built with Django and PostgreSQL, streamlining student enrollment, attendance tracking, and grading.
+
+[Back to all projects](/#work)
+
+## Overview & Architecture
+
+EduManage is a scalable and secure college management system designed to optimize academic administration. Built with Django and PostgreSQL, it offers features such as student enrollment, course and timetable management, attendance tracking, and performance assessment. The system supports multi-user access, allowing administrators, faculty, and students to interact seamlessly. Deployed on an Ubuntu VPS using Gunicorn and Certbot for SSL security, with serverless API integrations for maximum speed and database query optimization.
+
+## Key Capabilities
+
+### User Roles & Authentication
+
+Secure multi-role authentication for administrators, faculty, and students with strict permission boundaries.
+
+### Student & Course Management
+
+Enrollment workflows, batch assignment, and course allocation through a responsive dashboard.
+
+### Attendance Tracking
+
+Real-time attendance recording with automated monthly and semester statistical reporting.
+
+### Performance Evaluation
+
+Integrated gradebook and assessment module generating academic progress reports.
+
+### Timetable Scheduling
+
+Conflict-free automated scheduling for faculty and classrooms.
+
+## Interface Previews
+
+1 / 21
+
+![EduManage — College Management System - Preview 1](/assets/edumanage-1.CNVRLkc7_ZcJCiQ.webp)
+
+Preview 1 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 2](/assets/edumanage-2.wSV4i9qk_ZuVlKG.webp)
+
+Preview 2 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 3](/assets/edumanage-3.B2CsAKX4_Z1L6tYY.webp)
+
+Preview 3 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 4](/assets/edumanage-4.C5Vgxxdu_Z1vajmj.webp)
+
+Preview 4 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 5](/assets/edumanage-5.BuweX2J5_ZREPo9.webp)
+
+Preview 5 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 6](/assets/edumanage-6.SRNawfNC_1iNySi.webp)
+
+Preview 6 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 7](/assets/edumanage-7.gMGF2R22_Z1fbScT.webp)
+
+Preview 7 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 8](/assets/edumanage-8.B_NN4xYh_1Gz5ul.webp)
+
+Preview 8 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 9](/assets/edumanage-9.BWuNvixG_Z1BeSQ1.webp)
+
+Preview 9 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 10](/assets/edumanage-10.Dz5Ku8Q9_ZBw9pT.webp)
+
+Preview 10 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 11](/assets/edumanage-11.DfdPGMU7_1AShQ.webp)
+
+Preview 11 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 12](/assets/edumanage-12.BINOZ_En_Z2u02cf.webp)
+
+Preview 12 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 13](/assets/edumanage-13.FmcLjxXi_2sxmEW.webp)
+
+Preview 13 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 14](/assets/edumanage-14.B_OHX_v8_Zt3Ds7.webp)
+
+Preview 14 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 15](/assets/edumanage-15.De8UlXIY_ZLe3s8.webp)
+
+Preview 15 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 16](/assets/edumanage-16.DPQJiaTx_Sos0E.webp)
+
+Preview 16 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 17](/assets/edumanage-17.CGiqSKkr_1rGfF5.webp)
+
+Preview 17 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 18](/assets/edumanage-18.Bo8Qd7RZ_Z1W7C5v.webp)
+
+Preview 18 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 19](/assets/edumanage-19.Bxw8jC_3_1G3Kbf.webp)
+
+Preview 19 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 20](/assets/edumanage-20.CM56S2Kq_ns1WW.webp)
+
+Preview 20 could not be loaded.
+
+Retry image
+
+![EduManage — College Management System - Preview 21](/assets/edumanage-21.CNscDqFN_Z1LQwG7.webp)
+
+Preview 21 could not be loaded.
+
+Retry image
+
+Fullscreen
+
+![Thumbnail 1](/assets/edumanage-1.CNVRLkc7_ZcJCiQ.webp)![Thumbnail 2](/assets/edumanage-2.wSV4i9qk_ZuVlKG.webp)![Thumbnail 3](/assets/edumanage-3.B2CsAKX4_Z1L6tYY.webp)![Thumbnail 4](/assets/edumanage-4.C5Vgxxdu_Z1vajmj.webp)![Thumbnail 5](/assets/edumanage-5.BuweX2J5_ZREPo9.webp)![Thumbnail 6](/assets/edumanage-6.SRNawfNC_1iNySi.webp)![Thumbnail 7](/assets/edumanage-7.gMGF2R22_Z1fbScT.webp)![Thumbnail 8](/assets/edumanage-8.B_NN4xYh_1Gz5ul.webp)![Thumbnail 9](/assets/edumanage-9.BWuNvixG_Z1BeSQ1.webp)![Thumbnail 10](/assets/edumanage-10.Dz5Ku8Q9_ZBw9pT.webp)![Thumbnail 11](/assets/edumanage-11.DfdPGMU7_1AShQ.webp)![Thumbnail 12](/assets/edumanage-12.BINOZ_En_Z2u02cf.webp)![Thumbnail 13](/assets/edumanage-13.FmcLjxXi_2sxmEW.webp)![Thumbnail 14](/assets/edumanage-14.B_OHX_v8_Zt3Ds7.webp)![Thumbnail 15](/assets/edumanage-15.De8UlXIY_ZLe3s8.webp)![Thumbnail 16](/assets/edumanage-16.DPQJiaTx_Sos0E.webp)![Thumbnail 17](/assets/edumanage-17.CGiqSKkr_1rGfF5.webp)![Thumbnail 18](/assets/edumanage-18.Bo8Qd7RZ_Z1W7C5v.webp)![Thumbnail 19](/assets/edumanage-19.Bxw8jC_3_1G3Kbf.webp)![Thumbnail 20](/assets/edumanage-20.CM56S2Kq_ns1WW.webp)![Thumbnail 21](/assets/edumanage-21.CNscDqFN_Z1LQwG7.webp)
+
+![EduManage — College Management System - Fullscreen preview](<data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E>)
+
+Loading preview…
+
+Could not load full-resolution preview.
+
+Try again
+
+1 / 21Press ESC to close
+
+---
+
+## Personal Portfolio & Design System
+
+URL: https://portfolio.ajmalbuv.duckdns.org/projects/portfolio
+
+High-performance personal website engineered with Astro 7, Tailwind CSS 4, and TypeScript, featuring zero-overhead architecture and strict CSP headers.
+
+[Back to all projects](/#work)
+
+## Overview & Architecture
+
+My personal portfolio built to demonstrate clean code architecture, absolute KISS principle, and maximum accessibility. Engineered using Astro 7 for zero unnecessary client-side JavaScript, styled with Tailwind CSS 4 and Geist variable fonts, and hardened with automated SHA-256 Content Security Policy generation at build time.
+
+## Key Capabilities
+
+### Zero Client JS Default
+
+Islands architecture ensuring only the Hero particle canvas executes client JS, while all other sections remain static HTML.
+
+### Strict Content Security Policy
+
+Automated post-build AST hash generator eliminating unsafe-inline from both styles and scripts.
+
+### Modern CSS Animation Timeline
+
+Scroll-driven animations with automatic prefers-reduced-motion fallback.
+
+## Interface Previews
+
+1 / 6
+
+![Personal Portfolio & Design System - Preview 1](/assets/portfolio-1.Z_utM8Ef_ognKr.webp)
+
+Preview 1 could not be loaded.
+
+Retry image
+
+![Personal Portfolio & Design System - Preview 2](/assets/portfolio-2.BroeSe-H_Z1eYfa6.webp)
+
+Preview 2 could not be loaded.
+
+Retry image
+
+![Personal Portfolio & Design System - Preview 3](/assets/portfolio-3.CL9t4un2_LR7A4.webp)
+
+Preview 3 could not be loaded.
+
+Retry image
+
+![Personal Portfolio & Design System - Preview 4](/assets/portfolio-4.Bf-YfNAJ_ZhC0Vm.webp)
+
+Preview 4 could not be loaded.
+
+Retry image
+
+![Personal Portfolio & Design System - Preview 5](/assets/portfolio-5.D4yZFL-P_ZgN82b.webp)
+
+Preview 5 could not be loaded.
+
+Retry image
+
+![Personal Portfolio & Design System - Preview 6](/assets/portfolio-6.DVTeG3Ih_Z20eEvQ.webp)
+
+Preview 6 could not be loaded.
+
+Retry image
+
+Fullscreen
+
+![Thumbnail 1](/assets/portfolio-1.Z_utM8Ef_ognKr.webp)![Thumbnail 2](/assets/portfolio-2.BroeSe-H_Z1eYfa6.webp)![Thumbnail 3](/assets/portfolio-3.CL9t4un2_LR7A4.webp)![Thumbnail 4](/assets/portfolio-4.Bf-YfNAJ_ZhC0Vm.webp)![Thumbnail 5](/assets/portfolio-5.D4yZFL-P_ZgN82b.webp)![Thumbnail 6](/assets/portfolio-6.DVTeG3Ih_Z20eEvQ.webp)
+
+![Personal Portfolio & Design System - Fullscreen preview](<data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E>)
+
+Loading preview…
+
+Could not load full-resolution preview.
+
+Try again
+
+1 / 6Press ESC to close
+
+---
+
+## typst_flutter — Native Typst Compiler for Flutter
+
+URL: https://portfolio.ajmalbuv.duckdns.org/projects/typst-flutter
+
+Embed the Typst typesetting compiler natively into Flutter apps via Rust FFI with zero WASM/WebView overhead, sub-100ms compilation, and drop-in widgets.
+
+[Back to all projects](/#work)
+
+## Overview & Architecture
+
+typst\_flutter is an open-source Flutter package that natively embeds the Typst document compiler into Flutter applications across Android, iOS, macOS, Windows, and Linux via a high-performance Rust FFI bridge. By avoiding heavy WebViews and WASM interpreters, it compiles complex Typst documents directly on-device in under 100 milliseconds. Engineered with an opaque handle memory architecture, compiled documents remain safely inside Rust memory to guarantee zero race conditions and zero memory leaks. It provides drop-in interactive widgets (TypstDocumentViewer), full Typst query() selector data extraction to structured JSON, bidirectional input passing via sys.inputs, and automated handling for the Typst universe package registry (@preview/\*). Published on pub.dev and backed by comprehensive documentation.
+
+## Key Capabilities
+
+### Native Rust Core & FFI Bridge
+
+Compiles Typst markup natively on-device with Rust FFI, achieving sub-100ms compilation without WebViews, WASM, or external cloud servers.
+
+### Opaque Handle Memory Architecture
+
+Compiled document references remain encapsulated in native Rust memory, guaranteeing thread safety, high throughput, and zero memory leaks.
+
+### Drop-In Document Viewer Widgets
+
+Interactive Flutter widgets (TypstDocumentViewer, TypstView) supporting multi-page rendering, pinch-to-zoom, pan, and reactive re-renders.
+
+### Dynamic Data & Metadata Querying
+
+Extract structured JSON metadata and document hierarchies via Typst selectors with query(), and pass runtime variables using sys.inputs.
+
+### Typst Package Registry Support
+
+Seamless integration with the Typst Universe (@preview/\*) with automatic downloading, tarball decompression, and in-memory caching.
+
+### Automated Multi-Platform Binary Distribution
+
+Turnkey cross-compilation pipeline providing prebuilt native binaries for Android, iOS, macOS, Windows, and Linux via automated setup scripts.

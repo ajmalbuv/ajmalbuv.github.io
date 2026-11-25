@@ -1,0 +1,15 @@
+# Site
+
+This file helps language models discover the most useful content on this site.
+
+## Home
+
+- [ajmalbuv](https://portfolio.ajmalbuv.duckdns.org/home.md): Software engineer focused on scalable systems, high-performance Flutter applications, and modern cross-platform engineering with clean architecture.
+
+## Projects
+
+- [blamr — Fast Concurrent Git Blame CLI & Attribution Engine](https://portfolio.ajmalbuv.duckdns.org/projects/blamr.md): Blazing-fast, zero-dependency concurrent git-blame author attribution and line statistics CLI engine written in modern Rust with in-process Gitoxide repository scanning.
+- [EduManage — College Management System](https://portfolio.ajmalbuv.duckdns.org/projects/edumanage.md): A comprehensive web-based academic administration platform built with Django and PostgreSQL, streamlining student enrollment, attendance tracking, and grading.
+- [Personal Portfolio & Design System](https://portfolio.ajmalbuv.duckdns.org/projects/portfolio.md): High-performance personal website engineered with Astro 7, Tailwind CSS 4, and TypeScript, featuring zero-overhead architecture and strict CSP headers.
+- [typst_flutter — Native Typst Compiler for Flutter](https://portfolio.ajmalbuv.duckdns.org/projects/typst-flutter.md): Embed the Typst typesetting compiler natively into Flutter apps via Rust FFI with zero WASM/WebView overhead, sub-100ms compilation, and drop-in widgets.
+

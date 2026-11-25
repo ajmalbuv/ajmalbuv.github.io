@@ -1,0 +1,4 @@
+Contact: mailto:ajmalbuv@gmail.com
+Expires: 2027-11-25T19:36:15.968Z
+Canonical: https://portfolio.ajmalbuv.duckdns.org/.well-known/security.txt
+Preferred-Languages: en
