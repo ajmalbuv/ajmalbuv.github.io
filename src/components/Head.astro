@@ -1,4 +1,5 @@
 ---
+import { getImage } from 'astro:assets';
 import { siteData } from '../data/site';
 import { absolute, canonical, getSite, safeJsonLd } from '../utils/url';
 import geistSansFont from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
@@ -33,7 +34,13 @@ const {
 const site = getSite(Astro.site, Astro.url);
 const siteUrl = site.href;
 const ogImageFullUrl = absolute(image, site);
-const avatarFullUrl = absolute(siteData.personal.avatar.src, site);
+const optimizedAvatar = await getImage({
+  src: siteData.personal.avatar,
+  width: 416,
+  height: 416,
+  format: 'webp',
+});
+const avatarFullUrl = absolute(optimizedAvatar.src, site);
 const personId = absolute('/#person', site);
 const websiteId = absolute('/#website', site);
 const twitterHandle = `@${siteData.personal.handle}`;

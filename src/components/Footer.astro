@@ -7,14 +7,14 @@ const currentYear = new Date().getFullYear();
 
 <footer class="w-full border-t border-neutral-800/80 bg-surface-footer text-neutral-400 py-6 sm:py-8 px-3.5 sm:px-6 lg:px-8 transition-colors">
   <div class="max-w-5xl 2xl:max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div class="flex flex-col items-center sm:items-start gap-1">
+    <div class="min-w-0 flex flex-col items-center sm:items-start text-center sm:text-start gap-1">
       <a
         href="/#home"
         class="font-mono text-white font-bold hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded min-h-11 flex items-center"
       >
         {siteData.personal.handle}
       </a>
-      <p class="text-xs text-neutral-400">
+      <p class="text-xs text-neutral-400 wrap-break-word max-w-full">
         © {currentYear} {siteData.personal.name}. All rights reserved.
       </p>
     </div>

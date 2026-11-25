@@ -15,9 +15,9 @@ import Base from '../layouts/Base.astro';
   <main
     id="main-content"
     tabindex="-1"
-    class="min-h-[70vh] flex items-center justify-center px-4 py-20 focus:outline-none"
+    class="flex-1 w-full flex items-center justify-center px-3.5 sm:px-6 lg:px-8 py-16 sm:py-24 focus:outline-none"
   >
-    <div class="text-center max-w-md mx-auto">
+    <div class="text-center min-w-0 w-full max-w-md mx-auto wrap-break-word">
       <span class="font-mono text-5xl sm:text-7xl font-bold text-accent tracking-tight block mb-4">
         404
       </span>
@@ -31,9 +31,9 @@ import Base from '../layouts/Base.astro';
 
       <a
         href="/#home"
-        class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-black font-mono font-bold text-sm rounded-full hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20"
+        class="inline-flex items-center justify-center gap-2 min-h-11 px-6 py-3 bg-accent text-black font-mono font-bold text-sm rounded-full hover:bg-accent-hover transition-colors shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
       >
-        <Icon name="mdi:arrow-left" class="w-4 h-4" aria-hidden="true" />
+        <Icon name="mdi:arrow-left" class="w-4 h-4 shrink-0 rtl:rotate-180" aria-hidden="true" />
         <span>Return to Homepage</span>
       </a>
     </div>

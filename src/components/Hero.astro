@@ -22,29 +22,33 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
       <Image
         src={personal.avatar}
         alt={`${personal.name} (${personal.handle})`}
-        class="w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full object-cover object-top shadow-xl transition-transform duration-300 hover:scale-105"
+        class="w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full object-cover object-top shadow-xl transition-[transform,scale] duration-300 motion-safe:hover:scale-105 motion-reduce:transition-none"
         width={208}
         height={208}
+        widths={[208, 416]}
+        sizes="(min-width: 768px) 208px, (min-width: 640px) 176px, 128px"
+        format="webp"
         fit="cover"
         position="top"
         loading="eager"
+        decoding="sync"
         fetchpriority="high"
       />
     </div>
 
-    <div class="flex flex-col items-center md:items-start text-center md:text-left">
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-black font-sans leading-none mb-2">
+    <div class="w-full min-w-0 flex flex-col items-center md:items-start text-center md:text-start">
+      <h1 class="max-w-full wrap-break-word text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-black font-sans leading-none mb-2">
         {personal.handle}
       </h1>
-      <h2 class="text-xl sm:text-3xl font-semibold text-neutral-800 font-mono mb-2">
+      <h2 class="max-w-full wrap-break-word text-xl sm:text-3xl font-semibold text-neutral-800 font-mono mb-2">
         {personal.name}
       </h2>
-      <p class="font-mono text-xs sm:text-base md:text-lg text-neutral-600 mb-6 max-w-md">
+      <p class="font-mono text-xs sm:text-base md:text-lg text-neutral-600 mb-6 max-w-md wrap-break-word">
         {personal.title}
       </p>
 
       <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4">
-        <div class="flex items-center gap-1.5 sm:gap-2">
+        <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
           {personal.contact.socials.map((social) => {
             const isExternal = social.url.startsWith("http");
             return (
@@ -87,11 +91,11 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
           data-resume-url={personal.resumeUrl}
           type="button"
           aria-describedby="resume-status"
-          class="inline-flex items-center gap-2 min-h-11 px-4 py-2 sm:px-5 sm:py-2.5 bg-black text-white font-mono text-xs sm:text-sm font-semibold rounded-full hover:bg-accent hover:text-black transition-colors duration-200 cursor-pointer shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark aria-busy:pointer-events-none aria-busy:cursor-wait aria-busy:opacity-70 active:scale-95"
+          class="inline-flex items-center justify-center gap-2 min-h-11 px-4 py-2 sm:px-5 sm:py-2.5 bg-black text-white font-mono text-xs sm:text-sm font-semibold rounded-full hover:bg-accent hover:text-black transition-[color,background-color,transform,scale] duration-200 cursor-pointer shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark disabled:pointer-events-none disabled:cursor-wait disabled:opacity-70 aria-busy:pointer-events-none aria-busy:cursor-wait aria-busy:opacity-70 motion-safe:active:scale-95 motion-reduce:transition-colors motion-reduce:duration-100"
         >
           <Icon
             name="mdi:file-document-outline"
-            class="w-4 h-4"
+            class="w-4 h-4 shrink-0"
             aria-hidden="true"
           />
           <span id="download-resume-text">Download Resume</span>
@@ -101,12 +105,39 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
           href={resumeViewerUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 min-h-11 px-3.5 py-2 sm:px-4 sm:py-2 border border-neutral-300 text-neutral-800 font-mono text-xs font-medium rounded-full hover:border-black hover:text-black transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark active:scale-95"
+          class="inline-flex items-center justify-center gap-1.5 min-h-11 px-3.5 py-2 sm:px-4 sm:py-2 border border-neutral-300 text-neutral-800 font-mono text-xs font-medium rounded-full hover:border-black hover:text-black transition-[color,border-color,transform,scale] duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark motion-safe:active:scale-95 motion-reduce:transition-colors motion-reduce:duration-100"
         >
-          <Icon name="mdi:open-in-new" class="w-3.5 h-3.5" aria-hidden="true" />
+          <Icon name="mdi:open-in-new" class="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
           <span>View Online</span>
           <span class="sr-only">(opens in new tab)</span>
         </a>
+      </div>
+
+      <div
+        id="resume-error"
+        role="alert"
+        hidden
+        class="mt-3 w-full max-w-md rounded-xl border border-red-300 bg-red-50 px-3.5 py-2.5 text-start text-xs text-red-950 shadow-sm"
+      >
+        <p id="resume-error-msg" class="font-mono leading-relaxed wrap-break-word"></p>
+        <div class="mt-2 flex flex-wrap items-center gap-2">
+          <button
+            id="resume-retry-btn"
+            type="button"
+            class="inline-flex items-center justify-center min-h-11 px-3.5 py-2 rounded-lg bg-black text-white font-mono text-xs font-semibold hover:bg-accent hover:text-black transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark cursor-pointer"
+          >
+            Try again
+          </button>
+          <a
+            href={personal.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-1 min-h-11 px-3 py-2 rounded-lg border border-red-300 text-red-900 font-mono text-xs font-medium hover:bg-red-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark"
+          >
+            <span>Open PDF directly</span>
+            <span class="sr-only">(opens in new tab)</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -115,14 +146,34 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
 <script>
   import type { Container, ISourceOptions } from "@tsparticles/engine";
 
+  type ConnectionLike = { saveData?: boolean; effectiveType?: string };
+  type WindowWithScheduler = Window & {
+    scheduler?: { yield?: () => Promise<void> };
+  };
+
+  function isConstrainedConnection(): boolean {
+    const conn = (navigator as Navigator & { connection?: ConnectionLike })
+      .connection;
+    return Boolean(
+      conn?.saveData ||
+        conn?.effectiveType === "slow-2g" ||
+        conn?.effectiveType === "2g",
+    );
+  }
+
+  function yieldToMain(): Promise<void> {
+    const scheduler = (window as WindowWithScheduler).scheduler;
+    if (typeof scheduler?.yield === "function") {
+      return scheduler.yield();
+    }
+    return new Promise((resolve) => window.setTimeout(resolve, 0));
+  }
+
   const getParticlesConfig = (isMobile: boolean): ISourceOptions => ({
-    fpsLimit: 60,
-    // fullScreen: {
-    // enable: false,
-    // },
+    fpsLimit: isMobile ? 30 : 60,
     particles: {
       number: {
-        value: isMobile ? 35 : 70,
+        value: isMobile ? 24 : 70,
         density: {
           enable: true,
           width: 800,
@@ -130,7 +181,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
         },
         limit: {
           mode: "delete",
-          value: isMobile ? 30 : 75,
+          value: isMobile ? 24 : 75,
         },
       },
       color: {
@@ -147,7 +198,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
       },
       links: {
         enable: true,
-        distance: 150,
+        distance: isMobile ? 125 : 150,
         color: "#000000",
         opacity: 0.4,
         width: 3,
@@ -182,7 +233,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
         },
       },
     },
-    detectRetina: true,
+    detectRetina: !isMobile,
   });
 
   let engineLoaded = false;
@@ -191,27 +242,64 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
   async function initParticles() {
     const container = document.getElementById("particles-js");
     if (!container || container.dataset["initialized"]) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      isConstrainedConnection()
+    ) {
+      return;
+    }
     container.dataset["initialized"] = "true";
 
     try {
       const isMobile = window.innerWidth < 640;
-      const [{ tsParticles }, { loadSlim }] = await Promise.all([
+      const [
+        { tsParticles },
+        { loadBasic },
+        { loadInteractivityPlugin },
+        { loadParticlesLinksInteraction },
+        grabModule,
+      ] = await Promise.all([
         import("@tsparticles/engine"),
-        import("@tsparticles/slim"),
+        import("@tsparticles/basic"),
+        import("@tsparticles/plugin-interactivity"),
+        import("@tsparticles/interaction-particles-links"),
+        !isMobile
+          ? import("@tsparticles/interaction-external-grab")
+          : Promise.resolve(null),
       ]);
 
+      await yieldToMain();
+      if (pageUnloading || !container.isConnected) {
+        delete container.dataset["initialized"];
+        return;
+      }
+
       if (!engineLoaded) {
-        await loadSlim(tsParticles);
+        await loadBasic(tsParticles);
+        await yieldToMain();
+        await tsParticles.pluginManager.register(async (e) => {
+          await loadInteractivityPlugin(e);
+          await loadParticlesLinksInteraction(e);
+          if (grabModule) {
+            await grabModule.loadExternalGrabInteraction(e);
+          }
+        });
         engineLoaded = true;
+        await yieldToMain();
+      }
+
+      if (pageUnloading || !container.isConnected) {
+        delete container.dataset["initialized"];
+        return;
       }
 
       const c = await tsParticles.load({
         id: "particles-js",
         options: getParticlesConfig(isMobile),
       });
-      if (!container.isConnected) {
+      if (!container.isConnected || pageUnloading) {
         c?.destroy();
+        delete container.dataset["initialized"];
         return;
       }
       particleContainer = c;
@@ -221,18 +309,54 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
     }
   }
 
+  let activeDownloadController: AbortController | null = null;
+  let pageUnloading = false;
+  let scheduleCleanup: (() => void) | undefined;
+
   function initResume() {
-    const resumeBtn = document.getElementById("download-resume-btn");
+    const resumeBtn = document.getElementById(
+      "download-resume-btn",
+    ) as HTMLButtonElement | null;
     const resumeText = document.getElementById("download-resume-text");
     const resumeStatus = document.getElementById("resume-status");
+    const resumeError = document.getElementById("resume-error");
+    const resumeErrorMsg = document.getElementById("resume-error-msg");
+    const resumeRetryBtn = document.getElementById("resume-retry-btn");
     if (!resumeBtn || resumeBtn.dataset["initialized"]) return;
     resumeBtn.dataset["initialized"] = "true";
 
-    resumeBtn.addEventListener("click", async () => {
+    const showResumeError = (message: string) => {
+      if (resumeErrorMsg) resumeErrorMsg.textContent = message;
+      if (resumeError) resumeError.hidden = false;
+      if (resumeStatus) resumeStatus.textContent = message;
+    };
+
+    const clearResumeError = () => {
+      if (resumeError) resumeError.hidden = true;
+      if (resumeErrorMsg) resumeErrorMsg.textContent = "";
+    };
+
+    const startDownload = async () => {
       const resumeUrl = resumeBtn.dataset["resumeUrl"];
-      if (!resumeUrl || resumeBtn.getAttribute("aria-busy") === "true") return;
+      if (
+        !resumeUrl ||
+        resumeBtn.disabled ||
+        resumeBtn.getAttribute("aria-busy") === "true"
+      ) {
+        return;
+      }
+
+      clearResumeError();
+
+      if (typeof navigator !== "undefined" && !navigator.onLine) {
+        showResumeError(
+          "You appear to be offline. Reconnect and try again, or open the direct PDF link when online.",
+        );
+        return;
+      }
 
       const originalText = resumeText?.textContent || "Download Resume";
+      resumeBtn.disabled = true;
       resumeBtn.setAttribute("aria-busy", "true");
       if (resumeText) resumeText.textContent = "Downloading...";
       if (resumeStatus) {
@@ -240,10 +364,26 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
         resumeStatus.textContent = "Preparing resume download...";
       }
 
+      activeDownloadController?.abort();
+      const controller = new AbortController();
+      activeDownloadController = controller;
+      let timedOut = false;
+      const timeoutId = window.setTimeout(() => {
+        timedOut = true;
+        controller.abort();
+      }, 12000);
+
       try {
-        const res = await fetch(resumeUrl);
-        if (!res.ok) throw new Error("Fetch failed");
+        const res = await fetch(resumeUrl, { signal: controller.signal });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const contentType = res.headers.get("content-type") || "";
+        if (contentType.includes("text/html")) {
+          throw new Error("Unexpected HTML response instead of PDF");
+        }
         const blob = await res.blob();
+        if (blob.size === 0) {
+          throw new Error("Received empty file");
+        }
         const blobUrl = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = blobUrl;
@@ -251,35 +391,96 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
-        if (resumeStatus)
+        window.setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1500);
+        if (resumeStatus) {
           resumeStatus.textContent = "Resume downloaded successfully.";
+        }
       } catch (err) {
-        console.warn("Direct fallback on fetch error:", err);
-        window.location.href = resumeUrl;
+        if (pageUnloading && controller.signal.aborted && !timedOut) {
+          return;
+        }
+        if (typeof navigator !== "undefined" && !navigator.onLine) {
+          showResumeError(
+            "Connection lost while downloading. Reconnect to retry or open the PDF link directly.",
+          );
+        } else if (timedOut) {
+          showResumeError(
+            "Download timed out after 12s on a slow connection. Try again or open the PDF directly.",
+          );
+        } else {
+          const detail =
+            err instanceof Error && err.message ? ` (${err.message})` : "";
+          showResumeError(
+            `Could not download resume directly${detail}. Try again or open the PDF directly.`,
+          );
+        }
       } finally {
-        resumeBtn.removeAttribute("aria-busy");
-        if (resumeText) resumeText.textContent = originalText;
+        window.clearTimeout(timeoutId);
+        if (activeDownloadController === controller) {
+          activeDownloadController = null;
+        }
+        if (resumeBtn.isConnected) {
+          resumeBtn.disabled = false;
+          resumeBtn.removeAttribute("aria-busy");
+          if (resumeText) resumeText.textContent = originalText;
+        }
       }
+    };
+
+    resumeBtn.addEventListener("click", () => {
+      void startDownload();
+    });
+    resumeRetryBtn?.addEventListener("click", () => {
+      void startDownload();
     });
   }
 
   const scheduleParticles = () => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      isConstrainedConnection()
+    ) {
+      return;
+    }
+    scheduleCleanup?.();
 
     let scheduled = false;
-    const start = () => {
-      if (scheduled) return;
-      scheduled = true;
-      cleanup();
-      initParticles();
-    };
+    let idleId: number | undefined;
+    let idleTimer: number | undefined;
 
-    const cleanup = () => {
+    const cleanupTriggers = () => {
       window.removeEventListener("pointermove", start);
       window.removeEventListener("touchstart", start);
       window.removeEventListener("scroll", start);
+      window.removeEventListener("load", triggerIdle);
+      if (
+        idleId !== undefined &&
+        typeof window.cancelIdleCallback === "function"
+      ) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (idleTimer !== undefined) {
+        window.clearTimeout(idleTimer);
+      }
     };
+
+    const start = () => {
+      if (scheduled || pageUnloading) return;
+      scheduled = true;
+      cleanupTriggers();
+      void initParticles();
+    };
+
+    const triggerIdle = () => {
+      if (scheduled || pageUnloading) return;
+      if (typeof window.requestIdleCallback === "function") {
+        idleId = window.requestIdleCallback(start, { timeout: 4000 });
+      } else {
+        idleTimer = window.setTimeout(start, 2500);
+      }
+    };
+
+    scheduleCleanup = cleanupTriggers;
 
     window.addEventListener("pointermove", start, {
       once: true,
@@ -287,14 +488,6 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
     });
     window.addEventListener("touchstart", start, { once: true, passive: true });
     window.addEventListener("scroll", start, { once: true, passive: true });
-
-    const triggerIdle = () => {
-      if ("requestIdleCallback" in window) {
-        window.requestIdleCallback(start, { timeout: 4000 });
-      } else {
-        setTimeout(start, 2500);
-      }
-    };
 
     if (document.readyState === "complete") {
       triggerIdle();
@@ -304,6 +497,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
   };
 
   const boot = () => {
+    pageUnloading = false;
     initResume();
     scheduleParticles();
   };
@@ -314,6 +508,11 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
     boot();
   }
   const cleanup = () => {
+    pageUnloading = true;
+    scheduleCleanup?.();
+    scheduleCleanup = undefined;
+    activeDownloadController?.abort();
+    activeDownloadController = null;
     particleContainer?.destroy();
     particleContainer = undefined;
     const container = document.getElementById("particles-js");
@@ -322,6 +521,7 @@ const resumeViewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
 
   window.addEventListener("pagehide", cleanup);
   window.addEventListener("pageshow", (event) => {
+    pageUnloading = false;
     if (!event.persisted) return;
     initResume();
     const container = document.getElementById("particles-js");

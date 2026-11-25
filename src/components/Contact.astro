@@ -16,14 +16,14 @@ const { personal } = siteData;
     ></div>
 
     <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-7 text-center lg:text-left">
+      <div class="lg:col-span-7 min-w-0 text-center lg:text-start">
         <span class="font-mono text-xs uppercase tracking-widest text-accent font-bold block mb-2">
           Get In Touch
         </span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4 wrap-break-word">
           Let's Build Together.
         </h2>
-        <p class="text-neutral-400 text-sm sm:text-base leading-relaxed mb-6 max-w-xl mx-auto lg:mx-0">
+        <p class="text-neutral-400 text-sm sm:text-base leading-relaxed mb-6 max-w-xl mx-auto lg:mx-0 wrap-break-word">
           I am always open to discussing new opportunities, systems
           architecture, high-performance Flutter applications, or open-source
           collaborations.
@@ -32,36 +32,36 @@ const { personal } = siteData;
         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-neutral-400">
           <a
             href={`tel:${personal.contact.phone.replace(/\s+/g, '')}`}
-            class="inline-flex items-center gap-2 bg-neutral-900/80 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-neutral-800/80 hover:border-neutral-700 hover:text-white transition-colors"
+            class="inline-flex items-center min-h-11 max-w-full min-w-0 gap-2 bg-neutral-900/80 px-3.5 py-2 rounded-xl border border-neutral-800/80 hover:border-neutral-700 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Icon name="mdi:phone" class="w-4 h-4 text-neutral-500 shrink-0" aria-hidden="true" />
-            <span>{personal.contact.phone}</span>
+            <span dir="ltr" class="wrap-break-word">{personal.contact.phone}</span>
           </a>
-          <span class="inline-flex items-center gap-2 bg-neutral-900/80 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-neutral-800/80 text-neutral-300">
+          <span class="inline-flex items-center min-h-11 max-w-full min-w-0 gap-2 bg-neutral-900/80 px-3.5 py-2 rounded-xl border border-neutral-800/80 text-neutral-300">
             <Icon
               name="mdi:map-marker"
               class="w-4 h-4 text-neutral-500 shrink-0"
               aria-hidden="true"
             />
-            <span>{personal.contact.location}</span>
+            <span class="wrap-break-word">{personal.contact.location}</span>
           </span>
         </div>
       </div>
 
-      <div class="lg:col-span-5 w-full flex flex-col gap-4">
-        <div class="bg-surface-card border border-neutral-800 p-5 sm:p-7 rounded-2xl flex flex-col gap-4 text-center lg:text-left shadow-xl">
-          <div>
+      <div class="lg:col-span-5 min-w-0 w-full flex flex-col gap-4">
+        <div class="min-w-0 bg-surface-card border border-neutral-800 p-5 sm:p-7 rounded-2xl flex flex-col gap-4 text-center lg:text-start shadow-xl">
+          <div class="min-w-0">
             <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 font-bold block mb-1">
               Direct Contact
             </span>
-            <p class="text-xs text-neutral-400">
+            <p class="text-xs text-neutral-400 wrap-break-word">
               Reach out directly for freelance, consulting, or full-time roles.
             </p>
           </div>
 
           <a
             href={`mailto:${personal.contact.email}`}
-            class="inline-flex items-center justify-center gap-2 px-4 py-3 sm:px-6 sm:py-3.5 bg-accent text-black font-mono font-bold text-xs sm:text-sm md:text-base rounded-xl hover:bg-accent-hover transition-all transform hover:scale-[1.02] shadow-lg shadow-accent/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:ring-offset-accent max-w-full"
+            class="inline-flex items-center justify-center gap-2 min-h-11 px-4 py-3 sm:px-6 sm:py-3.5 bg-accent text-black font-mono font-bold text-xs sm:text-sm md:text-base rounded-xl hover:bg-accent-hover transition-[color,background-color,transform,scale] duration-200 motion-safe:hover:scale-[1.02] motion-safe:active:scale-95 motion-reduce:transition-colors shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:ring-offset-accent max-w-full min-w-0"
           >
             <Icon
               name="mdi:email-outline"

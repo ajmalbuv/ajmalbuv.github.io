@@ -28,13 +28,26 @@
 
 html {
   font-family: var(--font-sans);
-  scroll-behavior: smooth;
   scrollbar-gutter: stable;
   color-scheme: dark;
+  scrollbar-color: var(--color-neutral-700) var(--color-surface-bg);
+  scrollbar-width: thin;
 }
 
-@view-transition {
-  navigation: auto;
+@media (forced-colors: active) {
+  html {
+    scrollbar-color: auto;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @view-transition {
+    navigation: auto;
+  }
 }
 
 body {
@@ -43,32 +56,31 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100dvh;
-  overflow-x: hidden;
+  overflow-x: clip;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body:has(dialog:modal) {
-  overflow: hidden;
+/* Prevent scroll chaining from modal dialogs and backdrop without mutating root overflow */
+dialog:modal {
+  overscroll-behavior: contain;
 }
 
-/* Scroll-driven animations with reduced motion and browser support guards */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fade-in-up linear forwards;
-      animation-timeline: view();
-      animation-range: entry 10% cover 30%;
-    }
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
 
-    @keyframes fade-in-up {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 }

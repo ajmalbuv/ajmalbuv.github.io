@@ -14,44 +14,72 @@ if (!screenshots || screenshots.length === 0) {
 }
 ---
 
-<section class="mb-12 sm:mb-16" id="project-gallery-section">
+<section
+  class="w-full min-w-0 mb-12 sm:mb-16"
+  id="project-gallery-section"
+  aria-roledescription="carousel"
+  aria-labelledby="project-gallery-heading"
+>
   <div class="flex items-center justify-between mb-4 sm:mb-6">
-    <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+    <h2
+      id="project-gallery-heading"
+      class="text-xl sm:text-2xl font-bold text-white tracking-tight"
+    >
       Interface Previews
     </h2>
     {screenshots.length > 1 && (
       <span
         id="gallery-counter"
-        class="font-mono text-xs text-neutral-400 bg-neutral-900/90 px-3 py-1 rounded-full border border-neutral-800 shadow-inner"
+        dir="ltr"
+        class="font-mono tabular-nums text-xs text-neutral-400 bg-neutral-900/90 px-3 py-1 rounded-full border border-neutral-800 shadow-inner"
       >
         1 / {screenshots.length}
       </span>
     )}
   </div>
 
-  <div class="gallery-root relative bg-surface-card border border-neutral-800/90 rounded-2xl overflow-hidden shadow-2xl">
+  <div class="gallery-root w-full min-w-0 relative bg-surface-card border border-neutral-800/90 rounded-2xl overflow-hidden shadow-2xl">
     <!-- Main Display Viewport (Native CSS Scroll-Snap) -->
-    <div class="relative aspect-video sm:aspect-16/10 bg-neutral-950 overflow-hidden group">
+    <div class="w-full min-w-0 relative aspect-video sm:aspect-16/10 bg-neutral-950 overflow-hidden group">
       <div
-        class="gallery-viewport flex w-full h-full overflow-x-auto snap-x snap-mandatory scroll-smooth overscroll-x-contain scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset"
-        role="region"
-        aria-label="Interface previews carousel"
+        class="gallery-viewport flex w-full h-full overflow-x-auto snap-x snap-mandatory motion-safe:scroll-smooth overscroll-x-contain touch-manipulation scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset"
+        role="group"
+        aria-label="Interface preview slides"
         tabindex="0"
       >
         {screenshots.map((shot, idx) => (
           <div
-            class="gallery-slide shrink-0 w-full h-full snap-center flex items-center justify-center p-1 sm:p-2 select-none"
+            class="gallery-slide relative shrink-0 w-full h-full snap-center flex items-center justify-center p-1 sm:p-2 select-none"
             data-slide-index={idx}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${idx + 1} of ${screenshots.length}`}
           >
             <Image
               src={shot}
               alt={`${title} - Preview ${idx + 1}`}
-              class="w-full h-full object-contain cursor-zoom-in"
+              class="gallery-slide-img w-full h-full object-contain cursor-zoom-in"
               loading={idx === 0 ? 'eager' : 'lazy'}
+              decoding={idx === 0 ? 'sync' : 'async'}
+              fetchpriority={idx === 0 ? undefined : 'low'}
               widths={[640, 960, 1280, 1920]}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1152px"
+              sizes="(min-width: 1536px) 1088px, (min-width: 1024px) 960px, calc(100vw - 1.75rem)"
               data-zoom-src={shot.src}
             />
+            <div
+              class="gallery-slide-error hidden absolute inset-4 flex-col items-center justify-center gap-3 rounded-xl bg-neutral-950/90 border border-neutral-800 p-4 text-center"
+              role="alert"
+            >
+              <p class="font-mono text-xs text-neutral-300">
+                Preview {idx + 1} could not be loaded.
+              </p>
+              <button
+                type="button"
+                class="gallery-slide-retry min-h-11 px-4 py-2 rounded-lg bg-accent text-black font-mono text-xs font-bold hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer"
+              >
+                Retry image
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -61,7 +89,7 @@ if (!screenshots || screenshots.length === 0) {
         <>
           <button
             type="button"
-            class="gallery-prev-btn absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 min-w-11 min-h-11 p-2 sm:p-2.5 rounded-full bg-black/70 hover:bg-accent text-white hover:text-black backdrop-blur-md border border-white/10 transition-all active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent opacity-80 sm:opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 cursor-pointer flex items-center justify-center"
+            class="gallery-prev-btn absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 min-w-11 min-h-11 p-2 sm:p-2.5 rounded-full bg-black/70 hover:bg-accent text-white hover:text-black backdrop-blur-md border border-white/10 transition-[opacity,background-color,color,transform,scale] duration-200 ease-out motion-safe:active:scale-95 motion-reduce:transition-[opacity,background-color,color] motion-reduce:duration-100 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-accent opacity-85 sm:[@media(hover:hover)_and_(pointer:fine)]:opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 cursor-pointer flex items-center justify-center"
             aria-label="Previous preview"
           >
             <Icon name="mdi:chevron-left" class="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
@@ -69,7 +97,7 @@ if (!screenshots || screenshots.length === 0) {
 
           <button
             type="button"
-            class="gallery-next-btn absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 min-w-11 min-h-11 p-2 sm:p-2.5 rounded-full bg-black/70 hover:bg-accent text-white hover:text-black backdrop-blur-md border border-white/10 transition-all active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent opacity-80 sm:opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 cursor-pointer flex items-center justify-center"
+            class="gallery-next-btn absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 min-w-11 min-h-11 p-2 sm:p-2.5 rounded-full bg-black/70 hover:bg-accent text-white hover:text-black backdrop-blur-md border border-white/10 transition-[opacity,background-color,color,transform,scale] duration-200 ease-out motion-safe:active:scale-95 motion-reduce:transition-[opacity,background-color,color] motion-reduce:duration-100 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-accent opacity-85 sm:[@media(hover:hover)_and_(pointer:fine)]:opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 cursor-pointer flex items-center justify-center"
             aria-label="Next preview"
           >
             <Icon name="mdi:chevron-right" class="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
@@ -80,7 +108,7 @@ if (!screenshots || screenshots.length === 0) {
       <!-- Fullscreen zoom prompt button -->
       <button
         type="button"
-        class="gallery-expand-btn absolute bottom-3 right-3 z-20 inline-flex items-center justify-center gap-1.5 min-h-11 px-3.5 py-2 rounded-lg bg-black/80 hover:bg-accent text-neutral-300 hover:text-black font-mono text-xs backdrop-blur-md border border-white/10 transition-all active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+        class="gallery-expand-btn absolute bottom-3 inset-e-3 z-20 inline-flex items-center justify-center gap-1.5 min-w-11 min-h-11 px-2.5 sm:px-3.5 py-2 rounded-lg bg-black/80 hover:bg-accent text-neutral-300 hover:text-black font-mono text-xs backdrop-blur-md border border-white/10 transition-[background-color,color,transform,scale] duration-200 ease-out motion-safe:active:scale-95 motion-reduce:transition-colors motion-reduce:duration-100 touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
         aria-label="Open fullscreen preview"
       >
         <Icon name="mdi:arrow-expand" class="w-4 h-4" aria-hidden="true" />
@@ -91,14 +119,14 @@ if (!screenshots || screenshots.length === 0) {
     <!-- Thumbnail Strip -->
     {screenshots.length > 1 && (
       <div class="p-3 sm:p-4 bg-neutral-900/95 border-t border-neutral-800">
-        <div class="gallery-thumbs flex gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-thin scrollbar-neutral-700">
+        <div class="gallery-thumbs flex gap-2 sm:gap-3 overflow-x-auto overflow-y-hidden p-1.5 scrollbar-thin [scrollbar-color:var(--color-neutral-700)_transparent]">
           {screenshots.map((shot, idx) => (
             <button
               type="button"
               class:list={[
-                'gallery-thumb shrink-0 relative w-16 sm:w-20 md:w-24 aspect-video rounded-lg overflow-hidden border-2 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+                'gallery-thumb shrink-0 relative w-20 sm:w-22 md:w-24 aspect-video rounded-lg overflow-hidden border-2 transition-[opacity,border-color,box-shadow,transform,scale] duration-200 ease-out motion-safe:active:scale-95 motion-reduce:transition-[opacity,border-color] motion-reduce:duration-100 cursor-pointer touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-accent',
                 idx === 0
-                  ? 'border-accent ring-1 ring-accent/50 scale-105'
+                  ? 'border-accent ring-1 ring-accent/50 motion-safe:scale-105'
                   : 'border-neutral-800 opacity-60 hover:opacity-100 hover:border-neutral-600',
               ]}
               data-thumb-index={idx}
@@ -110,7 +138,10 @@ if (!screenshots || screenshots.length === 0) {
                 alt={`Thumbnail ${idx + 1}`}
                 class="w-full h-full object-cover"
                 widths={[96, 192]}
+                sizes="(min-width: 768px) 96px, (min-width: 640px) 88px, 80px"
                 loading="lazy"
+                decoding="async"
+                fetchpriority={idx > 5 ? 'low' : undefined}
               />
             </button>
           ))}
@@ -119,92 +150,179 @@ if (!screenshots || screenshots.length === 0) {
     )}
   </div>
 
+  {screenshots.length > 1 && (
+    <p id="gallery-status" class="sr-only" role="status" aria-live="polite"></p>
+  )}
+
   <!-- Native Lightbox Dialog -->
   <dialog
     id="gallery-lightbox"
     closedby="any"
     aria-label={`${title} interface preview lightbox`}
-    class="backdrop:bg-black/95 backdrop:backdrop-blur-sm bg-transparent p-0 m-auto max-w-[95vw] max-h-[95vh] outline-none border-none text-white rounded-2xl overflow-hidden shadow-2xl"
+    class="backdrop:bg-black/95 backdrop:backdrop-blur-sm bg-transparent p-0 m-auto max-w-[95vw] max-h-[95dvh] outline-none border-none text-white rounded-2xl overflow-hidden shadow-2xl"
   >
-    <div class="relative flex flex-col items-center justify-center p-2 sm:p-6">
+    <div class="relative flex flex-col items-center justify-center p-2 pt-14 sm:p-6 sm:pt-14 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))]">
       <button
         id="lightbox-close-btn"
         type="button"
-        class="absolute top-4 right-4 z-50 min-w-11 min-h-11 p-2.5 rounded-full bg-black/80 hover:bg-accent text-white hover:text-black border border-white/10 transition-colors active:scale-95 cursor-pointer flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        class="absolute top-2.5 inset-e-2.5 sm:top-3 sm:inset-e-3 z-50 min-w-11 min-h-11 p-2.5 rounded-full bg-black/80 hover:bg-accent text-white hover:text-black border border-white/10 transition-[color,background-color,transform,scale] duration-150 motion-safe:active:scale-95 motion-reduce:transition-colors motion-reduce:duration-100 touch-manipulation cursor-pointer flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         aria-label="Close fullscreen view"
       >
         <Icon name="mdi:close" class="w-6 h-6" aria-hidden="true" />
       </button>
 
-      {screenshots.length > 1 && (
-        <>
-          <button
-            id="lightbox-prev-btn"
-            type="button"
-            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-50 min-w-11 min-h-11 p-2 sm:p-2.5 rounded-full bg-black/80 hover:bg-accent text-white hover:text-black border border-white/10 transition-colors active:scale-95 cursor-pointer flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            aria-label="Previous image"
-          >
-            <Icon name="mdi:chevron-left" class="w-6 h-6" aria-hidden="true" />
-          </button>
+      <div class="relative flex items-center justify-center w-full min-w-[min(88vw,30rem)] min-h-40">
+        {screenshots.length > 1 && (
+          <>
+            <button
+              id="lightbox-prev-btn"
+              type="button"
+              class="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-50 min-w-11 min-h-11 p-2 sm:p-2.5 rounded-full bg-black/80 hover:bg-accent text-white hover:text-black border border-white/10 transition-[color,background-color,transform,scale] duration-150 motion-safe:active:scale-95 motion-reduce:transition-colors motion-reduce:duration-100 touch-manipulation cursor-pointer flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              aria-label="Previous image"
+            >
+              <Icon name="mdi:chevron-left" class="w-6 h-6" aria-hidden="true" />
+            </button>
 
-          <button
-            id="lightbox-next-btn"
-            type="button"
-            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-50 min-w-11 min-h-11 p-2 sm:p-2.5 rounded-full bg-black/80 hover:bg-accent text-white hover:text-black border border-white/10 transition-colors active:scale-95 cursor-pointer flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            aria-label="Next image"
-          >
-            <Icon name="mdi:chevron-right" class="w-6 h-6" aria-hidden="true" />
-          </button>
-        </>
-      )}
+            <button
+              id="lightbox-next-btn"
+              type="button"
+              class="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-50 min-w-11 min-h-11 p-2 sm:p-2.5 rounded-full bg-black/80 hover:bg-accent text-white hover:text-black border border-white/10 transition-[color,background-color,transform,scale] duration-150 motion-safe:active:scale-95 motion-reduce:transition-colors motion-reduce:duration-100 touch-manipulation cursor-pointer flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              aria-label="Next image"
+            >
+              <Icon name="mdi:chevron-right" class="w-6 h-6" aria-hidden="true" />
+            </button>
+          </>
+        )}
 
-      <img
-        id="lightbox-img"
-        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
-        alt={`${title} - Fullscreen preview`}
-        class="max-w-[92vw] max-h-[85vh] object-contain rounded-xl shadow-2xl transition-opacity duration-150"
-      />
+        <img
+          id="lightbox-img"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+          alt={`${title} - Fullscreen preview`}
+          decoding="async"
+          class="max-w-[90vw] max-h-[75dvh] sm:max-h-[82dvh] object-contain rounded-xl shadow-2xl"
+        />
+
+        <div
+          id="lightbox-loading"
+          role="status"
+          aria-live="polite"
+          class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none flex-col items-center justify-center gap-2 rounded-xl bg-black/85 border border-neutral-800 px-5 py-4 text-center shadow-2xl"
+        >
+          <span
+            class="w-6 h-6 rounded-full border-2 border-neutral-600 border-t-accent motion-safe:animate-spin"
+            aria-hidden="true"
+          ></span>
+          <span class="font-mono text-xs text-neutral-300">Loading preview…</span>
+        </div>
+
+        <div
+          id="lightbox-error"
+          role="alert"
+          class="hidden mx-14 sm:mx-16 flex-col items-center justify-center gap-3 rounded-xl bg-neutral-950/95 border border-neutral-800 px-6 py-5 text-center max-w-sm"
+        >
+          <p class="font-mono text-xs text-neutral-200 leading-relaxed">
+            Could not load full-resolution preview.
+          </p>
+          <button
+            id="lightbox-retry-btn"
+            type="button"
+            class="min-h-11 px-4 py-2 rounded-lg bg-accent text-black font-mono text-xs font-bold hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer"
+          >
+            Try again
+          </button>
+        </div>
+      </div>
 
       <div class="mt-3 flex items-center justify-between w-full max-w-md px-4 font-mono text-xs text-neutral-400">
-        <span id="lightbox-counter" aria-live="polite" aria-atomic="true">1 / {screenshots.length}</span>
+        <span id="lightbox-counter" class="tabular-nums" dir="ltr" aria-live="polite" aria-atomic="true">1 / {screenshots.length}</span>
         <span class="hidden sm:inline">Press ESC to close</span>
       </div>
     </div>
   </dialog>
 </section>
 
-<style>
-  dialog#gallery-lightbox {
+<style is:global>
+  #gallery-lightbox {
     opacity: 0;
-    transform: scale(0.97);
-    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), overlay 0.2s allow-discrete, display 0.2s allow-discrete;
+    transition-property: opacity, transform, display, overlay;
+    transition-duration: 0.09s, 0.09s, 0.16s, 0.16s;
+    transition-delay: 0s;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  dialog#gallery-lightbox[open] {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  @starting-style {
-    dialog#gallery-lightbox[open] {
-      opacity: 0;
+  @media (prefers-reduced-motion: no-preference) {
+    #gallery-lightbox {
       transform: scale(0.97);
     }
   }
 
-  dialog#gallery-lightbox::backdrop {
-    opacity: 0;
-    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), overlay 0.2s allow-discrete, display 0.2s allow-discrete;
-  }
-
-  dialog#gallery-lightbox[open]::backdrop {
+  #gallery-lightbox[open]:not([data-closing]) {
     opacity: 1;
-  }
+    transition-duration: 0.18s, 0.2s, 0.24s, 0.24s;
+    transition-delay: 0.06s, 0.04s, 0s, 0s;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 
-  @starting-style {
-    dialog#gallery-lightbox[open]::backdrop {
+    @starting-style {
       opacity: 0;
     }
+
+    @media (prefers-reduced-motion: no-preference) {
+      transform: scale(1);
+
+      @starting-style {
+        transform: scale(0.97);
+      }
+    }
+  }
+
+  #gallery-lightbox::backdrop {
+    opacity: 0;
+    transition-property: opacity, display, overlay;
+    transition-duration: 0.1s, 0.16s, 0.16s;
+    transition-delay: 0.06s, 0s, 0s;
+    transition-timing-function: ease-out;
+  }
+
+  #gallery-lightbox[open]:not([data-closing])::backdrop {
+    opacity: 1;
+    transition-duration: 0.1s, 0.24s, 0.24s;
+    transition-delay: 0s, 0s, 0s;
+    transition-timing-function: ease-out;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #gallery-lightbox {
+      transition-duration: 0.06s, 0s, 0.11s, 0.11s;
+      transition-delay: 0s;
+    }
+
+    #gallery-lightbox::backdrop {
+      transition-duration: 0.07s, 0.11s, 0.11s;
+      transition-delay: 0.04s, 0s, 0s;
+    }
+
+    #gallery-lightbox[open]:not([data-closing]) {
+      transition-duration: 0.07s, 0s, 0.11s, 0.11s;
+      transition-delay: 0.04s, 0s, 0s, 0s;
+    }
+
+    #gallery-lightbox[open]:not([data-closing])::backdrop {
+      transition-duration: 0.055s, 0.11s, 0.11s;
+      transition-delay: 0s;
+    }
+  }
+
+  /* Declared with higher specificity after transition longhands so LightningCSS cannot collapse transition-* into a shorthand that resets transition-behavior to normal */
+  dialog#gallery-lightbox {
+    transition-behavior: allow-discrete;
+  }
+
+  dialog#gallery-lightbox::backdrop {
+    transition-behavior: allow-discrete;
   }
 </style>
 
@@ -222,10 +340,12 @@ if (!screenshots || screenshots.length === 0) {
     const slides = Array.from(
       viewport.querySelectorAll<HTMLElement>('.gallery-slide'),
     );
+    const thumbsTrack = root.querySelector<HTMLElement>('.gallery-thumbs');
     const thumbs = Array.from(
       root.querySelectorAll<HTMLButtonElement>('.gallery-thumb'),
     );
     const counter = document.getElementById('gallery-counter');
+    const statusRegion = document.getElementById('gallery-status');
     const prevBtn = root.querySelector<HTMLButtonElement>('.gallery-prev-btn');
     const nextBtn = root.querySelector<HTMLButtonElement>('.gallery-next-btn');
     const expandBtn = root.querySelector<HTMLButtonElement>(
@@ -237,51 +357,188 @@ if (!screenshots || screenshots.length === 0) {
     const lightboxImg = document.getElementById(
       'lightbox-img',
     ) as HTMLImageElement | null;
+    const lightboxLoading = document.getElementById('lightbox-loading');
+    const lightboxError = document.getElementById('lightbox-error');
+    const lightboxRetry = document.getElementById('lightbox-retry-btn');
     const lightboxCounter = document.getElementById('lightbox-counter');
     const lightboxClose = document.getElementById('lightbox-close-btn');
     const lightboxPrev = document.getElementById('lightbox-prev-btn');
     const lightboxNext = document.getElementById('lightbox-next-btn');
 
     let activeIndex = 0;
+    let lastSettledIndex = 0;
+    let pendingTargetIndex: number | null = null;
+    let pendingTargetLeft: number | null = null;
+    let requestedFromLeft: number | null = null;
+    let scrollRafId: number | null = null;
+    let settleTimer: number | undefined;
+    let loadingDelayTimer: number | undefined;
+    let lightboxLoadSeq = 0;
+    let currentLightboxSrc = '';
+    let currentLightboxAlt = '';
     const total = slides.length;
     if (total === 0) return;
 
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const getScrollBehavior = (): ScrollBehavior =>
+      motionQuery.matches ? 'auto' : 'smooth';
+    const supportsScrollEnd = 'onscrollend' in window;
+    const rootEl = root;
+    const isRtl = () => getComputedStyle(rootEl).direction === 'rtl';
 
-    function updateActiveState(index: number) {
-      if (index === activeIndex) return;
-      activeIndex = index;
+    function showLightboxElement(el: HTMLElement | null, visible: boolean) {
+      if (!el) return;
+      el.classList.toggle('hidden', !visible);
+      el.classList.toggle('flex', visible);
+    }
 
-      thumbs.forEach((thumb, idx) => {
-        const isActive = idx === activeIndex;
-        thumb.setAttribute('aria-current', isActive ? 'true' : 'false');
-        if (isActive) {
-          thumb.classList.remove('border-neutral-800', 'opacity-60');
-          thumb.classList.add(
-            'border-accent',
-            'ring-1',
-            'ring-accent/50',
-            'scale-105',
-            'opacity-100',
-          );
-          thumb.scrollIntoView({
-            behavior: prefersReducedMotion ? 'auto' : 'smooth',
-            block: 'nearest',
-            inline: 'center',
-          });
+    const onLightboxImgLoad = () => {
+      window.clearTimeout(loadingDelayTimer);
+      showLightboxElement(lightboxLoading, false);
+      showLightboxElement(lightboxError, false);
+      lightboxImg?.classList.remove('hidden');
+    };
+
+    const onLightboxImgError = () => {
+      window.clearTimeout(loadingDelayTimer);
+      showLightboxElement(lightboxLoading, false);
+      if (currentLightboxSrc && lightboxImg?.getAttribute('src')) {
+        lightboxImg.classList.add('hidden');
+        showLightboxElement(lightboxError, true);
+      }
+    };
+
+    lightboxImg?.addEventListener('load', onLightboxImgLoad);
+    lightboxImg?.addEventListener('error', onLightboxImgError);
+
+    function loadLightboxImage(src: string, alt: string, forceReload = false) {
+      if (!lightboxImg) return;
+      const seq = ++lightboxLoadSeq;
+      currentLightboxSrc = src;
+      currentLightboxAlt = alt;
+
+      window.clearTimeout(loadingDelayTimer);
+      showLightboxElement(lightboxError, false);
+      showLightboxElement(lightboxLoading, false);
+      lightboxImg.classList.remove('hidden');
+      lightboxImg.alt = alt;
+
+      if (forceReload) {
+        lightboxImg.removeAttribute('src');
+      }
+      lightboxImg.src = src;
+
+      if (lightboxImg.complete) {
+        if (lightboxImg.naturalWidth > 0) {
+          onLightboxImgLoad();
         } else {
-          thumb.classList.remove(
-            'border-accent',
-            'ring-1',
-            'ring-accent/50',
-            'scale-105',
-            'opacity-100',
-          );
-          thumb.classList.add('border-neutral-800', 'opacity-60');
+          onLightboxImgError();
+        }
+        return;
+      }
+
+      loadingDelayTimer = window.setTimeout(() => {
+        if (seq !== lightboxLoadSeq || !lightbox?.open) return;
+        showLightboxElement(lightboxLoading, true);
+      }, 120);
+    }
+
+    const onLightboxRetry = () => {
+      if (currentLightboxSrc) {
+        loadLightboxImage(
+          currentLightboxSrc,
+          currentLightboxAlt || lightboxImg?.alt || '',
+          true,
+        );
+      }
+    };
+    lightboxRetry?.addEventListener('click', onLightboxRetry);
+
+    /** Compute horizontal scrollLeft that centers an item inside its scroll container. */
+    function getCenteredScrollLeft(
+      container: HTMLElement,
+      item: HTMLElement,
+    ): number {
+      const containerRect = container.getBoundingClientRect();
+      const itemRect = item.getBoundingClientRect();
+      const containerCenter =
+        containerRect.left + container.clientLeft + container.clientWidth / 2;
+      const itemCenter = itemRect.left + itemRect.width / 2;
+      const maxScroll = Math.max(
+        0,
+        container.scrollWidth - container.clientWidth,
+      );
+      return Math.max(
+        0,
+        Math.min(
+          maxScroll,
+          container.scrollLeft + (itemCenter - containerCenter),
+        ),
+      );
+    }
+
+    function getNearestSlideIndex(): number {
+      if (!viewport) return 0;
+      const viewportRect = viewport.getBoundingClientRect();
+      const viewportCenter =
+        viewportRect.left + viewport.clientLeft + viewport.clientWidth / 2;
+      let nearestIdx = 0;
+      let minDist = Number.POSITIVE_INFINITY;
+
+      slides.forEach((slide, idx) => {
+        const rect = slide.getBoundingClientRect();
+        const dist = Math.abs(rect.left + rect.width / 2 - viewportCenter);
+        if (dist < minDist) {
+          minDist = dist;
+          nearestIdx = idx;
         }
       });
+
+      return nearestIdx;
+    }
+
+    function updateActiveUI(index: number) {
+      if (index === activeIndex) return;
+      const prevThumb = thumbs[activeIndex];
+      activeIndex = index;
+      const nextThumb = thumbs[activeIndex];
+
+      // Batch DOM read before mutating classes to prevent layout thrashing
+      const thumbScrollLeft =
+        thumbsTrack && nextThumb
+          ? getCenteredScrollLeft(thumbsTrack, nextThumb)
+          : null;
+
+      if (prevThumb) {
+        prevThumb.setAttribute('aria-current', 'false');
+        prevThumb.classList.remove(
+          'border-accent',
+          'ring-1',
+          'ring-accent/50',
+          'motion-safe:scale-105',
+          'opacity-100',
+        );
+        prevThumb.classList.add('border-neutral-800', 'opacity-60');
+      }
+
+      if (nextThumb) {
+        nextThumb.setAttribute('aria-current', 'true');
+        nextThumb.classList.remove('border-neutral-800', 'opacity-60');
+        nextThumb.classList.add(
+          'border-accent',
+          'ring-1',
+          'ring-accent/50',
+          'motion-safe:scale-105',
+          'opacity-100',
+        );
+      }
+
+      if (thumbsTrack && thumbScrollLeft !== null) {
+        thumbsTrack.scrollTo({
+          left: thumbScrollLeft,
+          behavior: getScrollBehavior(),
+        });
+      }
 
       if (counter) {
         counter.textContent = `${activeIndex + 1} / ${total}`;
@@ -290,55 +547,115 @@ if (!screenshots || screenshots.length === 0) {
       if (lightbox && lightbox.open && lightboxImg) {
         const activeImg = slides[activeIndex]?.querySelector('img');
         const zoomSrc = activeImg?.dataset['zoomSrc'] || activeImg?.src;
-        if (zoomSrc) lightboxImg.src = zoomSrc;
-        if (activeImg?.alt) lightboxImg.alt = activeImg.alt;
+        if (zoomSrc) {
+          loadLightboxImage(zoomSrc, activeImg?.alt || lightboxImg.alt);
+        }
         if (lightboxCounter) {
           lightboxCounter.textContent = `${activeIndex + 1} / ${total}`;
         }
       }
     }
 
-    function scrollToSlide(index: number) {
-      const targetIndex = (index + total) % total;
-      slides[targetIndex]?.scrollIntoView({
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
-        block: 'nearest',
-        inline: 'start',
-      });
+    function announceIfSettledChanged(index: number) {
+      if (index === lastSettledIndex) return;
+      lastSettledIndex = index;
+      if (statusRegion) {
+        statusRegion.textContent = `Slide ${index + 1} of ${total}`;
+      }
     }
 
-    // IntersectionObserver to observe which slide is snapped into view
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const idx = Number.parseInt(
-              (entry.target as HTMLElement).dataset['slideIndex'] || '0',
-              10,
-            );
-            updateActiveState(idx);
-          }
-        }
-      },
-      {
-        root: viewport,
-        threshold: 0.6,
-      },
-    );
+    function clearPendingTarget() {
+      pendingTargetIndex = null;
+      pendingTargetLeft = null;
+      requestedFromLeft = null;
+    }
 
-    slides.forEach((slide) => observer.observe(slide));
+    function handleSettledScroll() {
+      if (!viewport) return;
+      if (
+        pendingTargetIndex !== null &&
+        requestedFromLeft !== null &&
+        pendingTargetLeft !== null &&
+        Math.abs(viewport.scrollLeft - requestedFromLeft) < 1 &&
+        Math.abs(pendingTargetLeft - requestedFromLeft) >= 1
+      ) {
+        return;
+      }
 
-    const onPrev = () => {
-      viewport.scrollBy({
-        left: -viewport.clientWidth,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      clearPendingTarget();
+      const settledIndex = getNearestSlideIndex();
+      updateActiveUI(settledIndex);
+      announceIfSettledChanged(settledIndex);
+    }
+
+    function scrollToSlide(index: number) {
+      if (!viewport) return;
+      const targetIndex = ((index % total) + total) % total;
+      const targetSlide = slides[targetIndex];
+      if (!targetSlide) return;
+
+      const targetLeft = getCenteredScrollLeft(viewport, targetSlide);
+      const behavior = getScrollBehavior();
+
+      if (Math.abs(targetLeft - viewport.scrollLeft) < 1) {
+        clearPendingTarget();
+        updateActiveUI(targetIndex);
+        announceIfSettledChanged(targetIndex);
+        return;
+      }
+
+      pendingTargetIndex = targetIndex;
+      pendingTargetLeft = targetLeft;
+      requestedFromLeft = viewport.scrollLeft;
+      updateActiveUI(targetIndex);
+
+      viewport.scrollTo({
+        left: targetLeft,
+        behavior,
+      });
+
+      if (behavior === 'auto') {
+        clearPendingTarget();
+        announceIfSettledChanged(targetIndex);
+      } else if (!supportsScrollEnd) {
+        window.clearTimeout(settleTimer);
+        settleTimer = window.setTimeout(handleSettledScroll, 150);
+      }
+    }
+
+    const onViewportScroll = () => {
+      if (!supportsScrollEnd) {
+        window.clearTimeout(settleTimer);
+        settleTimer = window.setTimeout(handleSettledScroll, 150);
+      }
+      if (pendingTargetIndex !== null || scrollRafId !== null) return;
+      scrollRafId = window.requestAnimationFrame(() => {
+        scrollRafId = null;
+        if (pendingTargetIndex !== null) return;
+        updateActiveUI(getNearestSlideIndex());
       });
     };
+
+    viewport.addEventListener('scroll', onViewportScroll, { passive: true });
+    if (supportsScrollEnd) {
+      viewport.addEventListener('scrollend', handleSettledScroll);
+    }
+    viewport.addEventListener('pointerdown', clearPendingTarget, {
+      passive: true,
+    });
+    viewport.addEventListener('pointercancel', clearPendingTarget, {
+      passive: true,
+    });
+    viewport.addEventListener('touchstart', clearPendingTarget, {
+      passive: true,
+    });
+    viewport.addEventListener('wheel', clearPendingTarget, { passive: true });
+
+    const onPrev = () => {
+      scrollToSlide((pendingTargetIndex ?? activeIndex) - 1);
+    };
     const onNext = () => {
-      viewport.scrollBy({
-        left: viewport.clientWidth,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
-      });
+      scrollToSlide((pendingTargetIndex ?? activeIndex) + 1);
     };
 
     prevBtn?.addEventListener('click', onPrev);
@@ -355,25 +672,129 @@ if (!screenshots || screenshots.length === 0) {
       onThumbClicks.push({ btn: thumb, handler });
     });
 
+    const onSlideImgCleanups: Array<() => void> = [];
+    slides.forEach((slide) => {
+      const img = slide.querySelector<HTMLImageElement>('.gallery-slide-img');
+      const errBox = slide.querySelector<HTMLElement>('.gallery-slide-error');
+      const retryBtn = slide.querySelector<HTMLButtonElement>(
+        '.gallery-slide-retry',
+      );
+      if (!img) return;
+
+      const onErr = () => {
+        errBox?.classList.remove('hidden');
+        errBox?.classList.add('flex');
+      };
+      const onLoad = () => {
+        errBox?.classList.add('hidden');
+        errBox?.classList.remove('flex');
+      };
+      const onRetry = () => {
+        errBox?.classList.add('hidden');
+        errBox?.classList.remove('flex');
+        const targetSrc = img.getAttribute('src') || img.currentSrc;
+        if (targetSrc) {
+          img.removeAttribute('src');
+          img.src = targetSrc;
+        }
+      };
+
+      img.addEventListener('error', onErr);
+      img.addEventListener('load', onLoad);
+      retryBtn?.addEventListener('click', onRetry);
+      onSlideImgCleanups.push(() => {
+        img.removeEventListener('error', onErr);
+        img.removeEventListener('load', onLoad);
+        retryBtn?.removeEventListener('click', onRetry);
+      });
+    });
+
     // Lightbox modal logic
     let lastActiveElement: HTMLElement | null = null;
+    let supportsDisplayTransition: boolean | undefined;
+
+    function canTransitionDisplay(): boolean {
+      if (supportsDisplayTransition !== undefined) {
+        return supportsDisplayTransition;
+      }
+      if (
+        !window.CSS?.supports?.('transition-behavior', 'allow-discrete') ||
+        !document.body
+      ) {
+        return false;
+      }
+      const probe = document.createElement('div');
+      probe.style.cssText =
+        'transition: display 1s allow-discrete !important; display: block;';
+      document.body.appendChild(probe);
+      if (getComputedStyle(probe).display !== 'block') {
+        probe.remove();
+        supportsDisplayTransition = false;
+        return false;
+      }
+      probe.style.display = 'none';
+      supportsDisplayTransition = getComputedStyle(probe).display === 'block';
+      probe.remove();
+      return supportsDisplayTransition;
+    }
+
+    function supportsTopLayerExit(): boolean {
+      return Boolean(
+        window.CSS?.supports?.('overlay', 'auto') && canTransitionDisplay(),
+      );
+    }
+
+    async function closeLightbox() {
+      if (!lightbox || !lightbox.open) return;
+      ++lightboxLoadSeq;
+      window.clearTimeout(loadingDelayTimer);
+      showLightboxElement(lightboxLoading, false);
+      showLightboxElement(lightboxError, false);
+
+      if (!supportsTopLayerExit()) {
+        if (lightbox.hasAttribute('data-closing')) return;
+        lightbox.setAttribute('data-closing', '');
+        const animations = lightbox.getAnimations({ subtree: true });
+        if (animations.length > 0) {
+          await Promise.race([
+            Promise.allSettled(animations.map((a) => a.finished)),
+            new Promise<void>((resolve) => window.setTimeout(resolve, 400)),
+          ]);
+        }
+        if (
+          !lightbox.isConnected ||
+          !lightbox.hasAttribute('data-closing') ||
+          !lightbox.open
+        ) {
+          return;
+        }
+        lightbox.removeAttribute('data-closing');
+      }
+      if (lightbox.open) {
+        lightbox.close();
+      }
+    }
 
     function openLightbox() {
       if (!lightbox || !lightboxImg) return;
+      lightbox.removeAttribute('data-closing');
       const activeElement = document.activeElement;
-      lastActiveElement =
-        activeElement instanceof HTMLElement && activeElement !== document.body
-          ? activeElement
-          : (expandBtn ?? thumbs[activeIndex] ?? viewport ?? null);
+      if (!lightbox.open) {
+        lastActiveElement =
+          activeElement instanceof HTMLElement && activeElement !== document.body
+            ? activeElement
+            : (expandBtn ?? thumbs[activeIndex] ?? viewport ?? null);
+      }
       const activeImg = slides[activeIndex]?.querySelector('img');
       const zoomSrc = activeImg?.dataset['zoomSrc'] || activeImg?.src;
       if (!zoomSrc) return;
-      lightboxImg.src = zoomSrc;
-      if (activeImg?.alt) lightboxImg.alt = activeImg.alt;
+      loadLightboxImage(zoomSrc, activeImg?.alt || lightboxImg.alt);
       if (lightboxCounter) {
         lightboxCounter.textContent = `${activeIndex + 1} / ${total}`;
       }
-      lightbox.showModal();
+      if (!lightbox.open) {
+        lightbox.showModal();
+      }
     }
 
     expandBtn?.addEventListener('click', openLightbox);
@@ -386,19 +807,29 @@ if (!screenshots || screenshots.length === 0) {
       }
     });
 
-    const onCloseLightbox = () => lightbox?.close();
+    const onCloseLightbox = () => {
+      void closeLightbox();
+    };
     lightboxClose?.addEventListener('click', onCloseLightbox);
 
-    const onLightboxPrev = () => scrollToSlide(activeIndex - 1);
-    const onLightboxNext = () => scrollToSlide(activeIndex + 1);
+    const onLightboxCancel = (e: Event) => {
+      e.preventDefault();
+      void closeLightbox();
+    };
+    lightbox?.addEventListener('cancel', onLightboxCancel);
+
+    const onLightboxPrev = () =>
+      scrollToSlide((pendingTargetIndex ?? activeIndex) - 1);
+    const onLightboxNext = () =>
+      scrollToSlide((pendingTargetIndex ?? activeIndex) + 1);
     lightboxPrev?.addEventListener('click', onLightboxPrev);
     lightboxNext?.addEventListener('click', onLightboxNext);
 
     const onDialogClose = () => {
-      if (lightboxImg) {
-        lightboxImg.src =
-          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E";
-      }
+      lightbox?.removeAttribute('data-closing');
+      ++lightboxLoadSeq;
+      window.clearTimeout(loadingDelayTimer);
+      showLightboxElement(lightboxLoading, false);
       const target = lastActiveElement;
       lastActiveElement = null;
       if (target?.isConnected) {
@@ -409,64 +840,172 @@ if (!screenshots || screenshots.length === 0) {
     };
     lightbox?.addEventListener('close', onDialogClose);
 
-    // Close on backdrop click (click directly on native dialog element)
-    const onBackdropClick = (e: MouseEvent) => {
-      if (lightbox && e.target === lightbox) {
-        lightbox.close();
-      }
+    // Fallback light-dismiss for engines without <dialog closedby="any">
+    const isOutsideDialog = (e: PointerEvent, dlg: HTMLDialogElement) => {
+      const r = dlg.getBoundingClientRect();
+      return (
+        e.clientX < r.left ||
+        e.clientX > r.right ||
+        e.clientY < r.top ||
+        e.clientY > r.bottom
+      );
     };
-    lightbox?.addEventListener('click', onBackdropClick);
+    const needsClosedByFallback = !('closedBy' in HTMLDialogElement.prototype);
+    let pressedOutsideBackdrop = false;
+    const onBackdropPointerDown = (e: PointerEvent) => {
+      if (!lightbox) return;
+      pressedOutsideBackdrop = isOutsideDialog(e, lightbox);
+    };
+    const onBackdropPointerUp = (e: PointerEvent) => {
+      if (lightbox && pressedOutsideBackdrop && isOutsideDialog(e, lightbox)) {
+        void closeLightbox();
+      }
+      pressedOutsideBackdrop = false;
+    };
+    if (needsClosedByFallback) {
+      lightbox?.addEventListener('pointerdown', onBackdropPointerDown);
+      lightbox?.addEventListener('pointerup', onBackdropPointerUp);
+    }
 
-    // Touch swipe gesture support for mobile fullscreen lightbox
+    // Interrupted-gesture hardened swipe support for mobile fullscreen lightbox
     let touchStartX = 0;
     let touchStartY = 0;
+    let activeTouchId: number | null = null;
+    let multiTouchGesture = false;
+
+    const resetSwipeState = () => {
+      activeTouchId = null;
+      multiTouchGesture = false;
+    };
 
     const onTouchStart = (e: TouchEvent) => {
-      const touch = e.changedTouches[0];
+      if (e.touches.length > 1) {
+        multiTouchGesture = true;
+        activeTouchId = null;
+        return;
+      }
+      if (activeTouchId !== null) return;
+      const touch = e.touches[0];
       if (touch) {
+        multiTouchGesture = false;
+        activeTouchId = touch.identifier;
         touchStartX = touch.clientX;
         touchStartY = touch.clientY;
       }
     };
 
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 1) {
+        multiTouchGesture = true;
+        activeTouchId = null;
+      }
+    };
+
     const onTouchEnd = (e: TouchEvent) => {
-      const touch = e.changedTouches[0];
-      if (!touch) return;
-      const diffX = touch.clientX - touchStartX;
-      const diffY = touch.clientY - touchStartY;
-      if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
-        if (diffX < 0) {
-          scrollToSlide(activeIndex + 1);
-        } else {
-          scrollToSlide(activeIndex - 1);
+      let matched: Touch | undefined;
+      for (let i = 0; i < e.changedTouches.length; i++) {
+        const candidate = e.changedTouches[i];
+        if (candidate && candidate.identifier === activeTouchId) {
+          matched = candidate;
+          break;
         }
+      }
+
+      if (matched && !multiTouchGesture) {
+        const diffX = matched.clientX - touchStartX;
+        const diffY = matched.clientY - touchStartY;
+        if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+          const step = diffX < 0 ? 1 : -1;
+          scrollToSlide(
+            (pendingTargetIndex ?? activeIndex) + (isRtl() ? -step : step),
+          );
+        }
+      }
+
+      if (e.touches.length === 0) {
+        resetSwipeState();
       }
     };
 
     lightbox?.addEventListener('touchstart', onTouchStart, { passive: true });
+    lightbox?.addEventListener('touchmove', onTouchMove, { passive: true });
     lightbox?.addEventListener('touchend', onTouchEnd, { passive: true });
+    lightbox?.addEventListener('touchcancel', resetSwipeState, {
+      passive: true,
+    });
 
-    // Keyboard arrow navigation
+    const onWindowBlur = () => {
+      clearPendingTarget();
+      resetSwipeState();
+      pressedOutsideBackdrop = false;
+    };
+    window.addEventListener('blur', onWindowBlur);
+
+    // Keyboard navigation (inline carousel & lightbox)
     const onKeyDown = (e: KeyboardEvent) => {
-      if (lightbox && lightbox.open) {
-        if (e.key === 'ArrowRight') scrollToSlide(activeIndex + 1);
-        if (e.key === 'ArrowLeft') scrollToSlide(activeIndex - 1);
+      const inLightbox = Boolean(lightbox && lightbox.open);
+      const targetNode = e.target instanceof Node ? e.target : null;
+      const inInlineGallery = Boolean(
+        !inLightbox &&
+          targetNode &&
+          (viewport.contains(targetNode) ||
+            thumbsTrack?.contains(targetNode) ||
+            targetNode === prevBtn ||
+            targetNode === nextBtn),
+      );
+      if (!inLightbox && !inInlineGallery) return;
+
+      const dir = isRtl() ? -1 : 1;
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        scrollToSlide((pendingTargetIndex ?? activeIndex) + dir);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        scrollToSlide((pendingTargetIndex ?? activeIndex) - dir);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        scrollToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        scrollToSlide(total - 1);
       }
     };
     window.addEventListener('keydown', onKeyDown);
 
     cleanupGallery = () => {
-      observer.disconnect();
+      window.clearTimeout(settleTimer);
+      window.clearTimeout(loadingDelayTimer);
+      if (scrollRafId !== null) {
+        window.cancelAnimationFrame(scrollRafId);
+      }
+      lightboxImg?.removeEventListener('load', onLightboxImgLoad);
+      lightboxImg?.removeEventListener('error', onLightboxImgError);
+      lightboxRetry?.removeEventListener('click', onLightboxRetry);
+      viewport.removeEventListener('scroll', onViewportScroll);
+      if (supportsScrollEnd) {
+        viewport.removeEventListener('scrollend', handleSettledScroll);
+      }
+      viewport.removeEventListener('pointerdown', clearPendingTarget);
+      viewport.removeEventListener('pointercancel', clearPendingTarget);
+      viewport.removeEventListener('touchstart', clearPendingTarget);
+      viewport.removeEventListener('wheel', clearPendingTarget);
       prevBtn?.removeEventListener('click', onPrev);
       nextBtn?.removeEventListener('click', onNext);
       expandBtn?.removeEventListener('click', openLightbox);
       lightboxClose?.removeEventListener('click', onCloseLightbox);
+      lightbox?.removeEventListener('cancel', onLightboxCancel);
       lightboxPrev?.removeEventListener('click', onLightboxPrev);
       lightboxNext?.removeEventListener('click', onLightboxNext);
       lightbox?.removeEventListener('close', onDialogClose);
-      lightbox?.removeEventListener('click', onBackdropClick);
+      if (needsClosedByFallback) {
+        lightbox?.removeEventListener('pointerdown', onBackdropPointerDown);
+        lightbox?.removeEventListener('pointerup', onBackdropPointerUp);
+      }
       lightbox?.removeEventListener('touchstart', onTouchStart);
+      lightbox?.removeEventListener('touchmove', onTouchMove);
       lightbox?.removeEventListener('touchend', onTouchEnd);
+      lightbox?.removeEventListener('touchcancel', resetSwipeState);
+      window.removeEventListener('blur', onWindowBlur);
       window.removeEventListener('keydown', onKeyDown);
       onThumbClicks.forEach(({ btn, handler }) =>
         btn.removeEventListener('click', handler),
@@ -474,6 +1013,7 @@ if (!screenshots || screenshots.length === 0) {
       onSlideClicks.forEach(({ img, handler }) =>
         img.removeEventListener('click', handler),
       );
+      onSlideImgCleanups.forEach((fn) => fn());
     };
   }
 
